@@ -1,0 +1,1614 @@
+fileFormatVersion: 2
+guid: fecad21f59ebc66449c1ac5ac645a31f
+timeCreated: 1459378654
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Bomberman_Down1
+    21300002: Bomberman-Down2
+    21300004: Bomberman-BombermanTournament_2
+    21300006: Bomberman-BombermanTournament_3
+    21300008: Bomberman-BombermanTournament_4
+    21300010: Bomberman-Left1
+    21300012: Bomberman-Left2
+    21300014: Bomberman-Left3
+    21300016: Bomberman-BombermanTournament_8
+    21300018: Bomberman-BombermanTournament_9
+    21300020: Bomberman-BombermanTournament_10
+    21300022: Bomberman-Up1
+    21300024: Bomberman-Up2
+    21300026: Bomberman-BombermanTournament_13
+    21300028: Bomberman-PlaceBomb_DownExtra2
+    21300030: Bomberman-PlaceBomb_Extra
+    21300032: Bomberman-PlaceBomb_Left
+    21300034: Bomberman-PlaceBomb_Left1
+    21300036: Bomberman-BombermanTournament_18
+    21300038: Bomberman-BombermanTournament_19
+    21300040: Bomberman-PlaceBomb_Up
+    21300042: Bomberman-BombermanTournament_21
+    21300044: Bomberman-BombermanTournament_22
+    21300046: Bomberman-BombermanTournament_23
+    21300048: Bomberman-BombermanTournament_24
+    21300050: Bomberman-BombermanTournament_25
+    21300052: Bomberman-BombermanTournament_26
+    21300054: Bomberman-BombermanTournament_27
+    21300056: Bomberman-BombermanTournament_28
+    21300058: Bomberman-BombermanTournament_29
+    21300060: Bomberman-BombermanTournament_30
+    21300062: Bomberman-BombermanTournament_31
+    21300064: Bomberman-BombermanTournament_32
+    21300066: Bomberman-BombermanTournament_33
+    21300068: Bomberman-BombermanTournament_34
+    21300070: Bomberman-BombermanTournament_35
+    21300072: Bomberman-BombermanTournament_36
+    21300074: Bomberman-BombermanTournament_37
+    21300076: Bomberman-BombermanTournament_38
+    21300078: Bomberman-BombermanTournament_39
+    21300080: Bomberman-BombermanTournament_40
+    21300082: Bomberman-BombermanTournament_41
+    21300084: Bomberman-BombermanTournament_42
+    21300086: Bomberman-BombermanTournament_43
+    21300088: Bomberman-BombermanTournament_44
+    21300090: Bomberman-BombermanTournament_45
+    21300092: Bomberman-BombermanTournament_46
+    21300094: Bomberman-BombermanTournament_47
+    21300096: Bomberman-BombermanTournament_48
+    21300098: Bomberman-BombermanTournament_49
+    21300100: Bomberman-BombermanTournament_50
+    21300102: Bomberman-BombermanTournament_51
+    21300104: Bomberman-BombermanTournament_52
+    21300106: Bomberman-BombermanTournament_53
+    21300108: Bomberman-BombermanTournament_54
+    21300110: Bomberman-BombermanTournament_55
+    21300112: Bomberman-BombermanTournament_56
+    21300114: Bomberman-BombermanTournament_57
+    21300116: Bomberman-BombermanTournament_58
+    21300118: Bomberman-BombermanTournament_59
+    21300120: Bomberman-BombermanTournament_60
+    21300122: Bomberman-BombermanTournament_61
+    21300124: Bomberman-BombermanTournament_62
+    21300126: Bomberman-BombermanTournament_63
+    21300128: Bomberman-BombermanTournament_64
+    21300130: Bomberman-BombermanTournament_65
+    21300132: Bomberman-BombermanTournament_66
+    21300134: Bomberman-BombermanTournament_67
+    21300136: Bomberman-BombermanTournament_68
+    21300138: Bomberman-BombermanTournament_69
+    21300140: Bomberman-BombermanTournament_70
+    21300142: Bomberman-BombermanTournament_71
+    21300144: Bomberman-BombermanTournament_72
+    21300146: Bomberman-BombermanTournament_73
+    21300148: Bomberman-BombermanTournament_74
+    21300150: Bomberman-BombermanTournament_75
+    21300152: Bomberman-BombermanTournament_76
+    21300154: Bomberman-BombermanTournament_77
+    21300156: Bomberman-BombermanTournament_78
+    21300158: Bomberman-BombermanTournament_79
+    21300160: Bomberman-BombermanTournament_80
+    21300162: Bomberman-BombermanTournament_81
+    21300164: Bomberman-BombermanTournament_82
+    21300166: Bomberman-BombermanTournament_83
+    21300168: Bomberman-BombermanTournament_84
+    21300170: Bomberman-BombermanTournament_85
+    21300172: Bomberman-BombermanTournament_86
+    21300174: Bomberman-BombermanTournament_87
+    21300176: Bomberman-BombermanTournament_88
+    21300178: Bomberman-BombermanTournament_89
+    21300180: Bomberman-BombermanTournament_90
+    21300182: Bomberman-BombermanTournament_91
+    21300184: Bomberman-BombermanTournament_92
+    21300186: Bomberman-BombermanTournament_93
+    21300188: Bomberman-BombermanTournament_94
+    21300190: Bomberman-BombermanTournament_95
+    21300192: Bomberman-BombermanTournament_96
+    21300194: Bomberman-BombermanTournament_97
+    21300196: Bomberman-BombermanTournament_98
+    21300198: Bomberman-BombermanTournament_99
+    21300200: Bomberman-BombermanTournament_100
+    21300202: Bomberman-BombermanTournament_101
+    21300204: Bomberman-BombermanTournament_102
+    21300206: Bomberman-BombermanTournament_103
+    21300208: Bomberman-BombermanTournament_104
+    21300210: Bomberman-BombermanTournament_105
+    21300212: Bomberman-BombermanTournament_106
+    21300214: Bomberman-BombermanTournament_107
+    21300216: Bomberman-BombermanTournament_108
+    21300218: Bomberman-BombermanTournament_109
+    21300220: Bomberman-BombermanTournament_110
+    21300222: Bomberman-BombermanTournament_111
+    21300224: Bomberman-BombermanTournament_112
+    21300226: Bomberman-BombermanTournament_113
+    21300228: Bomberman-BombermanTournament_114
+    21300230: Bomberman-BombermanTournament_115
+    21300232: Bomberman-BombermanTournament_116
+    21300234: Bomberman-BombermanTournament_117
+    21300236: Bomberman-BombermanTournament_118
+    21300238: Bomberman-BombermanTournament_119
+    21300240: Bomberman-BombermanTournament_120
+    21300242: Bomberman-BombermanTournament_121
+    21300244: Bomberman-BombermanTournament_122
+    21300246: Bomberman-BombermanTournament_123
+    21300248: Bomberman-BombermanTournament_124
+    21300250: Bomberman-BombermanTournament_125
+    21300252: Bomberman-BombermanTournament_126
+    21300254: Bomberman-BombermanTournament_127
+    21300256: Bomberman-BombermanTournament_128
+    21300258: Bomberman-BombermanTournament_129
+    21300260: Bomberman-BombermanTournament_130
+    21300262: Bomberman-BombermanTournament_131
+    21300264: Bomberman-BombermanTournament_132
+    21300266: Bomberman-BombermanTournament_133
+    21300268: Bomberman-BombermanTournament_134
+    21300270: Bomberman-BombermanTournament_135
+    21300272: Bomberman-BombermanTournament_136
+    21300274: Bomberman-BombermanTournament_137
+    21300276: Bomberman-BombermanTournament_138
+    21300278: Bomberman-BombermanTournament_139
+    21300280: Bomberman-BombermanTournament_140
+    21300282: Bomberman-BombermanTournament_141
+    21300284: Bomberman-BombermanTournament_142
+    21300286: Bomberman-BombermanTournament_143
+    21300288: Bomberman-BombermanTournament_144
+    21300290: Bomberman-BombermanTournament_145
+    21300292: Bomberman-BombermanTournament_146
+    21300294: Bomberman-BombermanTournament_147
+    21300296: Bomberman-BombermanTournament_148
+    21300298: Bomberman-BombermanTournament_149
+    21300300: Bomberman-BombermanTournament_150
+    21300302: Bomberman-BombermanTournament_151
+    21300304: Bomberman-BombermanTournament_152
+    21300306: Bomberman-BombermanTournament_153
+    21300308: Bomberman-BombermanTournament_154
+    21300310: Bomberman-BombermanTournament_155
+    21300312: Bomberman-BombermanTournament_156
+    21300314: Bomberman-BombermanTournament_157
+    21300316: Bomberman-BombermanTournament_158
+    21300318: Bomberman-BombermanTournament_159
+    21300320: Bomberman-BombermanTournament_160
+    21300322: Bomberman-BombermanTournament_161
+    21300324: Bomberman-BombermanTournament_162
+    21300326: Bomberman-BombermanTournament_163
+    21300328: Bomberman-BombermanTournament_164
+    21300330: Bomberman-BombermanTournament_165
+    21300332: Bomberman-BombermanTournament_166
+    21300334: Bomberman-BombermanTournament_167
+    21300336: Bomberman-BombermanTournament_168
+    21300338: Bomberman-BombermanTournament_169
+    21300340: Bomberman-BombermanTournament_170
+    21300342: Bomberman-BombermanTournament_171
+    21300344: Bomberman-BombermanTournament_172
+    21300346: Bomberman-BombermanTournament_173
+    21300348: Bomberman-BombermanTournament_174
+    21300350: Bomberman-BombermanTournament_175
+    21300352: Bomberman-BombermanTournament_176
+    21300354: Bomberman-BombermanTournament_177
+    21300356: Bomberman-BombermanTournament_178
+    21300358: Bomberman-PlaceBomb_Down
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 21
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Bomberman_Down1
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 264
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-Down2
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 264
+        width: 14
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_2
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 264
+        width: 13
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_3
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 264
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_4
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 264
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-Left1
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 264
+        width: 13
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-Left2
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 264
+        width: 13
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-Left3
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 264
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_8
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 264
+        width: 14
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_9
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 264
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_10
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 264
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-Up1
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 264
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-Up2
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 264
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_13
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 238
+        width: 200
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-PlaceBomb_DownExtra2
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 238
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-PlaceBomb_Extra
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 238
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-PlaceBomb_Left
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 238
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-PlaceBomb_Left1
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 238
+        width: 13
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_18
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 238
+        width: 13
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_19
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 238
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-PlaceBomb_Up
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 238
+        width: 13
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_21
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 238
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_22
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 238
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_23
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 210
+        width: 204
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_24
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 210
+        width: 13
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_25
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 211
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_26
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 210
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_27
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 210
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_28
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 210
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_29
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 210
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_30
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 210
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_31
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 210
+        width: 13
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_32
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 210
+        width: 14
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_33
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 210
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_34
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 210
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_35
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 184
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_36
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 181
+        width: 200
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_37
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 183
+        width: 13
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_38
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 187
+        width: 13
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_39
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 183
+        width: 14
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_40
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 183
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_41
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 181
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_42
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 181
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_43
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 185
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_44
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 189
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_45
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 184
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_46
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 182
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_47
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 181
+        width: 15
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_48
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 155
+        width: 15
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_49
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 154
+        width: 200
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_50
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 155
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_51
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 155
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_52
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 155
+        width: 14
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_53
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 155
+        width: 14
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_54
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 155
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_55
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 155
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_56
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 154
+        width: 13
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_57
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 154
+        width: 13
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_58
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 154
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_59
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 154
+        width: 13
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_60
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 154
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_61
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 154
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_62
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 125
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_63
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 125
+        width: 201
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_64
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 125
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_65
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 125
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_66
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 125
+        width: 17
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_67
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 125
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_68
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 125
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_69
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 125
+        width: 17
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_70
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 126
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_71
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 126
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_72
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 126
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_73
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 126
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_74
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 98
+        width: 16
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_75
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 101
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_76
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 98
+        width: 200
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_77
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 101
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_78
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 101
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_79
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 98
+        width: 13
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_80
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 98
+        width: 13
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_81
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 98
+        width: 14
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_82
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 98
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_83
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 98
+        width: 14
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_84
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 101
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_85
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 101
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_86
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 101
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_87
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 101
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_88
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 98
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_89
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 98
+        width: 17
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_90
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 98
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_91
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 62
+        width: 23
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_92
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 57
+        width: 200
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -9, y: -16.5}
+        - {x: 1, y: -19.5}
+        - {x: 93, y: -19.5}
+        - {x: 100, y: -18.5}
+        - {x: 100, y: 19.5}
+        - {x: -100, y: 19.5}
+        - {x: -100, y: -15.5}
+        - {x: -99, y: -16.5}
+        - {x: -90, y: -19.5}
+        - {x: -11, y: -19.5}
+        - {x: -10, y: -10.5}
+        - {x: -10, y: -4.5}
+        - {x: -10, y: -13.5}
+    - name: Bomberman-BombermanTournament_93
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 62
+        width: 23
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_94
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 57
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_95
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 71
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_96
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 71
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_97
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 71
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_98
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 71
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_99
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 71
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_100
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 71
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_101
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 71
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_102
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 60
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_103
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 60
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_104
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 60
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_105
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 60
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_106
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 60
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_107
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 60
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_108
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 60
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_109
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 37
+        width: 200
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_110
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 37
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_111
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_112
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_113
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_114
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_115
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_116
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_117
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_118
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_119
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_120
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_121
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 23
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-BombermanTournament_162
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 2
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bomberman-PlaceBomb_Down
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 238
+        width: 14
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
