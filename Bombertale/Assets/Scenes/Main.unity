@@ -330,10 +330,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bomb: {fileID: 194232, guid: 564cad67cebf01c4abe37f9365ce9699, type: 2}
-  bombSize: 1
   horizontalMovement: 0
   verticalMovement: 0
   moveSpeed: 3
+  bombSize: 1
+  speedPU: 1
+  sizePU: 1
 --- !u!50 &97997695
 Rigidbody2D:
   serializedVersion: 2
@@ -4421,10 +4423,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bomb: {fileID: 194232, guid: 564cad67cebf01c4abe37f9365ce9699, type: 2}
-  bombSize: 1
   horizontalMovement: 0
   verticalMovement: 0
   moveSpeed: 3
+  bombSize: 1
+  speedPU: 1
+  sizePU: 1
 --- !u!95 &1513470725
 Animator:
   serializedVersion: 3
@@ -4741,10 +4745,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bomb: {fileID: 194232, guid: 564cad67cebf01c4abe37f9365ce9699, type: 2}
-  bombSize: 1
   horizontalMovement: 0
   verticalMovement: 0
   moveSpeed: 3
+  bombSize: 1
+  speedPU: 1
+  sizePU: 1
 --- !u!50 &1615384802
 Rigidbody2D:
   serializedVersion: 2
@@ -6386,10 +6392,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bomb: {fileID: 194232, guid: 564cad67cebf01c4abe37f9365ce9699, type: 2}
-  bombSize: 1
   horizontalMovement: 0
   verticalMovement: 0
   moveSpeed: 3
+  bombSize: 1
+  speedPU: 1
+  sizePU: 1
 --- !u!95 &2128131638
 Animator:
   serializedVersion: 3

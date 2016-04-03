@@ -4,17 +4,21 @@ using System.Collections;
 public class Player : MonoBehaviour
 {
     public GameObject bomb;
-    public int bombSize = 1;
 
     [HideInInspector]
     public Direction horizontalMovement, verticalMovement;
     public float moveSpeed = 3f;
+    public int bombSize = 1;
+    public float speedPU = 1f;
+    public int sizePU = 1;
 
+    private Vector2 startPos;
     Animator playerAnim;
 
     void Start()
     {
         playerAnim = this.GetComponent<Animator>();
+        startPos = this.transform.position;
     }
 
     void FixedUpdate()
@@ -49,6 +53,17 @@ public class Player : MonoBehaviour
         if (hitObject.CompareTag("Explosion"))
         {
             Die();
+        }
+        else if(!hitObject.CompareTag("Bomb")){
+            if (hitObject.CompareTag("PUSpeed"))
+            {
+                moveSpeed += speedPU;
+            }
+            if (hitObject.CompareTag("PUExplosion"))
+            {
+                bombSize += sizePU;
+            }
+            Destroy(hitObject.gameObject);
         }
     }
 

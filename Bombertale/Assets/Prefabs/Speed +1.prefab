@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 465774}
   - 212: {fileID: 21238404}
   - 61: {fileID: 6139020}
-  - 114: {fileID: 11411376}
   m_Layer: 0
   m_Name: Speed +1
   m_TagString: PUSpeed
@@ -44,20 +43,6 @@ BoxCollider2D:
   m_Offset: {x: 0.735, y: 0.735}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
---- !u!114 &11411376
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 111914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e302e09e6037ffe4086370f47b85a66c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  bombCD: 0
-  exSize: 1
 --- !u!212 &21238404
 SpriteRenderer:
   m_ObjectHideFlags: 1
