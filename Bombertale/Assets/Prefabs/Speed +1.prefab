@@ -12,7 +12,7 @@ GameObject:
   - 61: {fileID: 6139020}
   - 114: {fileID: 11411376}
   m_Layer: 0
-  m_Name: power_up3
+  m_Name: Speed +1
   m_TagString: PUSpeed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
