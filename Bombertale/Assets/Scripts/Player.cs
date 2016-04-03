@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 
     [HideInInspector]
     public Direction horizontalMovement, verticalMovement;
+    [HideInInspector]
+    public bool isAlive = true;
     public float moveSpeed = 3f;
     public int bombSize = 1;
     public float speedPU = 1f;
@@ -52,29 +54,31 @@ public class Player : MonoBehaviour
     {
         if (hitObject.CompareTag("Explosion"))
         {
-            Die();
+            if (new Vector2(hitObject.transform.position.x, hitObject.transform.position.y) == GridLocation())
+            {
+                Die();
+            }                
         }
-        else if(!hitObject.CompareTag("Bomb")){
-            if (hitObject.CompareTag("PUSpeed"))
-            {
-                moveSpeed += speedPU;
-            }
-            if (hitObject.CompareTag("PUExplosion"))
-            {
-                bombSize += sizePU;
-            }
+        else if (hitObject.CompareTag("PUSpeed"))
+        {
+            moveSpeed += speedPU;
             Destroy(hitObject.gameObject);
         }
+        else if (hitObject.CompareTag("PUExplosion"))
+        {
+            bombSize += sizePU;
+            Destroy(hitObject.gameObject);
+        } 
     }
 
     public void DropBomb()
     {
-        GameObject newBomb = (GameObject)Instantiate(bomb, MyLocation(), Quaternion.identity);
+        GameObject newBomb = (GameObject)Instantiate(bomb, GridLocation(), Quaternion.identity);
         newBomb.GetComponent<Bomb>().size = bombSize;
         Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), newBomb.GetComponent<Collider2D>());
     }
 
-    private Vector2 MyLocation()
+    public Vector2 GridLocation()
     {
         return new Vector2(Mathf.FloorToInt(this.transform.position.x), Mathf.FloorToInt(this.transform.position.y));
     }
@@ -97,6 +101,6 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log(this.gameObject.name + " Died");
+        Debug.Log(this.gameObject.name + " Died");        
     }
 }

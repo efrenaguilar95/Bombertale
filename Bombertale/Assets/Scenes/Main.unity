@@ -332,6 +332,7 @@ MonoBehaviour:
   bomb: {fileID: 194232, guid: 564cad67cebf01c4abe37f9365ce9699, type: 2}
   horizontalMovement: 0
   verticalMovement: 0
+  isAlive: 1
   moveSpeed: 3
   bombSize: 1
   speedPU: 1
@@ -4425,6 +4426,7 @@ MonoBehaviour:
   bomb: {fileID: 194232, guid: 564cad67cebf01c4abe37f9365ce9699, type: 2}
   horizontalMovement: 0
   verticalMovement: 0
+  isAlive: 1
   moveSpeed: 3
   bombSize: 1
   speedPU: 1
@@ -4747,6 +4749,7 @@ MonoBehaviour:
   bomb: {fileID: 194232, guid: 564cad67cebf01c4abe37f9365ce9699, type: 2}
   horizontalMovement: 0
   verticalMovement: 0
+  isAlive: 1
   moveSpeed: 3
   bombSize: 1
   speedPU: 1
@@ -6394,6 +6397,7 @@ MonoBehaviour:
   bomb: {fileID: 194232, guid: 564cad67cebf01c4abe37f9365ce9699, type: 2}
   horizontalMovement: 0
   verticalMovement: 0
+  isAlive: 1
   moveSpeed: 3
   bombSize: 1
   speedPU: 1
