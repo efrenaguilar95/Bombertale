@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class SoftBlock : MonoBehaviour {
-
+    public GameObject PUSpeed;
     Mapper map;
     int xLoc, yLoc;
 
@@ -30,5 +30,10 @@ public class SoftBlock : MonoBehaviour {
     void OnDestroy()
     {
         map.grid[xLoc][yLoc] = ".";
+        float rand = Random.Range(0, 100);
+        if (rand >= 70)
+        {
+            Instantiate(PUSpeed, this.transform.position, Quaternion.identity);
+        }
     }
 }

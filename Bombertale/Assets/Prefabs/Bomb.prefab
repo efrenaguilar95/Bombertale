@@ -178,6 +178,10 @@ Prefab:
       propertyPath: size
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: PUSpeed
+      value: 
+      objectReference: {fileID: 165948, guid: 8ce2292505ac78945b24e179ce05161f, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 194232}
