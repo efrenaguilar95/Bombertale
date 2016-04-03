@@ -4,6 +4,8 @@ using System.Collections;
 public class Player : MonoBehaviour
 {
     public GameObject bomb;
+    public int bombSize = 1;
+
     [HideInInspector]
     public Direction horizontalMovement, verticalMovement;
     public float moveSpeed = 3f;
@@ -53,6 +55,7 @@ public class Player : MonoBehaviour
     public void DropBomb()
     {
         GameObject newBomb = (GameObject)Instantiate(bomb, MyLocation(), Quaternion.identity);
+        newBomb.GetComponent<Bomb>().size = bombSize;
         Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), newBomb.GetComponent<Collider2D>());
     }
 

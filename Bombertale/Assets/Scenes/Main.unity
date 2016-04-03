@@ -330,6 +330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bomb: {fileID: 194232, guid: 564cad67cebf01c4abe37f9365ce9699, type: 2}
+  bombSize: 1
   horizontalMovement: 0
   verticalMovement: 0
   moveSpeed: 3
@@ -4420,6 +4421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bomb: {fileID: 194232, guid: 564cad67cebf01c4abe37f9365ce9699, type: 2}
+  bombSize: 1
   horizontalMovement: 0
   verticalMovement: 0
   moveSpeed: 3
@@ -4739,6 +4741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bomb: {fileID: 194232, guid: 564cad67cebf01c4abe37f9365ce9699, type: 2}
+  bombSize: 1
   horizontalMovement: 0
   verticalMovement: 0
   moveSpeed: 3
@@ -6383,6 +6386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bomb: {fileID: 194232, guid: 564cad67cebf01c4abe37f9365ce9699, type: 2}
+  bombSize: 1
   horizontalMovement: 0
   verticalMovement: 0
   moveSpeed: 3

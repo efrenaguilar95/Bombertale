@@ -2,15 +2,19 @@
 using System.Collections;
 
 public class SoftBlock : MonoBehaviour {
-    public GameObject PUSpeed;
+
+
+    public GameObject[] powerUps;
+
+    private bool isQuitting = false;
+
     Mapper map;
     int xLoc, yLoc;
-
     void Awake()
     {
         map = GameObject.Find("Map").GetComponent<Mapper>();
         xLoc = (int)this.transform.position.x;
-        yLoc = (int)this.transform.position.y;
+        yLoc = (int)this.transform.position.y;  
     }
 
     public void Fizzle()
@@ -26,14 +30,23 @@ public class SoftBlock : MonoBehaviour {
     //    map.grid[xLoc][yLoc] = ".";
     //    Destroy(map.gameObjectGrid[xLoc][yLoc]);
     //}
-
+    void OnApplicationQuit()
+    {
+        isQuitting = true;
+    }
     void OnDestroy()
     {
-        map.grid[xLoc][yLoc] = ".";
-        float rand = Random.Range(0, 100);
-        if (rand >= 70)
+        if (!isQuitting)
         {
-            Instantiate(PUSpeed, this.transform.position, Quaternion.identity);
+            map.grid[xLoc][yLoc] = ".";
+            float rand = Random.Range(0, 100);
+
+            int randPU = Random.Range(0, powerUps.Length);
+            GameObject power = powerUps[randPU];
+            if (rand >= 70)
+            {
+                Instantiate(power, this.transform.position, Quaternion.identity);
+            }
         }
     }
 }

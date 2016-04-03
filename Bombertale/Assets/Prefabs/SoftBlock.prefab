@@ -73,7 +73,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a6d4e76d1293d4fb7045a1db9035ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PUSpeed: {fileID: 111914, guid: f71ea9762d18c294f813dbd8f362e0a2, type: 2}
+  powerUps:
+  - {fileID: 111914, guid: f71ea9762d18c294f813dbd8f362e0a2, type: 2}
+  - {fileID: 132434, guid: c97ba4e6a747bb049a63748b32893d8a, type: 2}
 --- !u!212 &21272558
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -112,9 +114,25 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: powerUps.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: PUSpeed
       value: 
       objectReference: {fileID: 111914, guid: f71ea9762d18c294f813dbd8f362e0a2, type: 2}
+    - target: {fileID: 0}
+      propertyPath: PUExplosion
+      value: 
+      objectReference: {fileID: 132434, guid: c97ba4e6a747bb049a63748b32893d8a, type: 2}
+    - target: {fileID: 0}
+      propertyPath: powerUps.Array.data[0]
+      value: 
+      objectReference: {fileID: 111914, guid: f71ea9762d18c294f813dbd8f362e0a2, type: 2}
+    - target: {fileID: 0}
+      propertyPath: powerUps.Array.data[1]
+      value: 
+      objectReference: {fileID: 132434, guid: c97ba4e6a747bb049a63748b32893d8a, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 170082}

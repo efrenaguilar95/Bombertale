@@ -18,7 +18,7 @@ public class PowerUps : MonoBehaviour {
             }
             if (this.gameObject.tag == "PUExplosion")
             {
-                //increase explosion size
+               other.gameObject.GetComponent<Player>().bombSize += 1;
             }
             if (this.gameObject.tag == "PUBomb")
             {
