@@ -3,20 +3,112 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
-    public GameObject player1, player2, player3, player4;
-    Player p1Script;
-    Player p2Script;
-    Player p3Script;
-    Player p4Script;
-
-    void Awake () {
-        p1Script = player1.GetComponent<Player>();
-        p2Script = player2.GetComponent<Player>();
-        p3Script = player3.GetComponent<Player>();
-        p4Script = player4.GetComponent<Player>();
+    public GameObject player1, player2, player3, player4;    
+    struct PlayerStruct{
+        public GameObject player;
+        public Player playerScript;
+        public KeyCode upKey;
+        public KeyCode leftKey;
+        public KeyCode downKey;
+        public KeyCode rightKey;
+        public KeyCode bombKey;
+        public bool isAlive;
+        public PlayerStruct(GameObject player, KeyCode up, KeyCode left, KeyCode down, KeyCode right, KeyCode bomb)
+        {
+            this.player = player;
+            playerScript = player.GetComponent<Player>();
+            upKey = up;
+            downKey = down;
+            rightKey = right;
+            leftKey = left;
+            bombKey = bomb;
+            isAlive = true;
+        }
     }
-		
-	void Update () {
+    PlayerStruct p1Struct;
+    PlayerStruct p2Struct;
+    PlayerStruct p3Struct;
+    PlayerStruct p4Struct;
+
+    void Awake() {
+        p1Struct = new PlayerStruct(player1, KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.Space);
+        p2Struct = new PlayerStruct(player2, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.DownArrow, KeyCode.RightArrow, KeyCode.Mouse0);
+        p3Struct = new PlayerStruct(player3, KeyCode.Keypad5, KeyCode.Keypad1, KeyCode.Keypad2, KeyCode.Keypad3, KeyCode.Keypad0);
+        p4Struct = new PlayerStruct(player4, KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, KeyCode.P);
+    }
+
+    void Update()
+    {
+        PlayerHandler(p1Struct);
+        PlayerHandler(p2Struct);
+        PlayerHandler(p3Struct);
+        PlayerHandler(p4Struct);        
+    }
+
+    void PlayerHandler(PlayerStruct pStruct)
+    {
+        if (!pStruct.isAlive)   //Have to do this wonky thing because the gameobject becomes disabled, disabling the script as well
+            return;
+        if (!pStruct.playerScript.isAlive)
+        {
+            pStruct.player.SetActive(false);
+            pStruct.isAlive = false;
+            return;
+        }
+        //Movement
+        if (Input.GetKeyDown(pStruct.upKey))
+        {
+            pStruct.playerScript.verticalMovement = Direction.UP;
+            if (!pStruct.playerScript.isMoving())
+                pStruct.playerScript.toggleMovement();
+            pStruct.playerScript.SetAnim("WalkUp");
+        }
+        else if (Input.GetKeyDown(pStruct.downKey))
+        {
+            pStruct.playerScript.verticalMovement = Direction.DOWN;
+            if (!pStruct.playerScript.isMoving())
+                pStruct.playerScript.toggleMovement();
+            pStruct.playerScript.SetAnim("WalkDown");
+        }
+        else if (!Input.GetKey(pStruct.upKey) && !Input.GetKey(pStruct.downKey))
+        {
+            pStruct.playerScript.verticalMovement = Direction.NONE;
+        }
+        if (Input.GetKeyDown(pStruct.leftKey))
+        {
+            pStruct.playerScript.horizontalMovement = Direction.LEFT;
+            if (!pStruct.playerScript.isMoving())
+                pStruct.playerScript.toggleMovement();
+            pStruct.playerScript.SetAnim("WalkLeft");
+        }
+        else if (Input.GetKeyDown(pStruct.rightKey))
+        {
+            pStruct.playerScript.horizontalMovement = Direction.RIGHT;
+            if (!pStruct.playerScript.isMoving())
+                pStruct.playerScript.toggleMovement();
+            pStruct.playerScript.SetAnim("WalkRight");
+        }
+        else if (!Input.GetKey(pStruct.leftKey) && !Input.GetKey(pStruct.rightKey))
+        {
+            pStruct.playerScript.horizontalMovement = Direction.NONE;
+        }
+        if (pStruct.playerScript.horizontalMovement == Direction.NONE && pStruct.playerScript.verticalMovement == Direction.NONE)
+        {
+            //p1Script.SetAnim("IdleDown");
+            if (pStruct.playerScript.isMoving())
+                pStruct.playerScript.toggleMovement();
+        }
+        //Place Bomb
+        if (Input.GetKeyDown(pStruct.bombKey))
+        {
+            pStruct.playerScript.DropBomb();
+        }
+    }
+}
+
+
+///CLG Below
+/*
         //Player1 Movement
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -59,6 +151,7 @@ public class GameManager : MonoBehaviour {
             if(p1Script.isMoving())
                 p1Script.toggleMovement();
         }
+        //Player1 Bomb
         if (Input.GetKeyDown(KeyCode.Space))
         {
             p1Script.DropBomb();    
@@ -209,5 +302,4 @@ public class GameManager : MonoBehaviour {
         {
             p4Script.DropBomb();
         }
-    }
-}
+        */

@@ -294,7 +294,7 @@ GameObject:
   - 50: {fileID: 97997695}
   - 114: {fileID: 97997694}
   - 95: {fileID: 97997693}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player4
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -4332,7 +4332,7 @@ GameObject:
   - 50: {fileID: 1513470723}
   - 114: {fileID: 1513470724}
   - 95: {fileID: 1513470725}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player2
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -4711,7 +4711,7 @@ GameObject:
   - 50: {fileID: 1615384802}
   - 114: {fileID: 1615384801}
   - 95: {fileID: 1615384800}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player3
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -6303,7 +6303,7 @@ GameObject:
   - 50: {fileID: 2128131636}
   - 114: {fileID: 2128131637}
   - 95: {fileID: 2128131638}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player1
   m_TagString: Player
   m_Icon: {fileID: 0}

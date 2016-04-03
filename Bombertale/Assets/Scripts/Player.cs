@@ -101,6 +101,7 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log(this.gameObject.name + " Died");        
+        Debug.Log(this.gameObject.name + " Died");
+        isAlive = false;
     }
 }
