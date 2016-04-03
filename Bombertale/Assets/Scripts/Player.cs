@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
             if (new Vector2(hitObject.transform.position.x, hitObject.transform.position.y) == GridLocation())
             {
                 Die();
-            }                
+            } 
         }
         else if (hitObject.CompareTag("PUSpeed"))
         {

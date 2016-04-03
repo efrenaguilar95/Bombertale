@@ -8,12 +8,12 @@ public class Explosion : MonoBehaviour
 
     void Start()
     {
-
-        Invoke("Explode", lifespan);
+        Destroy(this.gameObject, lifespan);
+       // Invoke("Explode", lifespan);
     }
 
-    void Explode()
-    {
-        Destroy(this.gameObject);
-    }
+    //void Explode()
+    //{
+    //    Destroy(this.gameObject);
+    //}
 }
