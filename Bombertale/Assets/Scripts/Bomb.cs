@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Bomb : MonoBehaviour {
     public float lifespan = 2.5f;
-    public int size = 15;
+    //public int size = 15;
     public GameObject exCenter;
     public GameObject exLeft;
     public GameObject exRight;
