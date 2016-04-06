@@ -13,14 +13,15 @@ public class Player : MonoBehaviour
     public int bombSize = 1;
     public float speedPU = 1f;
     public int sizePU = 1;
+    public bool kickPU = false;
 
-    private Vector2 startPos;
+    //private Vector2 startPos;
     Animator playerAnim;
 
     void Start()
     {
         playerAnim = this.GetComponent<Animator>();
-        startPos = this.transform.position;
+        //startPos = this.transform.position;
     }
 
     void FixedUpdate()
@@ -56,19 +57,27 @@ public class Player : MonoBehaviour
         {
             if (new Vector2(hitObject.transform.position.x, hitObject.transform.position.y) == GridLocation())
             {
-                Die();
+                //Die();
             } 
         }
         else if (hitObject.CompareTag("PUSpeed"))
         {
+            Debug.Log(this.gameObject.name + "PUSpeed");
             moveSpeed += speedPU;
             Destroy(hitObject.gameObject);
         }
         else if (hitObject.CompareTag("PUExplosion"))
         {
+            Debug.Log(this.gameObject.name + "PUExplosion");
             bombSize += sizePU;
             Destroy(hitObject.gameObject);
         } 
+        else if (hitObject.CompareTag("PUKick"))
+        {
+            kickPU = true;
+            Debug.Log(this.gameObject.name + "KickTRUE");
+            Destroy(hitObject.gameObject);
+        }
     }
 
     public void DropBomb()
@@ -76,6 +85,15 @@ public class Player : MonoBehaviour
         GameObject newBomb = (GameObject)Instantiate(bomb, GridLocation(), Quaternion.identity);
         newBomb.GetComponent<Bomb>().size = bombSize;
         Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), newBomb.GetComponent<Collider2D>());
+    }
+
+    public void Kick()
+    {
+        if(kickPU == true)
+        {
+            Debug.Log("Kick");
+
+        }
     }
 
     public Vector2 GridLocation()
@@ -104,4 +122,5 @@ public class Player : MonoBehaviour
         Debug.Log(this.gameObject.name + " Died");
         isAlive = false;
     }
+
 }

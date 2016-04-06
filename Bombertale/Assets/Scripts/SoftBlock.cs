@@ -40,10 +40,10 @@ public class SoftBlock : MonoBehaviour {
         {
             map.grid[xLoc][yLoc] = ".";
             float rand = Random.Range(0, 100);
-
+            s
             int randPU = Random.Range(0, powerUps.Length);
             GameObject power = powerUps[randPU];
-            if (rand >= 70)
+            if (rand >= 30)
             {
                 Instantiate(power, this.transform.position, Quaternion.identity);
             }
