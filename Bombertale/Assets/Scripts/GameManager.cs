@@ -12,9 +12,8 @@ public class GameManager : MonoBehaviour {
         public KeyCode downKey;
         public KeyCode rightKey;
         public KeyCode bombKey;
-        public KeyCode kickKey;
         public bool isAlive;
-        public PlayerStruct(GameObject player, KeyCode up, KeyCode left, KeyCode down, KeyCode right, KeyCode bomb, KeyCode kick)
+        public PlayerStruct(GameObject player, KeyCode up, KeyCode left, KeyCode down, KeyCode right, KeyCode bomb)
         {
             this.player = player;
             playerScript = player.GetComponent<Player>();
@@ -23,7 +22,6 @@ public class GameManager : MonoBehaviour {
             rightKey = right;
             leftKey = left;
             bombKey = bomb;
-            kickKey = kick;
             isAlive = true;
         }
     }
@@ -33,10 +31,10 @@ public class GameManager : MonoBehaviour {
     PlayerStruct p4Struct;
 
     void Awake() {
-        p1Struct = new PlayerStruct(player1, KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.Space, KeyCode.Q);
-        p2Struct = new PlayerStruct(player2, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.DownArrow, KeyCode.RightArrow, KeyCode.Mouse0, KeyCode.Mouse1);
-        p3Struct = new PlayerStruct(player3, KeyCode.Keypad5, KeyCode.Keypad1, KeyCode.Keypad2, KeyCode.Keypad3, KeyCode.Keypad0, KeyCode.KeypadEnter);
-        p4Struct = new PlayerStruct(player4, KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, KeyCode.P, KeyCode.U);
+        p1Struct = new PlayerStruct(player1, KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.Space);
+        p2Struct = new PlayerStruct(player2, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.DownArrow, KeyCode.RightArrow, KeyCode.Mouse0);
+        p3Struct = new PlayerStruct(player3, KeyCode.Keypad5, KeyCode.Keypad1, KeyCode.Keypad2, KeyCode.Keypad3, KeyCode.Keypad0);
+        p4Struct = new PlayerStruct(player4, KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, KeyCode.P);
     }
 
     void Update()
@@ -105,10 +103,7 @@ public class GameManager : MonoBehaviour {
         {
             pStruct.playerScript.DropBomb();
         }
-        if (Input.GetKeyDown(pStruct.kickKey))
-        {
-            pStruct.playerScript.Kick();
-        }
+
     }
 }
 

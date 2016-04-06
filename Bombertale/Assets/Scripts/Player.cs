@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     public int sizePU = 1;
     public bool kickPU = false;
 
+    Mapper map;
+
     //private Vector2 startPos;
     Animator playerAnim;
 
@@ -62,21 +64,26 @@ public class Player : MonoBehaviour
         }
         else if (hitObject.CompareTag("PUSpeed"))
         {
-            Debug.Log(this.gameObject.name + "PUSpeed");
             moveSpeed += speedPU;
             Destroy(hitObject.gameObject);
         }
         else if (hitObject.CompareTag("PUExplosion"))
         {
-            Debug.Log(this.gameObject.name + "PUExplosion");
             bombSize += sizePU;
             Destroy(hitObject.gameObject);
         } 
         else if (hitObject.CompareTag("PUKick"))
         {
             kickPU = true;
-            Debug.Log(this.gameObject.name + "KickTRUE");
             Destroy(hitObject.gameObject);
+        }
+    }
+    void OnCollisionEnter2D(Collider2D hitObject)
+    {
+
+        if (hitObject.CompareTag("Bomb") && kickPU == true)
+        {
+             //do bomb collision checks and stuff
         }
     }
 
@@ -85,15 +92,6 @@ public class Player : MonoBehaviour
         GameObject newBomb = (GameObject)Instantiate(bomb, GridLocation(), Quaternion.identity);
         newBomb.GetComponent<Bomb>().size = bombSize;
         Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), newBomb.GetComponent<Collider2D>());
-    }
-
-    public void Kick()
-    {
-        if(kickPU == true)
-        {
-            Debug.Log("Kick");
-
-        }
     }
 
     public Vector2 GridLocation()
