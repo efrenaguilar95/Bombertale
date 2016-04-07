@@ -77,6 +77,7 @@ MonoBehaviour:
   - {fileID: 111914, guid: f71ea9762d18c294f813dbd8f362e0a2, type: 2}
   - {fileID: 132434, guid: c97ba4e6a747bb049a63748b32893d8a, type: 2}
   - {fileID: 120336, guid: f8094f19d2fbcb04db3b46f6f93f0774, type: 2}
+  - {fileID: 143136, guid: 27f682f12db991449a62216d4bf40b5b, type: 2}
 --- !u!212 &21272558
 SpriteRenderer:
   m_ObjectHideFlags: 1

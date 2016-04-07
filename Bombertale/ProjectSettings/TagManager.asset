@@ -9,7 +9,9 @@ TagManager:
   - Bomb
   - PUSpeed
   - PUExplosion
+  - PUBomb
   - PUKick
+  - PUDetermine
   layers:
   - Default
   - TransparentFX
