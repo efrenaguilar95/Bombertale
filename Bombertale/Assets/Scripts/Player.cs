@@ -10,11 +10,13 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public bool isAlive = true;
     public float moveSpeed = 3f;
+    public float maxSpeed = 6f;
     public int bombSize = 1;
-    public float speedPU = 1f;
+    public float speedPU = .5f;
     public int sizePU = 1;
-    public bool kickPU = false;
-
+    public bool isDetermined = false;
+    public int bombCount = 1;
+    public float determinedTime = 5f;
     Mapper map;
 
     //private Vector2 startPos;
@@ -59,12 +61,15 @@ public class Player : MonoBehaviour
         {
             if (new Vector2(hitObject.transform.position.x, hitObject.transform.position.y) == GridLocation())
             {
-                //Die();
+                Die();
             } 
         }
         else if (hitObject.CompareTag("PUSpeed"))
         {
-            moveSpeed += speedPU;
+            if (moveSpeed < maxSpeed)
+            {
+                moveSpeed += speedPU;
+            }
             Destroy(hitObject.gameObject);
         }
         else if (hitObject.CompareTag("PUExplosion"))
@@ -72,26 +77,50 @@ public class Player : MonoBehaviour
             bombSize += sizePU;
             Destroy(hitObject.gameObject);
         } 
-        else if (hitObject.CompareTag("PUKick"))
+        else if (hitObject.CompareTag("PUBomb"))
         {
-            kickPU = true;
+           bombCount++;
+           Destroy(hitObject.gameObject);
+        }
+        else if (hitObject.CompareTag("PUDetermine"))
+        {
+            isDetermined = true;
+            Invoke("Undetermined", determinedTime);
             Destroy(hitObject.gameObject);
         }
     }
-    void OnCollisionEnter2D(Collider2D hitObject)
-    {
+    //void OnCollisionEnter2D(Collision2D hitObject)
+    //{
 
-        if (hitObject.CompareTag("Bomb") && kickPU == true)
-        {
-             //do bomb collision checks and stuff
-        }
-    }
+    //    if (hitObject.gameObject.CompareTag("Bomb") && kickPU == true)
+    //    {
+    //        Debug.Log("KICK MEH");
+    //        //hitObject.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition = RigidbodyConstraints2D.None;            
+    //        hitObject.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-100f, 0));
+    //         //do bomb collision checks and stuff
+    //    }
+    //}
 
     public void DropBomb()
     {
-        GameObject newBomb = (GameObject)Instantiate(bomb, GridLocation(), Quaternion.identity);
-        newBomb.GetComponent<Bomb>().size = bombSize;
-        Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), newBomb.GetComponent<Collider2D>());
+        if (bombCount > 0)
+        {
+            bombCount--;
+            GameObject newBomb = (GameObject)Instantiate(bomb, GridLocation(), Quaternion.identity);
+            Bomb bombScript = newBomb.GetComponent<Bomb>();
+            bombScript.size = bombSize;
+            Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), newBomb.GetComponent<Collider2D>());
+            Invoke("RefillBombCount", bombScript.lifespan);
+        }        
+    }
+
+    private void RefillBombCount()
+    {
+        bombCount++;
+    }
+    private void Undetermined()
+    {
+        isDetermined = false;
     }
 
     public Vector2 GridLocation()
@@ -117,8 +146,11 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log(this.gameObject.name + " Died");
-        isAlive = false;
+        if (isDetermined == false)
+        {
+            Debug.Log(this.gameObject.name + " Died");
+            isAlive = false;
+        }
     }
 
 }
