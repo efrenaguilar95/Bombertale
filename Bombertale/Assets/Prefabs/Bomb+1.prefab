@@ -12,7 +12,7 @@ GameObject:
   - 61: {fileID: 6146566}
   m_Layer: 0
   m_Name: Bomb+1
-  m_TagString: PUKick
+  m_TagString: PUBomb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

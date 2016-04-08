@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour {
         if (!pStruct.playerScript.isAlive)
         {
             pStruct.player.SetActive(false);
-            pStruct.isAlive = false;
+            pStruct.isAlive = false;            
             return;
         }
         //Movement
@@ -93,8 +93,7 @@ public class GameManager : MonoBehaviour {
             pStruct.playerScript.horizontalMovement = Direction.NONE;
         }
         if (pStruct.playerScript.horizontalMovement == Direction.NONE && pStruct.playerScript.verticalMovement == Direction.NONE)
-        {
-            //p1Script.SetAnim("IdleDown");
+        {            
             if (pStruct.playerScript.isMoving())
                 pStruct.playerScript.toggleMovement();
         }

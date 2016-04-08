@@ -10,7 +10,6 @@ TagManager:
   - PUSpeed
   - PUExplosion
   - PUBomb
-  - PUKick
   - PUDetermine
   layers:
   - Default

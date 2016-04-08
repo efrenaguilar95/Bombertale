@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
-    public GameObject bomb;
+    public GameObject bomb;    
 
     [HideInInspector]
     public Direction horizontalMovement, verticalMovement;
@@ -89,17 +89,6 @@ public class Player : MonoBehaviour
             Destroy(hitObject.gameObject);
         }
     }
-    //void OnCollisionEnter2D(Collision2D hitObject)
-    //{
-
-    //    if (hitObject.gameObject.CompareTag("Bomb") && kickPU == true)
-    //    {
-    //        Debug.Log("KICK MEH");
-    //        //hitObject.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition = RigidbodyConstraints2D.None;            
-    //        hitObject.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-100f, 0));
-    //         //do bomb collision checks and stuff
-    //    }
-    //}
 
     public void DropBomb()
     {
@@ -150,6 +139,9 @@ public class Player : MonoBehaviour
         {
             Debug.Log(this.gameObject.name + " Died");
             isAlive = false;
+            //Spawn Napstablook
+            GameObject napstablook = (GameObject)Instantiate(Resources.Load("Napstablook"), this.transform.position, Quaternion.identity);
+            Destroy(napstablook, 1.5f);
         }
     }
 
