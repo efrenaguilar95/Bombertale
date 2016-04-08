@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour {
     PlayerStruct p2Struct;
     PlayerStruct p3Struct;
     PlayerStruct p4Struct;
+    
 
     void Awake() {
         p1Struct = new PlayerStruct(player1, KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.Space);
@@ -42,9 +44,33 @@ public class GameManager : MonoBehaviour {
         PlayerHandler(p1Struct);
         PlayerHandler(p2Struct);
         PlayerHandler(p3Struct);
-        PlayerHandler(p4Struct);        
+        PlayerHandler(p4Struct);
+        if (playersAlive())
+        {
+            DeleteAll();
+            SceneManager.LoadScene("EndScreen");
+        }
     }
 
+    void DeleteAll()
+    {
+        foreach (GameObject o in Object.FindObjectsOfType<GameObject>())
+        {
+            Destroy(o);
+        }
+    }
+
+    private bool playersAlive()
+    {
+        if (p1Struct.playerScript.isAlive && !p2Struct.playerScript.isAlive && !p3Struct.playerScript.isAlive && !p4Struct.playerScript.isAlive)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     void PlayerHandler(PlayerStruct pStruct)
     {
         if (!pStruct.isAlive)   //Have to do this wonky thing because the gameobject becomes disabled, disabling the script as well
@@ -52,7 +78,7 @@ public class GameManager : MonoBehaviour {
         if (!pStruct.playerScript.isAlive)
         {
             pStruct.player.SetActive(false);
-            pStruct.isAlive = false;            
+            pStruct.isAlive = false;
             return;
         }
         //Movement

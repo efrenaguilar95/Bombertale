@@ -32,7 +32,7 @@ public class SoftBlock : MonoBehaviour {
     //}
     void OnApplicationQuit()
     {
-        isQuitting = true;
+        isQuitting = true;  
     }
     void OnDestroy()
     {
