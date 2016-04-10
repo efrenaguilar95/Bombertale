@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour {
 
     int numSongs;
     int musicSelector;
+    public static int win = 0;
+    
 
     void Awake() {
         p1Struct = new PlayerStruct(player1, KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.Space);
@@ -46,7 +48,7 @@ public class GameManager : MonoBehaviour {
         p4Struct = new PlayerStruct(player4, KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, KeyCode.P);
         audios = GetComponents<AudioSource>();
         numSongs = audios.Length - 2;
-        musicSelector = Random.Range(0, 1000 * (numSongs-1));
+        musicSelector = Random.Range(1000, 1000 * (numSongs-1));
         if(musicSelector == 7777)
         {
             musicSelector = 11;
@@ -64,8 +66,10 @@ public class GameManager : MonoBehaviour {
         PlayerHandler(p2Struct);
         PlayerHandler(p3Struct);
         PlayerHandler(p4Struct);
-        if (playersAlive())
+        PlayersAlive();
+        if (PlayersAlive() <= 1)
         {
+            win = Winner();
             DeleteAll();
             SceneManager.LoadScene("EndScreen");
         }
@@ -79,17 +83,45 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    private bool playersAlive()
+    private int PlayersAlive()
     {
-        if (p1Struct.playerScript.isAlive && !p2Struct.playerScript.isAlive && !p3Struct.playerScript.isAlive && !p4Struct.playerScript.isAlive)
+        int alive = 4;
+        if (!p1Struct.playerScript.isAlive)
         {
-            return true;
+            alive--;
         }
-        else
+        if (!p2Struct.playerScript.isAlive)
         {
-            return false;
+            alive--;
         }
+        if (!p3Struct.playerScript.isAlive)
+        {
+            alive--;
+        }
+        if (!p4Struct.playerScript.isAlive)
+        {
+            alive--;
+        }
+        return alive;
     }
+
+    private int Winner()
+    {
+        if (p1Struct.playerScript.isAlive)
+        {
+            return 1;
+        }
+        else if (p2Struct.playerScript.isAlive)
+        {
+            return 2;
+        }
+        else if (p3Struct.playerScript.isAlive)
+        {
+            return 3;
+        }
+        return 4;
+    }
+
     void PlayerHandler(PlayerStruct pStruct)
     {
         if (!pStruct.isAlive)   //Have to do this wonky thing because the gameobject becomes disabled, disabling the script as well
