@@ -4,7 +4,7 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
-    public GameObject player1, player2, player3, player4;    
+    public GameObject player1, player2, player3, player4; 
     struct PlayerStruct{
         public GameObject player;
         public Player playerScript;
@@ -30,13 +30,32 @@ public class GameManager : MonoBehaviour {
     PlayerStruct p2Struct;
     PlayerStruct p3Struct;
     PlayerStruct p4Struct;
-    
+
+    AudioSource[] audios;
+    AudioSource bombSound;
+    AudioSource deathSound;
+
+
+    int numSongs;
+    int musicSelector;
 
     void Awake() {
         p1Struct = new PlayerStruct(player1, KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.Space);
         p2Struct = new PlayerStruct(player2, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.DownArrow, KeyCode.RightArrow, KeyCode.Mouse0);
         p3Struct = new PlayerStruct(player3, KeyCode.Keypad5, KeyCode.Keypad1, KeyCode.Keypad2, KeyCode.Keypad3, KeyCode.Keypad0);
         p4Struct = new PlayerStruct(player4, KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, KeyCode.P);
+        audios = GetComponents<AudioSource>();
+        numSongs = audios.Length - 2;
+        musicSelector = Random.Range(0, 1000 * (numSongs-1));
+        if(musicSelector == 7777)
+        {
+            musicSelector = 11;
+        }
+        else
+        {
+            musicSelector = (musicSelector / 1000) + 1;
+        }
+        audios[musicSelector].Play();
     }
 
     void Update()
