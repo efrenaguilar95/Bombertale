@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour {
     PlayerStruct p2Struct;
     PlayerStruct p3Struct;
     PlayerStruct p4Struct;
+    public static int win = 0;
     
 
     void Awake() {
@@ -45,8 +46,10 @@ public class GameManager : MonoBehaviour {
         PlayerHandler(p2Struct);
         PlayerHandler(p3Struct);
         PlayerHandler(p4Struct);
-        if (playersAlive())
+        PlayersAlive();
+        if (PlayersAlive() <= 1)
         {
+            win = Winner();
             DeleteAll();
             SceneManager.LoadScene("EndScreen");
         }
@@ -60,17 +63,45 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    private bool playersAlive()
+    private int PlayersAlive()
     {
-        if (p1Struct.playerScript.isAlive && !p2Struct.playerScript.isAlive && !p3Struct.playerScript.isAlive && !p4Struct.playerScript.isAlive)
+        int alive = 4;
+        if (!p1Struct.playerScript.isAlive)
         {
-            return true;
+            alive--;
         }
-        else
+        if (!p2Struct.playerScript.isAlive)
         {
-            return false;
+            alive--;
         }
+        if (!p3Struct.playerScript.isAlive)
+        {
+            alive--;
+        }
+        if (!p4Struct.playerScript.isAlive)
+        {
+            alive--;
+        }
+        return alive;
     }
+
+    private int Winner()
+    {
+        if (p1Struct.playerScript.isAlive)
+        {
+            return 1;
+        }
+        else if (p2Struct.playerScript.isAlive)
+        {
+            return 2;
+        }
+        else if (p3Struct.playerScript.isAlive)
+        {
+            return 3;
+        }
+        return 4;
+    }
+
     void PlayerHandler(PlayerStruct pStruct)
     {
         if (!pStruct.isAlive)   //Have to do this wonky thing because the gameobject becomes disabled, disabling the script as well
