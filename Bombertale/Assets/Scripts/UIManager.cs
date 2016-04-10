@@ -10,8 +10,12 @@ public class UIManager : MonoBehaviour {
         SceneManager.LoadScene("Main");
     }
        
-    private void Update()
+    private void Start()
     {
-        GetComponent<Text>().text = "Player " + GameManager.win.ToString() + " Wins!";
+        GameObject Text = GameObject.Find("Winner");
+        if (Text != null)
+            {
+            GetComponent<Text>().text = "Player " + GameManager.win.ToString() + " Wins!";
+        }
     }
 }
