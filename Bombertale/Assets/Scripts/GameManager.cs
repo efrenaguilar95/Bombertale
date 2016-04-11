@@ -31,9 +31,10 @@ public class GameManager : MonoBehaviour {
     PlayerStruct p3Struct;
     PlayerStruct p4Struct;
 
-    AudioSource[] audios;
-    AudioSource bombSound;
-    AudioSource deathSound;
+    AudioSource[] sounds;
+    public AudioSource bombSound;
+    public AudioSource deathSound;
+    public AudioSource pickupSound;
 
 
     int numSongs;
@@ -46,18 +47,10 @@ public class GameManager : MonoBehaviour {
         p2Struct = new PlayerStruct(player2, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.DownArrow, KeyCode.RightArrow, KeyCode.Mouse0);
         p3Struct = new PlayerStruct(player3, KeyCode.Keypad5, KeyCode.Keypad1, KeyCode.Keypad2, KeyCode.Keypad3, KeyCode.Keypad0);
         p4Struct = new PlayerStruct(player4, KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, KeyCode.P);
-        //audios = GetComponents<AudioSource>();
-        //numSongs = audios.Length - 2;
-        //musicSelector = Random.Range(1000, 1000 * (numSongs-1));
-        //if(musicSelector == 7777)
-        //{
-        //    musicSelector = 11;
-        //}
-        //else
-        //{
-        //    musicSelector = (musicSelector / 1000) + 1;
-        //}
-        //audios[musicSelector].Play();
+        sounds = GetComponents<AudioSource>();
+        bombSound = sounds[0];
+        deathSound = sounds[1];
+        pickupSound = sounds[2];
     }
 
     void Update()

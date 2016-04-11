@@ -13,10 +13,12 @@ public class Bomb : MonoBehaviour {
     public GameObject exVert;
 
     Mapper map;
+    AudioSource explosionSound;
 
     void Awake()
     {
         map = GameObject.Find("Map").GetComponent<Mapper>();
+        explosionSound = GameObject.Find("GameManager").GetComponent<GameManager>().bombSound;
     }
 
     void Start () {
@@ -26,6 +28,7 @@ public class Bomb : MonoBehaviour {
     void Explode()
     {
         Destroy(this.gameObject);
+        explosionSound.Play();
         Instantiate(exCenter, this.transform.position, Quaternion.identity);
 
         ExplosionDirection(Vector3.up);

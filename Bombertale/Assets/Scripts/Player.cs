@@ -21,10 +21,14 @@ public class Player : MonoBehaviour
 
     //private Vector2 startPos;
     Animator playerAnim;
+    AudioSource deathSound;
+    AudioSource pickupSound;
 
     void Start()
     {
         playerAnim = this.GetComponent<Animator>();
+        deathSound = GameObject.Find("GameManager").GetComponent<GameManager>().deathSound;
+        pickupSound = GameObject.Find("GameManager").GetComponent<GameManager>().pickupSound;
         //startPos = this.transform.position;
     }
 
@@ -66,6 +70,7 @@ public class Player : MonoBehaviour
         }
         else if (hitObject.CompareTag("PUSpeed"))
         {
+            pickupSound.Play();
             if (moveSpeed < maxSpeed)
             {
                 moveSpeed += speedPU;
@@ -74,16 +79,19 @@ public class Player : MonoBehaviour
         }
         else if (hitObject.CompareTag("PUExplosion"))
         {
+            pickupSound.Play();
             bombSize += sizePU;
             Destroy(hitObject.gameObject);
         } 
         else if (hitObject.CompareTag("PUBomb"))
         {
+           pickupSound.Play();
            bombCount++;
            Destroy(hitObject.gameObject);
         }
         else if (hitObject.CompareTag("PUDetermine"))
         {
+            pickupSound.Play();
             isDetermined = true;
             Invoke("Undetermined", determinedTime);
             Destroy(hitObject.gameObject);
@@ -137,6 +145,7 @@ public class Player : MonoBehaviour
     {
         if (isDetermined == false)
         {
+            deathSound.Play();
             Debug.Log(this.gameObject.name + " Died");
             isAlive = false;
             //Spawn Napstablook

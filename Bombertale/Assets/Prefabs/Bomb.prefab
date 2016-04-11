@@ -13,6 +13,7 @@ GameObject:
   - 61: {fileID: 6190430}
   - 50: {fileID: 5036448}
   - 61: {fileID: 6166986}
+  - 82: {fileID: 8250176}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Bomb
@@ -77,6 +78,80 @@ BoxCollider2D:
   m_Offset: {x: 0.5, y: 0.5}
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.9}
+--- !u!82 &8250176
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194232}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 24402cb02c55b5b46ba6e1b5b72750ae, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &11424670
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -97,6 +172,7 @@ MonoBehaviour:
   exDown: {fileID: 195942, guid: 54bdd677f0119dd4f907be01c088aeac, type: 2}
   exHori: {fileID: 124420, guid: 4b2b6011b3a76dc46bde00538a695c4b, type: 2}
   exVert: {fileID: 107580, guid: f6feb9737b5de27498df4940288aaafc, type: 2}
+  soundSource: {fileID: 8250176}
 --- !u!212 &21219920
 SpriteRenderer:
   m_ObjectHideFlags: 1
