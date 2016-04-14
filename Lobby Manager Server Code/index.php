@@ -1,17 +1,5 @@
 <?php
-include 'db_info.php';
-
-// Create connection
-$conn = mysql_connect($servername, $username, $password);
-
-// Check connection
-if (!$conn)
-{
-    die("Connection failed: " . mysql_error());
-} 
-
-mysql_select_db($databasename)
-	or die("Unable to select database" . mysql_error());
+include 'setup.php';
 
 if(isset($_GET['reset']))
 {
@@ -46,8 +34,8 @@ if(isset($_GET['reset']))
 
 <table>
 	<tr>
-		<th>game_name</th>
-		<th>host_ip</th>
+		<th>server_name</th>
+		<th>server_ip</th>
 		<th>port</th>
 		<th>private</th>
 		<th>password</th>
@@ -68,8 +56,8 @@ if(isset($_GET['reset']))
 	for($i = 0; $i < $rows; ++$i)
 	{
 		echo '<tr>';
-		echo '<td>'	. mysql_result($result, $i, 'game_name')	. '</td>';
-		echo '<td>'	. mysql_result($result, $i, 'host_ip')		. '</td>';
+		echo '<td>'	. mysql_result($result, $i, 'server_name')	. '</td>';
+		echo '<td>'	. mysql_result($result, $i, 'server_ip')		. '</td>';
 		echo '<td>'	. mysql_result($result, $i, 'port')		. '</td>';
         if(mysql_result($result, $i, 'private') == 0)
         {
