@@ -1,0 +1,12 @@
+SERVER RETURN CODES
+BL00:	incorect/missing access password
+BL01:	connect to database failed
+BL02:	selecting table failed
+BL03:	lobby created successfully
+BL04:	lobby name already taken
+BL05:	lobby deleted successfully
+BL06:	failed to delete lobby
+BL07:	failed to get lobbies
+BL08:	no lobbies
+BL09:	could not find lobby by that name
+BL10:	lobby is full
