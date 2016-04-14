@@ -1,5 +1,22 @@
 <?php
-include 'setup.php';
+
+$servername = "localhost";
+	$databasename = "Bombertale";
+	$tablename = "Servers";
+	$username = "Bombertale";
+	$password = "wSiphnsu6gco";
+
+	$conn = mysql_connect($servername, $username, $password);
+
+	if (!$conn)
+		die('BL01'); //failed to connect to database
+
+	if(!mysql_select_db($databasename))
+	{
+		mysql_close($conn);
+		die('BL02'); //failed to select table
+	}
+
 
 if(isset($_GET['reset']))
 {
@@ -84,3 +101,7 @@ if(isset($_GET['reset']))
 
 </body>
 </html>
+
+<?php
+	include 'cleanup.php';
+?>
