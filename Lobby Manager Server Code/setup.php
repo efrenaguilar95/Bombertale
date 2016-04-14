@@ -1,7 +1,7 @@
 <?php
 	$servername = "localhost";
-	$databasename = "BombertaleGames";
-	$tablename = "HostedGames";
+	$databasename = "Bombertale";
+	$tablename = "Servers";
 	$username = "Bombertale";
 	$password = "wSiphnsu6gco";
 	$unityPassword = "ICS168";

@@ -2,9 +2,9 @@
 	include 'setup.php';
 
 
-	$gameName = mysql_real_escape_string($_GET['gameName']);
+	$serverName = mysql_real_escape_string($_GET['serverName']);
 	
-	$query = "DELETE FROM $tablename WHERE game_name = '$gameName'";
+	$query = "DELETE FROM $tablename WHERE server_name = '$serverName'";
 
 	echo mysql_query($query) === TRUE ? 'BL05' : 'BL06';
 
