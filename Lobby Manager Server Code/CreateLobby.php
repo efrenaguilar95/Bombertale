@@ -1,15 +1,12 @@
 <?php
 	include 'db_info.php';
 
-	//write 0 to the html page if the password is missing or incorrect
 	if(!(isset($_GET['unityPassword']) && $_GET['unityPassword'] == $unityPassword))
-		die('password is missing or incorrect');
+		die('BL00');
 
-
-//write 0 to the page if connecting to the datbase or selecting the table fails
 	$conn = mysql_connect($servername, $username, $password);
-	if (!$conn) die(mysql_error());
-	mysql_select_db($databasename) or die(mysql_error());
+	if (!$conn) die('BL01');
+	mysql_select_db($databasename) or die('BL02');
 
 
 	//assumed all info is set, I know this is dangerous =/
@@ -22,5 +19,5 @@
 	$query = "INSERT INTO $tablename (game_name, host_ip, port, private, password, players)
 				VALUES ('$gameName', '$hostIp', '$port', '$private', '$password', '$players')";
 
-	echo mysql_query($query) === TRUE ? '1' : mysql_error();
+	echo mysql_query($query) === TRUE ? 'BL03' : 'BL04';
 ?>
