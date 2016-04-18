@@ -12,7 +12,7 @@ GameObject:
   - 114: {fileID: 11470304}
   - 61: {fileID: 6195514}
   m_Layer: 0
-  m_Name: explosions_23
+  m_Name: ExplosionHori
   m_TagString: Explosion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

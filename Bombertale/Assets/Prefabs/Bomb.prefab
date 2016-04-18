@@ -140,7 +140,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -172,7 +172,6 @@ MonoBehaviour:
   exDown: {fileID: 195942, guid: 54bdd677f0119dd4f907be01c088aeac, type: 2}
   exHori: {fileID: 124420, guid: 4b2b6011b3a76dc46bde00538a695c4b, type: 2}
   exVert: {fileID: 107580, guid: f6feb9737b5de27498df4940288aaafc, type: 2}
-  soundSource: {fileID: 8250176}
 --- !u!212 &21219920
 SpriteRenderer:
   m_ObjectHideFlags: 1
