@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
-    public GameObject bomb;    
+    public GameObject bomb;
 
     [HideInInspector]
     public Direction horizontalMovement, verticalMovement;
@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     public bool isDetermined = false;
     public int bombCount = 1;
     public float determinedTime = 5f;
+    public bool respawnPU = false;
+    public GameObject spawnPoint;
     Mapper map;
 
     //private Vector2 startPos;
@@ -65,8 +67,15 @@ public class Player : MonoBehaviour
         {
             if (new Vector2(hitObject.transform.position.x, hitObject.transform.position.y) == GridLocation())
             {
-                Die();
-            } 
+                //if (respawnPU)
+                //{
+                //    this.transform.position = spawnPoint.transform.position;
+                //    Destroy(spawnPoint.gameObject);
+                //}
+                //else {
+                    Die();
+                //}
+            }
         }
         else if (hitObject.CompareTag("PUSpeed"))
         {
@@ -82,12 +91,12 @@ public class Player : MonoBehaviour
             pickupSound.Play();
             bombSize += sizePU;
             Destroy(hitObject.gameObject);
-        } 
+        }
         else if (hitObject.CompareTag("PUBomb"))
         {
-           pickupSound.Play();
-           bombCount++;
-           Destroy(hitObject.gameObject);
+            pickupSound.Play();
+            bombCount++;
+            Destroy(hitObject.gameObject);
         }
         else if (hitObject.CompareTag("PUDetermine"))
         {
@@ -96,6 +105,12 @@ public class Player : MonoBehaviour
             Invoke("Undetermined", determinedTime);
             Destroy(hitObject.gameObject);
         }
+        //else if (hitObject.CompareTag("PURespawn"))
+        //{
+        //    respawnPU = true;
+        //    Instantiate(spawnPoint, hitObject.transform.position, Quaternion.identity);
+        //    Destroy(hitObject.gameObject);
+        //}
     }
 
     public void DropBomb()
@@ -108,7 +123,7 @@ public class Player : MonoBehaviour
             bombScript.size = bombSize;
             Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), newBomb.GetComponent<Collider2D>());
             Invoke("RefillBombCount", bombScript.lifespan);
-        }        
+        }
     }
 
     private void RefillBombCount()
