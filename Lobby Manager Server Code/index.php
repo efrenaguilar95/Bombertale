@@ -1,20 +1,21 @@
 <?php
 
-$servername = "localhost";
+	$servername = "localhost";
 	$databasename = "Bombertale";
+	$usertablename = "Clients";
 	$tablename = "Servers";
-	$username = "Bombertale";
+	$username = "someUser";
 	$password = "wSiphnsu6gco";
 
 	$conn = mysql_connect($servername, $username, $password);
 
 	if (!$conn)
-		die('BL01'); //failed to connect to database
+		die('BL01: Failed to connect to server '); //failed to connect to database
 
 	if(!mysql_select_db($databasename))
 	{
 		mysql_close($conn);
-		die('BL02'); //failed to select table
+		die('BL02: Failed to select database'); //failed to select table
 	}
 
 
@@ -95,6 +96,35 @@ if(isset($_GET['reset']))
 <form action="index.php?reset=true" method="get">
 	<input type="submit" name="reset" value="Reset">
 </form>
+<br /><br />
+<table>
+	<tr>
+		<th>username</th>
+		<th>password</th>
+		<th>online</th>
+	</tr>
+
+<?php
+	
+	$query = "SELECT * FROM  $usertablename";
+	$result = mysql_query($query);
+	if(!$result)
+	{
+		die("Database access failed: " . mysql_error());
+	}
+
+	$rows = mysql_num_rows($result);
+
+	for($i = 0; $i < $rows; ++$i)
+	{
+		echo '<tr>';
+		echo '<td>'	. mysql_result($result, $i, 'username')	. '</td>';
+		echo '<td>'	. mysql_result($result, $i, 'password')		. '</td>';
+        echo mysql_result($result, $i, 'online') == 0 ? '<td>false</td>' : '<td>true</td>';
+		echo '</tr>';
+	}
+?>
+</table>
 
 
 

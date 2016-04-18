@@ -7,7 +7,7 @@
 	if(!$result)
 	{
 		include 'cleanup.php';
-		die('BL07'); //failed to get lobbies
+		die('BL07: Failed to get servers'); //failed to get lobbies
 	}
 
 
@@ -16,7 +16,7 @@
 	if($rows == 0)
 	{
 		include 'cleanup.php';
-		die('BL08');
+		die('BL08: No servers hosted');
 	}
 
 	$echoString = '';
