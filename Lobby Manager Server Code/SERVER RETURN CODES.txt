@@ -12,6 +12,7 @@ BL09:	could not find server by that name
 BL10:	server is full
 BL11:	failed to update players
 BL12:	updated players
+BL13:	got lobby successfully
 BC00:	username taken
 BC01:	account created
 BC02:	failed to find account by that name

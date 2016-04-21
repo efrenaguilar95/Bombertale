@@ -19,7 +19,7 @@
 		die('BL08: No servers hosted');
 	}
 
-	$echoString = '';
+	$echoString = 'BL13: ';
 	for($i = 0; $i < $rows; ++$i)
 	{
 		$echoString .= mysql_result($result, $i, 'server_name') . '&';
