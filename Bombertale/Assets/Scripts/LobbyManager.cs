@@ -3,22 +3,21 @@ using System.Collections;
 
 public class LobbyManager : MonoBehaviour
 {
-	private string unityPassword = "ICS168";
+    private string unityPassword = "ICS168";
+    //void Start()
+    //{
+    //	//DeleteServer ("alex");
+    //	//CreateServer("alex2", "1.1.1.1", 100, true, "sonic", 4);
+    //	//GetServers();
+    //	//JoinServer("alex");
+    //	//UpdatePlayers("alex", 2);
+    //	//CreateAccount("alex", "sonic");
+    //	//Login("alex", "sonic");
 
-	//void Start()
-	//{
-	//	//DeleteServer ("alex");
-	//	//CreateServer("alex2", "1.1.1.1", 100, true, "sonic", 4);
-	//	//GetServers();
-	//	//JoinServer("alex");
-	//	//UpdatePlayers("alex", 2);
-	//	//CreateAccount("alex", "sonic");
-	//	//Login("alex", "sonic");
+    //}
 
-	//}
-
-	//returns the name, whether it is private, password (empty string if public game), and players for all lobbies
-	public string GetServers()
+    //returns the name, whether it is private, password (empty string if public game), and players for all lobbies
+    public string GetServers()
 	{
 		string url = "http://apedestrian.com/bombertale/GetLobby.php?unityPassword=" + unityPassword;
 		return GetText (url);

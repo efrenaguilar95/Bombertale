@@ -8,5 +8,14 @@ public class UIManager : MonoBehaviour {
     public void PressLocalGame()
     {
         SceneManager.LoadScene("Main");
-    }      
+    }
+    public void PressJoinLobby()
+    {
+        SceneManager.LoadScene("Lobby");
+    } 
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
 }
