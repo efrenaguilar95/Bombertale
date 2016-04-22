@@ -172,7 +172,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Lobby Name Of Justice ------------------------------
+  m_Text: 'Lobby Name of Justice ~~~~~~~~~~~~~~~~~~~~~~
+
+'
 --- !u!114 &11484494
 MonoBehaviour:
   m_ObjectHideFlags: 1

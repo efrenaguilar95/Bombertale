@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class ServerManager : MonoBehaviour
 {
+    public GameObject serverInfo;
 
     private List<Server> servers = new List<Server>();
     private string[] serverList;
@@ -40,6 +42,9 @@ public class ServerManager : MonoBehaviour
             servers.Add(new Server(temp));
         }
         Debug.Log(servers[0].serverName);
+        //GameObject tempObject = null;
+        //tempObject = Instantiate(serverInfo, this.transform.position, Quaternion.identity) as GameObject;
+        //tempObject.transform.SetParent(transform.parent.FindChild("Canvas").transform);
     }
 
     private void splitString(string message)
