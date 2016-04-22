@@ -23,6 +23,8 @@
 	for($i = 0; $i < $rows; ++$i)
 	{
 		$echoString .= mysql_result($result, $i, 'server_name') . '&';
+		$echoString .= mysql_result($result, $i, 'server_ip') . '&';
+		$echoString .= mysql_result($result, $i, 'port') . '&';
 		$echoString .= mysql_result($result, $i, 'private')   . '&';
 		$echoString .= mysql_result($result, $i, 'password')  . '&';
 		$echoString .= mysql_result($result, $i, 'players')   . '#';
