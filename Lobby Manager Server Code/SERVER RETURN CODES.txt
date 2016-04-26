@@ -17,5 +17,5 @@ BC00:	username taken
 BC01:	account created
 BC02:	failed to find account by that name
 BC03:	incorrect password
-BC04:
+BC04:	login success
 BC05:
