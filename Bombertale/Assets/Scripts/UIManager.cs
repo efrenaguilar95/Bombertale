@@ -15,9 +15,15 @@ public class UIManager : MonoBehaviour {
     {
         SceneManager.LoadScene("Login");
     } 
-    public void BackToMainMenu()
+
+	public void BackToMainMenu()
+	{
+		SceneManager.LoadScene("MainMenu");
+	}
+
+    public void Back()
     {
-        SceneManager.LoadScene("MainMenu");
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex-1);
     }
 
 	public void Login()
@@ -28,30 +34,63 @@ public class UIManager : MonoBehaviour {
 		string returnCode = Login (username, password);
 
 		returnCode = returnCode.Substring (0, 4);
-		Debug.Log (returnCode);
 
 		if (returnCode == "BC04")
 		{
 			//login success
 			//WE NEED TO SET A GLOBAL USERNAME HERE
-			GameObject.Find("Canvas/WrongLoginText").GetComponent<UnityEngine.UI.Text>().text = "";
+			GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "";
 			SceneManager.LoadScene ("Lobby");
 		}
 		else if(returnCode == "BC02" || returnCode == "BC03")
 		{
 			//wrong login information
-			GameObject.Find("Canvas/WrongLoginText").GetComponent<UnityEngine.UI.Text>().text = "Wrong Login Information";
+			GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Wrong Login Information";
 		}
 		else
 		{
 			//could not reach server
-			GameObject.Find("Canvas/WrongLoginText").GetComponent<UnityEngine.UI.Text>().text = "Couldn't Reach Server";
+			GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Couldn't Reach Server";
 		}
 	}
 
 	public void CreateAccount()
 	{
-		//SceneManager.LoadScene("MainMenu");
+		SceneManager.LoadScene("CreateAccount");
+	}
+
+	public void CreateNewAccount()
+	{
+		string username = GameObject.Find("Canvas/Username").GetComponent<UnityEngine.UI.InputField>().text;
+		string password = GameObject.Find("Canvas/Password").GetComponent<UnityEngine.UI.InputField>().text;
+		//string email = GameObject.Find("Canvas/Email").GetComponent<UnityEngine.UI.InputField>().text;
+
+		string returnCode = CreateAccount (username, password);//, email);
+
+		returnCode = returnCode.Substring (0, 4);
+
+		if (returnCode == "BC01")
+		{
+			//login success
+			//WE NEED TO SET A GLOBAL USERNAME HERE
+			GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "";
+			SceneManager.LoadScene ("Login");
+		}
+		else if(returnCode == "BC00")
+		{
+			//username taken
+			GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Username Taken";
+		}
+		else if (returnCode == "BC05")
+		{
+			//email in use
+			GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Email Already In Use";
+		}
+		else
+		{
+			//could not reach server
+			GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Couldn't Reach Server";
+		}
 	}
 
 	public void ForgotLogin()
@@ -63,6 +102,12 @@ public class UIManager : MonoBehaviour {
 	public string Login(string username, string password)
 	{
 		string url = "http://apedestrian.com/bombertale/Login.php?unityPassword=" + unityPassword +  "&clientUsername=" + username + "&clientPassword=" + password;
+		return GetText (url);
+	}
+
+	public string CreateAccount(string username, string password)//, string email)
+	{
+		string url = "http://apedestrian.com/bombertale/CreateAccount.php?unityPassword=" + unityPassword +  "&clientUsername=" + username + "&clientPassword=" + password;// + "&clientEmail=" + email;
 		return GetText (url);
 	}
 
