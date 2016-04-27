@@ -26,6 +26,11 @@ public class UIManager : MonoBehaviour {
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex-1);
     }
 
+	public void BackToLogin()
+	{
+		SceneManager.LoadScene("Login");
+	}
+
 	public void Login()
 	{
 		string username = GameObject.Find("Canvas/Username").GetComponent<UnityEngine.UI.InputField>().text;
@@ -94,8 +99,37 @@ public class UIManager : MonoBehaviour {
 
 	public void ForgotLogin()
 	{
-		//SceneManager.LoadScene("MainMenu");
+		SceneManager.LoadScene("ForgotLogin");
 	}
+
+	public void SubmitForgotLogin()
+	{
+		string email = GameObject.Find("Canvas/Email").GetComponent<UnityEngine.UI.InputField>().text;
+		string returnCode = SendLoginResetEmail (email);
+		returnCode = returnCode.Substring (0, 4);
+
+		if (returnCode == "BC07")
+		{
+			//email sent!
+			GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Email Sent!";
+		}
+		else if(returnCode == "BC08")
+		{
+			//email not in database
+			GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "No Accounts With That Email";
+		}
+		else if(returnCode == "BC09")
+		{
+			//email not in database
+			GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Failed To Send Email :(";
+		}
+		else
+		{
+			//could not reach server
+			GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Couldn't Reach Server";
+		}
+	}
+
 
 
 	public string CreateAccount(string username, string password, string email)
@@ -107,6 +141,12 @@ public class UIManager : MonoBehaviour {
 	public string Login(string username, string password)
 	{
 		string url = "http://apedestrian.com/bombertale/Login.php?unityPassword=" + unityPassword +  "&clientUsername=" + username + "&clientPassword=" + password;
+		return GetText (url);
+	}
+
+	public string SendLoginResetEmail(string email)
+	{
+		string url = "http://apedestrian.com/bombertale/SendLoginResetEmail.php?unityPassword=" + unityPassword +  "&clientEmail=" + email;
 		return GetText (url);
 	}
 

@@ -32,3 +32,6 @@ BC03:	Email already in use
 BC04:	Failed to find account by that name
 BC05:	Incorrect password
 BC06:	Failed to create account
+BC07:	Reset email sent
+BC08:	No such email in database
+BC09:	Failed to send email

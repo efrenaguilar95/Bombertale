@@ -6,18 +6,6 @@ public class DatabaseManager : MonoBehaviour
 {
 	private string unityPassword = "ICS168";
 
-	void Start()
-	{
-		//DeleteServer ("alex");
-		//CreateServer("alex2", "1.1.1.1", 100, true, "sonic", 4);
-		//GetServers();
-		//JoinServer("Alex's Lobby");
-		//UpdatePlayers("Alex's Lobby", 3);
-		//CreateAccount("alex", "sonic", "fafke@uci.edu");
-		//Login("alex", "sonic");
-
-	}
-
 	//returns the name, whether it is private, password (empty string if public game), and players for all lobbies
 	public string GetServers()
 	{
@@ -63,6 +51,12 @@ public class DatabaseManager : MonoBehaviour
 	public string Login(string username, string password)
 	{
 		string url = "http://apedestrian.com/bombertale/Login.php?unityPassword=" + unityPassword +  "&clientUsername=" + username + "&clientPassword=" + password;
+		return GetText (url);
+	}
+
+	public string SendLoginResetEmail(string email)
+	{
+		string url = "http://apedestrian.com/bombertale/SendLoginResetEmail.php?unityPassword=" + unityPassword +  "&clientEmail=" + email;
 		return GetText (url);
 	}
 
