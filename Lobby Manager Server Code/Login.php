@@ -1,37 +1,46 @@
 <?php
-	include 'setup.php';
 
+	include 'Setup.php';
 
-	//assumed all info is set, I know this is dangerous =/
-	$clientUsername = $_GET['clientUsername'];
+	if(!(
+			isset($_GET['clientUsername']) ||
+			isset($_GET['clientPassword'])
+		))
+	{
+		include 'Cleanup.php';
+		die('BD03: Missing arguments');
+	}
 
-	$query = "SELECT * FROM $usertablename WHERE username = '$clientUsername' LIMIT 1";
+	$clientUsername = strip_tags($_GET['clientUsername']);
+	$clientPassword = sha1(strip_tags($_GET['clientPassword']));
 
+	$query = "SELECT * FROM $usersTablename WHERE username = '$clientUsername' LIMIT 1";
 	$result = mysql_query($query);
 
 	if(!$result)
 	{
-		include 'cleanup.php';
-		die('BC02: Could not find account with that name');
+		include 'Cleanup.php';
+		die('BD04: ' . mysql_error());
 	}
 
 	$rows = mysql_num_rows($result);
 
 	if($rows == 0)
 	{
-		include 'cleanup.php';
-		die('BC02: Could not find account with that name');
+		include 'Cleanup.php';
+		die('BC04: Failed to find account by that name');
 	}
 
 	$encodedPassword = mysql_result($result, 0, 'password');
 
-	if($encodedPassword != sha1($_GET['clientPassword']))
+	if($encodedPassword != $clientPassword)
 	{
-		include 'cleanup.php';
-		die('BC03: Incorrect password');
+		include 'Cleanup.php';
+		die('BC05: Incorrect password');
 	}
 
-	echo 'BC04: Connected successfully!';
+	echo 'BC00: Login successful';
 
-	include 'cleanup.php';
+	include 'Cleanup.php';
+
 ?>

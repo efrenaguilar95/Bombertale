@@ -1,21 +1,34 @@
 SERVER RETURN CODES
-BL00:	incorect/missing access password
-BL01:	connect to database failed
-BL02:	selecting table failed
-BL03:	server created successfully
-BL04:	server name already taken
-BL05:	server deleted successfully
-BL06:	failed to delete server
-BL07:	failed to get servers
-BL08:	no servers hosted
-BL09:	could not find server by that name
-BL10:	server is full
-BL11:	failed to update players
-BL12:	updated players
-BL13:	got lobby successfully
-BC00:	username taken
-BC01:	account created
-BC02:	failed to find account by that name
-BC03:	incorrect password
-BC04:	login success
-BC05:	email already in use
+
+DATABASE CONNECTION RELATED
+BD00:	Missing or incorrect unity access password
+BD01:	Failed to connect to server
+BD02:	Failed to select database
+BD03:	Missing arguments
+BD04:	Unknown database error
+
+
+LOBBY CONNECTION RELATED
+BL00:	Got servers successfully
+BL01:	No servers hosted
+BL02:	Failed to get servers
+BL03:	Server created successfully
+BL04:	Server name already taken
+BL05:	Server deleted successfully
+BL06:	Failed to delete server
+BL08:	Could not find server by that name
+BL09:	Updated players successfully
+BL10:	Failed to update players
+BL11:	Failed to create server
+BL12:	Server is full
+BL13:	Server is ready to be joined
+
+
+CLIENT CONNECTION RELATED
+BC00:	Login successful
+BC01:	Account created
+BC02:	Username taken
+BC03:	Email already in use
+BC04:	Failed to find account by that name
+BC05:	Incorrect password
+BC06:	Failed to create account

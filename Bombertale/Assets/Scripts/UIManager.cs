@@ -35,14 +35,14 @@ public class UIManager : MonoBehaviour {
 
 		returnCode = returnCode.Substring (0, 4);
 
-		if (returnCode == "BC04")
+		if (returnCode == "BC00")
 		{
 			//login success
 			//WE NEED TO SET A GLOBAL USERNAME HERE
 			GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "";
 			SceneManager.LoadScene ("Lobby");
 		}
-		else if(returnCode == "BC02" || returnCode == "BC03")
+		else if(returnCode == "BC04" || returnCode == "BC05")
 		{
 			//wrong login information
 			GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Wrong Login Information";
@@ -63,25 +63,24 @@ public class UIManager : MonoBehaviour {
 	{
 		string username = GameObject.Find("Canvas/Username").GetComponent<UnityEngine.UI.InputField>().text;
 		string password = GameObject.Find("Canvas/Password").GetComponent<UnityEngine.UI.InputField>().text;
-		//string email = GameObject.Find("Canvas/Email").GetComponent<UnityEngine.UI.InputField>().text;
+		string email = GameObject.Find("Canvas/Email").GetComponent<UnityEngine.UI.InputField>().text;
 
-		string returnCode = CreateAccount (username, password);//, email);
+		string returnCode = CreateAccount (username, password, email);
 
 		returnCode = returnCode.Substring (0, 4);
 
 		if (returnCode == "BC01")
 		{
-			//login success
-			//WE NEED TO SET A GLOBAL USERNAME HERE
+			//account created!
 			GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "";
 			SceneManager.LoadScene ("Login");
 		}
-		else if(returnCode == "BC00")
+		else if(returnCode == "BC02")
 		{
 			//username taken
 			GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Username Taken";
 		}
-		else if (returnCode == "BC05")
+		else if (returnCode == "BC03")
 		{
 			//email in use
 			GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Email Already In Use";
@@ -99,15 +98,15 @@ public class UIManager : MonoBehaviour {
 	}
 
 
-	public string Login(string username, string password)
+	public string CreateAccount(string username, string password, string email)
 	{
-		string url = "http://apedestrian.com/bombertale/Login.php?unityPassword=" + unityPassword +  "&clientUsername=" + username + "&clientPassword=" + password;
+		string url = "http://apedestrian.com/bombertale/CreateAccount.php?unityPassword=" + unityPassword +  "&clientUsername=" + username + "&clientPassword=" + password + "&clientEmail=" + email;
 		return GetText (url);
 	}
 
-	public string CreateAccount(string username, string password)//, string email)
+	public string Login(string username, string password)
 	{
-		string url = "http://apedestrian.com/bombertale/CreateAccount.php?unityPassword=" + unityPassword +  "&clientUsername=" + username + "&clientPassword=" + password;// + "&clientEmail=" + email;
+		string url = "http://apedestrian.com/bombertale/Login.php?unityPassword=" + unityPassword +  "&clientUsername=" + username + "&clientPassword=" + password;
 		return GetText (url);
 	}
 
@@ -124,7 +123,13 @@ public class UIManager : MonoBehaviour {
 
 	private IEnumerator WaitForRequest(WWW www)
 	{
-		yield return www;  
+		yield return www;
+
+		// check for errors
+		if(!string.IsNullOrEmpty(www.error))
+			Debug.Log("WWW Error: "+ www.error);
+		else
+			Debug.Log("WWW success: "+ www.text);
 	}
 
 }

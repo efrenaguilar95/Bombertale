@@ -91,7 +91,7 @@ public class ServerManager : MonoBehaviour
 
     public string GetServers()
     {
-        string url = "http://apedestrian.com/bombertale/GetLobby.php?unityPassword=" + unityPassword;
+        string url = "http://apedestrian.com/bombertale/GetServers.php?unityPassword=" + unityPassword;
         return GetText(url);
     }
 
@@ -110,11 +110,9 @@ public class ServerManager : MonoBehaviour
     {
         yield return www;
 
-        //// check for errors
-        //if (!string.IsNullOrEmpty(www.error))
-        //    Debug.Log("WWW Error: " + www.error);
-        //else
-        //    Debug.Log("WWW Success!: " + www.text);
+        // check for errors
+        if (!string.IsNullOrEmpty(www.error))
+            Debug.Log("WWW Error: " + www.error);
     }
 
 

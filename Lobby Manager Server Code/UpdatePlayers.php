@@ -1,13 +1,23 @@
 <?php
-	include 'setup.php';
 
-	//assumed all info is set, I know this is dangerous =/
-	$serverName = $_GET['serverName'];
-	$players = $_GET['players'];
+	include 'Setup.php';
 
-	$query = "UPDATE $tablename SET players='$players' WHERE server_name = '$serverName'";
+	if(!(
+		isset($_GET['serverName']) || 
+		isset($_GET['players'])
+		))
+	{
+		include 'Cleanup.php';
+		die('BD03: Missing arguments');
+	}
 
-	echo mysql_query($query) === TRUE ? 'BL12: Updated players' : 'BL11: Failed to update players';
+	$serverName = strip_tags($_GET['serverName']);
+	$players = strip_tags($_GET['players']);
 
-	include 'cleanup.php';
+	$query = "UPDATE $serversTablename SET players='$players' WHERE server_name = '$serverName'";
+
+	echo mysql_query($query) === TRUE ? 'BL09: Updated players successfully' : 'BL10: Failed to update players';
+
+	include 'Cleanup.php';
+
 ?>
