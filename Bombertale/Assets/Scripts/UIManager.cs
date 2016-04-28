@@ -11,9 +11,9 @@ public class UIManager : MonoBehaviour {
     {
         SceneManager.LoadScene("Main");
     }
-    public void PressJoinLobby()
+    public void PressJoinGame()
     {
-        SceneManager.LoadScene("Login");
+        SceneManager.LoadScene("ServerList");
     } 
 
 	public void BackToMainMenu()
@@ -21,15 +21,10 @@ public class UIManager : MonoBehaviour {
 		SceneManager.LoadScene("MainMenu");
 	}
 
-    public void Back()
-    {
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex-1);
-    }
-
 	public void BackToLogin()
 	{
 		SceneManager.LoadScene("Login");
-	}
+	}    
 
 	public void Login()
 	{

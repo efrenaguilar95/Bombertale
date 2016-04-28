@@ -3,18 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class ServerManager : MonoBehaviour
+public class ServerListManager : MonoBehaviour
 {
-    public GameObject serverInfo;
+    public GameObject serverRowPrefab;
+    public Dictionary<string, Server> servers = new Dictionary<string, Server>();
 
-    private List<Server> servers = new List<Server>();
+    //private List<Server> servers = new List<Server>();    
     private string[] serverList;
     private int serverCount;
     private string unityPassword = "ICS168";
 
     List<GameObject> toDelete = new List<GameObject>();
 
-    struct Server
+    public struct Server
     {
         public string serverName;
         public string IP;
@@ -40,31 +41,25 @@ public class ServerManager : MonoBehaviour
 
     public void Refresh()
     {
-        splitString(GetServers());
-        servers.Clear();
-        //Debug.Log(transform.parent.Find("Scroll View").Find("Viewport").Find("Content").childCount);
-        //if (transform.parent.Find("Scroll View").Find("Viewport").Find("Content").childCount == null)
-        //{
-        //    return;
-        //}
+        splitString(GetServers());        
         ClearServers();
         for (int i = 0; i < serverCount; i++)
         {
             string[] temp;
             temp = serverList[i].Split('&');
-            servers.Add(new Server(temp));
-        }
-        //Debug.Log(servers[0].serverName);
+            Server newServer = new Server(temp);
+            servers.Add(newServer.serverName, newServer);
+        }        
         GameObject tempObject = null;
 
-        foreach (Server temp in servers)
+        foreach (Server server in servers.Values)
         {
-            tempObject = Instantiate(serverInfo, this.transform.position, Quaternion.identity) as GameObject;
+            tempObject = Instantiate(serverRowPrefab, this.transform.position, Quaternion.identity) as GameObject;
             tempObject.transform.SetParent(transform.parent.Find("Scroll View/Viewport/Content"));
             tempObject.transform.localScale = Vector3.one;
-            tempObject.transform.Find("LobbyName").GetComponent<UnityEngine.UI.Text>().text = temp.serverName;
-            tempObject.transform.Find("Players").GetComponent<UnityEngine.UI.Text>().text = temp.playerCount + "/4";
-            if (temp.security)
+            tempObject.transform.Find("ServerName").GetComponent<UnityEngine.UI.Text>().text = server.serverName;
+            tempObject.transform.Find("Players").GetComponent<UnityEngine.UI.Text>().text = server.playerCount + "/4";
+            if (server.security)
             {
                 tempObject.transform.Find("Security").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("lock");
             }
@@ -84,9 +79,12 @@ public class ServerManager : MonoBehaviour
 
     private void ClearServers()
     {
+        servers.Clear();
         for (int i = 0; i < toDelete.Count; i++)
+        {            
             Destroy(toDelete[i]);
-        toDelete.Clear();
+        }            
+        toDelete.Clear();        
     }
 
     public string GetServers()
