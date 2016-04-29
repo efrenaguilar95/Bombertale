@@ -28,7 +28,12 @@ public class ClientManager : NetworkHost
         ReceiveEvent recEvent = base.Receive();
         if (recEvent.type == NetworkEventType.DataEvent)
         {
-            _playerCount = int.Parse(recEvent.message);
+            //_playerCount = int.Parse(recEvent.message);
+            Message message = recEvent.message;
+            if (message.type == MessageType.LobbyUpdate)
+            {
+                _playerCount = (int)message.GetData();
+            }
         }
         //int connectionID;
         //int channelID;

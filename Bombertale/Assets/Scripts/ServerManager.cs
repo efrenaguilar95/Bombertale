@@ -38,7 +38,7 @@ public class ServerManager : NetworkHost {
             case NetworkEventType.ConnectEvent:
                 clientList.Add(recEvent.sender);
                 _databaseManager.UpdatePlayers("Bombertale", clientList.Count);
-                SendAll(clientList.Count.ToString());
+                SendAll(MessageType.LobbyUpdate, clientList.Count.ToString());
                 break;
         }
         //int connectionID;
@@ -60,11 +60,11 @@ public class ServerManager : NetworkHost {
         //}
     }
 
-    public void SendAll(string message)
+    public void SendAll(MessageType messageType, object data)
     {
         foreach (int i in clientList)
         {
-            base.Send(i, message);
+            base.Send(i, messageType, data);
         }
     }
     //void LateUpdate()
