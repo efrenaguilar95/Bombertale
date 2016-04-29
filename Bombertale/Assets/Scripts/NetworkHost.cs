@@ -4,13 +4,18 @@ using UnityEngine.Networking;
 
 public class NetworkHost : MonoBehaviour {
     //Pre-set the ServerIP to connect to or host from as this machine's local IP
-    public static string ServerIP = Network.player.ipAddress;
+    public static string ServerIP = "127.0.0.1";
     public static int Port = 100;
 
     private ConnectionConfig _config;
-    private int _myReliableChannelID;
+    public int _myReliableChannelID;
     private HostTopology _topology;
-    private int _hostID;
+    public int _hostID;
+
+    public virtual void Awake()
+    {
+        ServerIP = Network.player.ipAddress;
+    }
 
     public void Setup(int port, int maxConnections)
     {

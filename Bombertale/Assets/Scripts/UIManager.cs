@@ -29,7 +29,12 @@ public class UIManager : MonoBehaviour {
 	public void GoToLogin()
 	{
 		SceneManager.LoadScene("Login");
-	}    
+	}
+
+    public void GoToClientLobby()
+    {
+        SceneManager.LoadScene("ClientLobby");
+    }
 
 	public void Login()
 	{
