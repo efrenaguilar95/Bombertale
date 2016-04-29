@@ -13,6 +13,7 @@ public class ServerManager : NetworkHost {
 
     void Awake()
     {
+        NetworkHost.ServerIP = Network.player.ipAddress;    //Placeholder until we get UI on create game
         DontDestroyOnLoad(this.gameObject);
         base.Setup(NetworkHost.Port, 4);
         _databaseManager = this.GetComponent<DatabaseManager>();
