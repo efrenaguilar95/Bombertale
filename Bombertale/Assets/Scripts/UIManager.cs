@@ -11,17 +11,22 @@ public class UIManager : MonoBehaviour {
     {
         SceneManager.LoadScene("Main");
     }
-    public void PressJoinGame()
+    public void GoToServerList()
     {
         SceneManager.LoadScene("ServerList");
-    } 
+    }
+
+    public void GoToServerLobby()
+    {
+        SceneManager.LoadScene("ServerLobby");
+    }
 
 	public void BackToMainMenu()
 	{
 		SceneManager.LoadScene("MainMenu");
 	}
 
-	public void BackToLogin()
+	public void GoToLogin()
 	{
 		SceneManager.LoadScene("Login");
 	}    
@@ -40,7 +45,7 @@ public class UIManager : MonoBehaviour {
 			//login success
 			//WE NEED TO SET A GLOBAL USERNAME HERE
 			GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "";
-			SceneManager.LoadScene ("Lobby");
+			SceneManager.LoadScene ("JoinOrHost");
 		}
 		else if(returnCode == "BC04" || returnCode == "BC05")
 		{

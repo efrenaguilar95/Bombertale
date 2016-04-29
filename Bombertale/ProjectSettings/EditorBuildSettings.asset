@@ -12,6 +12,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CreateAccount.unity
   - enabled: 1
+    path: Assets/Scenes/JoinOrHost.unity
+  - enabled: 1
+    path: Assets/Scenes/ServerLobby.unity
+  - enabled: 1
     path: Assets/Scenes/ServerList.unity
   - enabled: 1
     path: Assets/Scenes/ForgotLogin.unity
