@@ -27,12 +27,14 @@ public class ClientManager : NetworkHost
     {
         ReceiveEvent recEvent = base.Receive();
         if (recEvent.type == NetworkEventType.DataEvent)
-        {
+        {       
             //_playerCount = int.Parse(recEvent.message);
             Message message = recEvent.message;
+            Debug.Log(message.subJson);
             if (message.type == MessageType.LobbyUpdate)
             {
-                _playerCount = (int)message.GetData();
+                LobbyUpdate lobbyUpdate = (LobbyUpdate)message.GetData();
+                _playerCount = lobbyUpdate.playerCount;
             }
         }
         //int connectionID;

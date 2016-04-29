@@ -36,9 +36,10 @@ public class ServerManager : NetworkHost {
         switch (recEvent.type)
         {
             case NetworkEventType.ConnectEvent:
+                Debug.Log("New connection: " + recEvent.sender);
                 clientList.Add(recEvent.sender);
                 _databaseManager.UpdatePlayers("Bombertale", clientList.Count);
-                SendAll(MessageType.LobbyUpdate, clientList.Count.ToString());
+                SendAll(MessageType.LobbyUpdate, new LobbyUpdate(clientList.Count));
                 break;
         }
         //int connectionID;

@@ -1,5 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+
+[System.Serializable]
+public struct LobbyUpdate
+{
+    public int playerCount;
+    public LobbyUpdate(int playerCount)
+    {
+        this.playerCount = playerCount;
+    }
+}
+
 public enum MessageType
 {
     None,
@@ -23,7 +34,7 @@ public class Message{
         switch (this.type)
         {
             case MessageType.LobbyUpdate:
-                return JsonUtility.FromJson<int>(subJson);
+                return JsonUtility.FromJson<LobbyUpdate>(subJson);
             default:
                 return null;
         }
