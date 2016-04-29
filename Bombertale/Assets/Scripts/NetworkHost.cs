@@ -29,10 +29,10 @@ public class NetworkHost : MonoBehaviour {
     private HostTopology _topology;
     public int _hostID;
 
-    public virtual void Awake()
-    {
-        ServerIP = Network.player.ipAddress;
-    }
+    //public virtual void Awake()
+    //{
+    //    ServerIP = Network.player.ipAddress;
+    //}
 
     public void Setup(int port, int maxConnections)
     {

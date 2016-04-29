@@ -13,9 +13,8 @@ public class ClientManager : NetworkHost
     /// Lobby Variables
     private Text _playersInLobby;
 
-    public override void Awake()
-    {
-        base.Awake();
+    void Awake()
+    {        
         int randomPort = Random.Range(10000, 65000);
         base.Setup(randomPort, 1);
         _server = base.Connect(NetworkHost.ServerIP, NetworkHost.Port);
@@ -27,8 +26,7 @@ public class ClientManager : NetworkHost
     {
         ReceiveEvent recEvent = base.Receive();
         if (recEvent.type == NetworkEventType.DataEvent)
-        {       
-            //_playerCount = int.Parse(recEvent.message);
+        {                   
             Message message = recEvent.message;
             Debug.Log(message.subJson);
             if (message.type == MessageType.LobbyUpdate)
@@ -37,17 +35,6 @@ public class ClientManager : NetworkHost
                 _playerCount = lobbyUpdate.playerCount;
             }
         }
-        //int connectionID;
-        //int channelID;
-        //byte[] recBuffer = new byte[1024];
-        //int bufferSize = 1024;
-        //int dataSize;
-        //byte error;
-        //NetworkEventType recData = NetworkTransport.ReceiveFromHost(this._hostID, out connectionID, out channelID, recBuffer, bufferSize, out dataSize, out error);
-        //if (recData == NetworkEventType.DataEvent)
-        //{
-        //    _playerCount = int.Parse(System.Text.Encoding.UTF8.GetString(recBuffer));
-        //}
     }
 
     void LateUpdate()
