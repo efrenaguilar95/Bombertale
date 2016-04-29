@@ -17,5 +17,7 @@ public class ServerSelection : MonoBehaviour {
     {
         Debug.Log(_serverListManager.servers[_serverName.text].IP);
         Debug.Log(_serverListManager.servers[_serverName.text].port);
+        NetworkHost.ServerIP = _serverListManager.servers[_serverName.text].IP;
+        NetworkHost.Port = _serverListManager.servers[_serverName.text].port;
     }
 }

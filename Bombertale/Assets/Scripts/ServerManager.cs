@@ -12,7 +12,7 @@ public class ServerManager : NetworkHost {
     private DatabaseManager _databaseManager;   
 
     void Awake()
-    {        
+    {
         DontDestroyOnLoad(this.gameObject);
         base.Setup(NetworkHost.Port, 4);
         _databaseManager = this.GetComponent<DatabaseManager>();
