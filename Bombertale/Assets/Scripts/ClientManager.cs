@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-
-//Remove after inheritance
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class ClientManager : NetworkHost
 {
@@ -33,6 +32,10 @@ public class ClientManager : NetworkHost
             {
                 LobbyUpdate lobbyUpdate = (LobbyUpdate)message.GetData();
                 _playerCount = lobbyUpdate.playerCount;
+            }
+            if (message.type == MessageType.Setup)
+            {
+                SceneManager.LoadScene("ClientGame");
             }
         }
     }

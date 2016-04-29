@@ -11,10 +11,17 @@ public struct LobbyUpdate
     }
 }
 
+[System.Serializable]
+public struct Setup
+{
+
+}
+
 public enum MessageType
 {
     None,
-    LobbyUpdate
+    LobbyUpdate,
+    Setup
 }
 
 [System.Serializable]
@@ -35,6 +42,8 @@ public class Message{
         {
             case MessageType.LobbyUpdate:
                 return JsonUtility.FromJson<LobbyUpdate>(subJson);
+            case MessageType.Setup:
+                return JsonUtility.FromJson<Setup>(subJson);
             default:
                 return null;
         }

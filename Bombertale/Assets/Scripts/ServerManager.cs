@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
-
-//Take this out after inheritance
 using UnityEngine.Networking;
 
 public class ServerManager : NetworkHost {
@@ -45,5 +43,10 @@ public class ServerManager : NetworkHost {
         {
             base.Send(i, messageType, data);
         }
+    }
+
+    public void PressStartGame()
+    {
+        SendAll(MessageType.Setup, new Setup());        
     }
 }

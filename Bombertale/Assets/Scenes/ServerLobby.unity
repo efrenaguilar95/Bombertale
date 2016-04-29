@@ -451,7 +451,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2043098876}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2020122112}
+        m_MethodName: PressStartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &349124690
@@ -1457,6 +1468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9766e248f56a92540badc9afc15a72c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _myReliableChannelID: 0
   _hostID: 0
   clientList: 
 --- !u!114 &2020122113
@@ -1481,6 +1493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4503440b69b66e4bbc31c64fea5fcc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _myReliableChannelID: 0
   _hostID: 0
 --- !u!1 &2043098874
 GameObject:
