@@ -7,11 +7,11 @@ public class ServerListManager : MonoBehaviour
 {
     public GameObject serverRowPrefab;
     public Dictionary<string, Server> servers = new Dictionary<string, Server>();
+    private DatabaseManager _databaseManager;
 
     //private List<Server> servers = new List<Server>();    
     private string[] serverList;
     private int serverCount;
-    private string unityPassword = "ICS168";
 
     List<GameObject> toDelete = new List<GameObject>();
 
@@ -33,7 +33,10 @@ public class ServerListManager : MonoBehaviour
             playerCount = int.Parse(serverString[5]);
         }
     }
-
+    void Awake()
+    {
+        _databaseManager = this.GetComponent<DatabaseManager>();
+    }
     void Start()
     {
         Refresh();
@@ -41,7 +44,7 @@ public class ServerListManager : MonoBehaviour
 
     public void Refresh()
     {
-        splitString(GetServers());        
+        splitString(_databaseManager.GetServers());        
         ClearServers();
         for (int i = 0; i < serverCount; i++)
         {
@@ -86,32 +89,4 @@ public class ServerListManager : MonoBehaviour
         }            
         toDelete.Clear();        
     }
-
-    public string GetServers()
-    {
-        string url = "http://apedestrian.com/bombertale/GetServers.php?unityPassword=" + unityPassword;
-        return GetText(url);
-    }
-
-    private string GetText(string url)
-    {
-        WWW www = new WWW(url.Replace(" ", "%20"));
-        StartCoroutine(WaitForRequest(www));
-        while (!www.isDone)
-        {
-            //...
-        }
-        return www.text;
-    }
-
-    private IEnumerator WaitForRequest(WWW www)
-    {
-        yield return www;
-
-        // check for errors
-        if (!string.IsNullOrEmpty(www.error))
-            Debug.Log("WWW Error: " + www.error);
-    }
-
-
 }
