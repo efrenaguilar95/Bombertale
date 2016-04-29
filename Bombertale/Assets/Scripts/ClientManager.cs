@@ -25,17 +25,22 @@ public class ClientManager : NetworkHost
 
     void Update()
     {
-        int connectionID;
-        int channelID;
-        byte[] recBuffer = new byte[1024];
-        int bufferSize = 1024;
-        int dataSize;
-        byte error;
-        NetworkEventType recData = NetworkTransport.ReceiveFromHost(this._hostID, out connectionID, out channelID, recBuffer, bufferSize, out dataSize, out error);
-        if (recData == NetworkEventType.DataEvent)
+        ReceiveEvent recEvent = base.Receive();
+        if (recEvent.type == NetworkEventType.DataEvent)
         {
-            _playerCount = int.Parse(System.Text.Encoding.UTF8.GetString(recBuffer));
+            _playerCount = int.Parse(recEvent.message);
         }
+        //int connectionID;
+        //int channelID;
+        //byte[] recBuffer = new byte[1024];
+        //int bufferSize = 1024;
+        //int dataSize;
+        //byte error;
+        //NetworkEventType recData = NetworkTransport.ReceiveFromHost(this._hostID, out connectionID, out channelID, recBuffer, bufferSize, out dataSize, out error);
+        //if (recData == NetworkEventType.DataEvent)
+        //{
+        //    _playerCount = int.Parse(System.Text.Encoding.UTF8.GetString(recBuffer));
+        //}
     }
 
     void LateUpdate()

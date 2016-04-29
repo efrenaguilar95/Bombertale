@@ -35,7 +35,10 @@ public class UIManager : MonoBehaviour {
     {
         SceneManager.LoadScene("ClientLobby");
     }
-
+    public void Flee()
+    {
+        Application.Quit();
+    }
 	public void Login()
 	{
 		string username = GameObject.Find("Canvas/Username").GetComponent<UnityEngine.UI.InputField>().text;

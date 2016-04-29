@@ -2,6 +2,26 @@
 using System.Collections;
 using UnityEngine.Networking;
 
+public struct ReceiveEvent
+{
+    public NetworkEventType type;
+    public int sender;
+   // public Message message;
+
+    public string message;
+    public ReceiveEvent(NetworkEventType type, int connectionID, byte[] message)
+    {
+        this.type = type;
+        this.sender = connectionID;
+        if (type != NetworkEventType.DataEvent)
+            //this.message = new Message();
+            this.message = "";
+        else
+            //this.message = JsonUtility.FromJson<Message>(System.Text.Encoding.UTF8.GetString(message));this.message = JsonUtility.FromJson<Message>(System.Text.Encoding.UTF8.GetString(message));
+            this.message = System.Text.Encoding.UTF8.GetString(message);
+    }
+}
+
 public class NetworkHost : MonoBehaviour {
     //Pre-set the ServerIP to connect to or host from as this machine's local IP
     public static string ServerIP = "127.0.0.1";
@@ -39,5 +59,23 @@ public class NetworkHost : MonoBehaviour {
         {
             return -1;
         }
+    }
+
+    public ReceiveEvent Receive()
+    {
+        int connectionID;
+        int channelID;
+        byte[] recBuffer = new byte[1024];
+        int bufferSize = 1024;
+        int dataSize;
+        byte error;
+        NetworkEventType recData = NetworkTransport.ReceiveFromHost(this._hostID, out connectionID, out channelID, recBuffer, bufferSize, out dataSize, out error);
+        return new ReceiveEvent(recData, connectionID, recBuffer);
+    }
+
+    public void Send(int connectionID, string message)
+    {
+        byte error;
+        NetworkTransport.Send(_hostID, connectionID, _myReliableChannelID, System.Text.Encoding.UTF8.GetBytes(message), 1024, out error);
     }
 }

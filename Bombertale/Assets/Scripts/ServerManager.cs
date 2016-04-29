@@ -32,25 +32,41 @@ public class ServerManager : NetworkHost {
 
     void Update()
     {
-        int connectionID;
-        int channelID;
-        byte[] recBuffer = new byte[1024];
-        int bufferSize = 1024;
-        int dataSize;
-        byte error;
-        NetworkEventType recData = NetworkTransport.ReceiveFromHost(this._hostID, out connectionID, out channelID, recBuffer, bufferSize, out dataSize, out error);
-        if (recData == NetworkEventType.ConnectEvent)
+        ReceiveEvent recEvent = base.Receive();
+        switch (recEvent.type)
         {
-            Debug.Log("New connection: " + connectionID);
-            clientList.Add(connectionID);
-            _databaseManager.UpdatePlayers("Bombertale", clientList.Count);
-            foreach (int clientID in clientList){
-                NetworkTransport.Send(this._hostID, clientID, this._myReliableChannelID, 
-                    System.Text.Encoding.UTF8.GetBytes(clientList.Count.ToString()), 1024, out error);
-            }            
+            case NetworkEventType.ConnectEvent:
+                clientList.Add(recEvent.sender);
+                _databaseManager.UpdatePlayers("Bombertale", clientList.Count);
+                SendAll(clientList.Count.ToString());
+                break;
         }
+        //int connectionID;
+        //int channelID;
+        //byte[] recBuffer = new byte[1024];
+        //int bufferSize = 1024;
+        //int dataSize;
+        //byte error;
+        //NetworkEventType recData = NetworkTransport.ReceiveFromHost(this._hostID, out connectionID, out channelID, recBuffer, bufferSize, out dataSize, out error);
+        //if (recData == NetworkEventType.ConnectEvent)
+        //{
+        //    Debug.Log("New connection: " + connectionID);
+        //    clientList.Add(connectionID);
+        //    _databaseManager.UpdatePlayers("Bombertale", clientList.Count);
+        //    foreach (int clientID in clientList){
+        //        NetworkTransport.Send(this._hostID, clientID, this._myReliableChannelID, 
+        //            System.Text.Encoding.UTF8.GetBytes(clientList.Count.ToString()), 1024, out error);
+        //    }            
+        //}
     }
 
+    public void SendAll(string message)
+    {
+        foreach (int i in clientList)
+        {
+            base.Send(i, message);
+        }
+    }
     //void LateUpdate()
     //{
     //    if (_playersInLobby != null)
