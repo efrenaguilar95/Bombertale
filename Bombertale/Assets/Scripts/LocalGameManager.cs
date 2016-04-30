@@ -2,12 +2,12 @@
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class GameManager : MonoBehaviour {
+public class LocalGameManager : MonoBehaviour {
 
     public GameObject player1, player2, player3, player4; 
     struct PlayerStruct{
         public GameObject player;
-        public Player playerScript;
+        public LocalGamePlayer playerScript;
         public KeyCode upKey;
         public KeyCode leftKey;
         public KeyCode downKey;
@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
         public PlayerStruct(GameObject player, KeyCode up, KeyCode left, KeyCode down, KeyCode right, KeyCode bomb)
         {
             this.player = player;
-            playerScript = player.GetComponent<Player>();
+            playerScript = player.GetComponent<LocalGamePlayer>();
             upKey = up;
             downKey = down;
             rightKey = right;

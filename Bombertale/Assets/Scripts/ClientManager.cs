@@ -23,6 +23,7 @@ public class ClientManager : NetworkHost
 
     void Update()
     {
+        PollMovement();
         ReceiveEvent recEvent = base.Receive();
         if (recEvent.type == NetworkEventType.DataEvent)
         {                   
@@ -43,5 +44,36 @@ public class ClientManager : NetworkHost
     void LateUpdate()
     {
         _playersInLobby.text = "Players: " + this._playerCount + "/4";
+    }
+
+    private void PollMovement()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            //Serialize a keypress
+            //Send this
+            base.Send(_server, MessageType.Move, new Move (Direction.UP));
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            base.Send(_server, MessageType.Move, new Move (Direction.LEFT));
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            base.Send(_server, MessageType.Move,new Move (Direction.DOWN));
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            base.Send(_server, MessageType.Move, new Move (Direction.RIGHT));
+        }
+
+        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
+        {
+            base.Send(_server, MessageType.Move, new Move(Direction.NONE));
+        }
     }
 }

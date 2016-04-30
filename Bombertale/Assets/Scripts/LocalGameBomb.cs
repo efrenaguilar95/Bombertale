@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Bomb : MonoBehaviour {
+public class LocalGameBomb : MonoBehaviour {
     public float lifespan = 2.5f;
     public int size = 1;
     public GameObject exCenter;
@@ -18,7 +18,7 @@ public class Bomb : MonoBehaviour {
     void Awake()
     {
         map = GameObject.Find("Map").GetComponent<Mapper>();
-        explosionSound = GameObject.Find("GameManager").GetComponent<GameManager>().bombSound;
+        explosionSound = GameObject.Find("GameManager").GetComponent<LocalGameManager>().bombSound;
     }
 
     void Start () {

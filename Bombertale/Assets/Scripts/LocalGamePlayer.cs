@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour
+public class LocalGamePlayer : MonoBehaviour
 {
     public GameObject bomb;
 
@@ -29,8 +29,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         playerAnim = this.GetComponent<Animator>();
-        deathSound = GameObject.Find("GameManager").GetComponent<GameManager>().deathSound;
-        pickupSound = GameObject.Find("GameManager").GetComponent<GameManager>().pickupSound;
+        deathSound = GameObject.Find("GameManager").GetComponent<LocalGameManager>().deathSound;
+        pickupSound = GameObject.Find("GameManager").GetComponent<LocalGameManager>().pickupSound;
         //startPos = this.transform.position;
     }
 
@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
         {
             bombCount--;
             GameObject newBomb = (GameObject)Instantiate(bomb, GridLocation(), Quaternion.identity);
-            Bomb bombScript = newBomb.GetComponent<Bomb>();
+            LocalGameBomb bombScript = newBomb.GetComponent<LocalGameBomb>();
             bombScript.size = bombSize;
             Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), newBomb.GetComponent<Collider2D>());
             Invoke("RefillBombCount", bombScript.lifespan);

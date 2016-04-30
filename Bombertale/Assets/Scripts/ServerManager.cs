@@ -34,6 +34,14 @@ public class ServerManager : NetworkHost {
                 _databaseManager.UpdatePlayers("Bombertale", clientList.Count);
                 SendAll(MessageType.LobbyUpdate, new LobbyUpdate(clientList.Count));
                 break;
+            case NetworkEventType.DataEvent:
+                Message message = recEvent.message;
+                if (message.type == MessageType.Move)
+                {
+                    Move playerMove = (Move)message.GetData();
+                    Debug.Log(playerMove.moveDir);
+                }           
+                break;
         }
     }
 

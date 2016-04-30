@@ -1,6 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum MessageType
+{
+    None,
+    LobbyUpdate,
+    Setup,
+    Move
+}
+
 [System.Serializable]
 public struct LobbyUpdate
 {
@@ -17,11 +25,14 @@ public struct Setup
 
 }
 
-public enum MessageType
+[System.Serializable]
+public struct Move
 {
-    None,
-    LobbyUpdate,
-    Setup
+    public Direction moveDir;
+    public Move(Direction direction)
+    {
+        this.moveDir = direction;
+    }
 }
 
 [System.Serializable]
@@ -44,6 +55,8 @@ public class Message{
                 return JsonUtility.FromJson<LobbyUpdate>(subJson);
             case MessageType.Setup:
                 return JsonUtility.FromJson<Setup>(subJson);
+            case MessageType.Move:
+                return JsonUtility.FromJson<Move>(subJson);
             default:
                 return null;
         }
