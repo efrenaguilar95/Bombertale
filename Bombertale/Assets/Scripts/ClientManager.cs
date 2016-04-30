@@ -8,12 +8,12 @@ public class ClientManager : NetworkHost
 {
     private int _server;
     private int _playerCount;
-
+    private bool _isGameStarted = false;
     /// Lobby Variables
     private Text _playersInLobby;
 
     void Awake()
-    {        
+    {
         int randomPort = Random.Range(10000, 65000);
         base.Setup(randomPort, 1);
         _server = base.Connect(NetworkHost.ServerIP, NetworkHost.Port);
@@ -26,7 +26,7 @@ public class ClientManager : NetworkHost
         PollMovement();
         ReceiveEvent recEvent = base.Receive();
         if (recEvent.type == NetworkEventType.DataEvent)
-        {                   
+        {
             Message message = recEvent.message;
             Debug.Log(message.subJson);
             if (message.type == MessageType.LobbyUpdate)
@@ -36,7 +36,11 @@ public class ClientManager : NetworkHost
             }
             if (message.type == MessageType.Setup)
             {
-                SceneManager.LoadScene("ClientGame");
+                this._isGameStarted = true;
+                if (this.GetComponent<ServerManager>() != null)
+                    SceneManager.LoadScene("ServerGame");
+                else
+                    SceneManager.LoadScene("ClientGame");
             }
         }
     }
@@ -48,32 +52,32 @@ public class ClientManager : NetworkHost
 
     private void PollMovement()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (_isGameStarted)
         {
-            //Serialize a keypress
-            //Send this
-            base.Send(_server, MessageType.Move, new Move (Direction.UP));
-        }
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                base.Send(_server, MessageType.Move, new Move(Direction.UP));
+            }
 
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                base.Send(_server, MessageType.Move, new Move(Direction.LEFT));
+            }
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            base.Send(_server, MessageType.Move, new Move (Direction.LEFT));
-        }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                base.Send(_server, MessageType.Move, new Move(Direction.DOWN));
+            }
 
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            base.Send(_server, MessageType.Move,new Move (Direction.DOWN));
-        }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                base.Send(_server, MessageType.Move, new Move(Direction.RIGHT));
+            }
 
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            base.Send(_server, MessageType.Move, new Move (Direction.RIGHT));
-        }
-
-        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
-        {
-            base.Send(_server, MessageType.Move, new Move(Direction.NONE));
+            if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
+            {
+                base.Send(_server, MessageType.Move, new Move(Direction.NONE));
+            }
         }
     }
 }

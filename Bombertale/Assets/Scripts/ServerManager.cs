@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
-public class ServerManager : NetworkHost {
+public class ServerManager : NetworkHost
+{
     public List<int> clientList = new List<int>();
+    public ServerGameManager serverGameManager;
 
-    private DatabaseManager _databaseManager;   
+    private DatabaseManager _databaseManager;
 
     void Awake()
     {
@@ -15,7 +17,7 @@ public class ServerManager : NetworkHost {
         DontDestroyOnLoad(this.gameObject);
         base.Setup(NetworkHost.Port, 4);
         _databaseManager = this.GetComponent<DatabaseManager>();
-        _databaseManager.CreateServer("Bombertale", NetworkHost.ServerIP, NetworkHost.Port, false, "", clientList.Count);        
+        _databaseManager.CreateServer("Bombertale", NetworkHost.ServerIP, NetworkHost.Port, false, "", clientList.Count);
     }
 
     void OnDestroy()
@@ -39,8 +41,9 @@ public class ServerManager : NetworkHost {
                 if (message.type == MessageType.Move)
                 {
                     Move playerMove = (Move)message.GetData();
-                    Debug.Log(playerMove.moveDir);
-                }           
+                    serverGameManager.SetPlayerDirection(recEvent.sender, playerMove.moveDir);
+                    //Debug.Log(playerMove.moveDir);
+                }
                 break;
         }
     }
@@ -55,6 +58,7 @@ public class ServerManager : NetworkHost {
 
     public void PressStartGame()
     {
-        SendAll(MessageType.Setup, new Setup());        
+        SendAll(MessageType.Setup, new Setup());
     }
+
 }
