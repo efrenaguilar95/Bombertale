@@ -61,7 +61,27 @@ public class NetworkPlayer : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-
+        if (other.CompareTag("Explosion"))
+        {
+            //Server I is ded?
+        }
+        if (other.CompareTag("PUSpeed"))
+        {
+            //Server I can go fast?
+        }
+        if (other.CompareTag("PUExplosion"))
+        {
+            //Server I can has bigger bombs?
+        }
+        if (other.CompareTag("PUBomb"))
+        {
+            //Server I can has more bombs?
+        }
+        if (other.CompareTag("PUDetermine"))
+        {
+            //Server I is determined?
+        }
+        Debug.Log(other.tag);
     }
 
     //public void Translate(Vector2 deltaPos)

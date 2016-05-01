@@ -14,7 +14,9 @@ public enum MessageType
     BombRequest,
     BombReply,
     DestroySoftBlock,
-    PowerUpDrop
+    PowerUpDrop,
+    TriggerRequest,
+    TriggerReply
 }
 
 [System.Serializable]
@@ -123,6 +125,22 @@ public struct PowerUpDrop
 }
 
 [System.Serializable]
+public struct TriggerRequest
+{
+    public TriggerType triggerType;
+    public TriggerRequest(TriggerType type)
+    {
+        this.triggerType = type;
+    }
+}
+
+[System.Serializable]
+public struct TriggerReply
+{
+
+}
+
+[System.Serializable]
 public class Message
 {
     public MessageType type;
@@ -159,6 +177,10 @@ public class Message
                 return JsonUtility.FromJson<DestroySoftBlock>(subJson);
             case MessageType.PowerUpDrop:
                 return JsonUtility.FromJson<PowerUpDrop>(subJson);
+            case MessageType.TriggerRequest:
+                return JsonUtility.FromJson<TriggerRequest>(subJson);
+            case MessageType.TriggerReply:
+                return JsonUtility.FromJson<TriggerReply>(subJson);
             default:
                 return null;
         }
