@@ -3,15 +3,20 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class ClientManager : NetworkHost
 {
     private int _server;
     private int _playerCount;
-    private bool _isGameStarted = false;
-    private bool _noneWasSent = false;
+    
     /// Lobby Variables
     private Text _playersInLobby;
+
+    /// In-Game Variables
+    private bool _isGameStarted = false;
+    private bool _noneWasSent = false;
+    private List<NetworkPlayer> _players = new List<NetworkPlayer>();
 
     void Awake()
     {
@@ -30,13 +35,13 @@ public class ClientManager : NetworkHost
         if (recEvent.type == NetworkEventType.DataEvent)
         {
             Message message = recEvent.message;
-            //Debug.Log(message.subJson);
+            Debug.Log(message.subJson);
             if (message.type == MessageType.LobbyUpdate)
             {
                 LobbyUpdate lobbyUpdate = (LobbyUpdate)message.GetData();
                 _playerCount = lobbyUpdate.playerCount;
             }
-            if (message.type == MessageType.Setup)
+            if (message.type == MessageType.StartGame)
             {
                 this._isGameStarted = true;
                 if (this.GetComponent<ServerManager>() != null)
@@ -44,10 +49,23 @@ public class ClientManager : NetworkHost
                 else
                     SceneManager.LoadScene("ClientGame");
             }
+            if (message.type == MessageType.Setup)
+            {
+                Setup setup = (Setup)message.GetData();
+                foreach (string playerName in setup.players)
+                {
+                    _players.Add(GameObject.Find(playerName).GetComponent<NetworkPlayer>());
+                }                                    
+            }
             if (message.type == MessageType.StateUpdate)
             {
                 StateUpdate stateUpdate = (StateUpdate)message.GetData();
-                Debug.Log(stateUpdate.players[0].direction);
+                for (int i = 0; i < stateUpdate.players.Count; i++)
+                {
+                    //_players[i].SetPosition(stateUpdate.players[i].worldLocation);
+                    _players[i].transform.position = stateUpdate.players[i].worldLocation;
+                }
+                //Debug.Log(stateUpdate.players[0].direction);
             }
         }
     }
@@ -93,6 +111,11 @@ public class ClientManager : NetworkHost
                     base.Send(_server, MessageType.Move, new Move(Direction.NONE));                    
                     _noneWasSent = true;
                 }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                //base.Send(_server, MessageType.BombRequest, new BombRequest());
             }
         }
     }

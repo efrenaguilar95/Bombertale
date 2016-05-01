@@ -5,6 +5,7 @@ using System.Collections;
 // I'm sorry, we have to do this because JsonUtility sucks
 public struct PlayerData
 {
+    public Vector2 worldLocation;
     public Direction direction;
     public bool isAlive;
     public float speed;
@@ -12,8 +13,9 @@ public struct PlayerData
     public int explosionRadius;
     public bool isInvulnerable;
     public float invulnTimeRemaining;
-    public PlayerData(Direction direction, bool isAlive, float speed, int bombCount, int explosionRadius, bool isInvulnerable, float invulnTimeRemaining)
+    public PlayerData(Vector2 worldLocation, Direction direction, bool isAlive, float speed, int bombCount, int explosionRadius, bool isInvulnerable, float invulnTimeRemaining)
     {
+        this.worldLocation = worldLocation;
         this.direction = direction;
         this.isAlive = isAlive;
         this.speed = speed;
@@ -26,19 +28,35 @@ public struct PlayerData
 
 public class NetworkPlayer : MonoBehaviour
 {
-    //public Direction direction = Direction.NONE;
-    //public bool isAlive = false;
 
+    public PlayerData data;
 
-    ////Powerup Variables
-    //public float speed = 3f;
-    //public int bombCount = 1;
-    //public int explosionRadius = 1;
-    //public bool isInvulnerable = false;
-    //public float invulnTimeRemaining;
+    void Awake()
+    {
+       this.data = new PlayerData(this.GetWorldLocation(), Direction.NONE, false, 3f, 1, 1, false, 0f);
+    }    
 
-    public PlayerData data = new PlayerData(Direction.NONE, false, 3f, 1, 1, false, 0f);
+    void Update()
+    {
+        this.data.worldLocation = GetWorldLocation();
+    }
 
+    //public void Translate(Vector2 deltaPos)
+    //{
+    //    this.transform.Translate(deltaPos);
+    //    this.data.worldLocation = this.GetWorldLocation();
+    //}
+
+    //public void SetPosition(Vector2 absoluteLocation)
+    //{
+    //    this.transform.position = absoluteLocation;
+    //    this.data.worldLocation = this.GetWorldLocation();
+    //}
+
+    public Vector2 GetWorldLocation()
+    {
+        return this.transform.position;
+    }
 
     public Vector2 GetGridLocation()
     {

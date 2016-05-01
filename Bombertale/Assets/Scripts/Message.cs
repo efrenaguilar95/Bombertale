@@ -6,6 +6,7 @@ public enum MessageType
 {
     None,
     LobbyUpdate,
+    StartGame,
     Setup,
     Move,
     StateUpdate
@@ -22,9 +23,19 @@ public struct LobbyUpdate
 }
 
 [System.Serializable]
-public struct Setup
+public struct StartGame
 {
 
+}
+
+[System.Serializable]
+public struct Setup
+{
+    public List<string> players;
+    public Setup(List<string> players)
+    {
+        this.players = players;
+    }
 }
 
 [System.Serializable]
@@ -45,46 +56,11 @@ public struct StateUpdate
     public StateUpdate(Dictionary<int, NetworkPlayer> playerDict)
     {
         this.players = new List<PlayerData>();
-        FillPlayers(playerDict);
-    }
-
-    private void FillPlayers(Dictionary<int, NetworkPlayer> playerDict)
-    {
         foreach (NetworkPlayer player in playerDict.Values)
         {
-            players.Add(new PlayerData(player.data.direction, player.data.isAlive, player.data.speed, player.data.bombCount, player.data.explosionRadius, player.data.isInvulnerable, player.data.invulnTimeRemaining));
+            players.Add(new PlayerData(player.data.worldLocation, player.data.direction, player.data.isAlive, player.data.speed, player.data.bombCount, player.data.explosionRadius, player.data.isInvulnerable, player.data.invulnTimeRemaining));
         }
-    }
-
-    //public Dictionary<int, NetworkPlayer> players;
-
-    //public List<int> _playersKeys = new List<int>();
-    //public List<NetworkPlayer> _playersValues = new List<NetworkPlayer>();
-
-    //public StateUpdate(Dictionary<int, NetworkPlayer> playerDict)
-    //{
-    //    this.players = playerDict;
-    //}
-
-    //public void OnBeforeSerialize()
-    //{
-    //    _playersKeys.Clear();
-    //    _playersValues.Clear();
-    //    foreach (var kvp in players)
-    //    {
-    //        _playersKeys.Add(kvp.Key);
-    //        _playersValues.Add(kvp.Value);
-    //    }
-    //}
-
-    //public void OnAfterDeserialize()
-    //{
-    //    players.Clear();
-    //    for (int i = 0; i != Mathf.Min(_playersKeys.Count, _playersValues.Count); i++)
-    //    {
-    //        players.Add(_playersKeys[i], _playersValues[i]);
-    //    }
-    //}
+    }  
 }
 
 [System.Serializable]
@@ -106,6 +82,8 @@ public class Message
         {
             case MessageType.LobbyUpdate:
                 return JsonUtility.FromJson<LobbyUpdate>(subJson);
+            case MessageType.StartGame:
+                return JsonUtility.FromJson<StartGame>(subJson);
             case MessageType.Setup:
                 return JsonUtility.FromJson<Setup>(subJson);
             case MessageType.Move:

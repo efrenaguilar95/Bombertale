@@ -26,7 +26,7 @@ public class ServerManager : NetworkHost
     }
 
     void Update()
-    {       
+    {
         ReceiveEvent recEvent = base.Receive();
         switch (recEvent.type)
         {
@@ -66,7 +66,30 @@ public class ServerManager : NetworkHost
 
     public void PressStartGame()
     {
-        SendAll(MessageType.Setup, new Setup());
+        SendAll(MessageType.StartGame, new StartGame());
     }
 
+    public void SendSetup()
+    {
+        List<string> playerListToSend = new List<string>();
+        for (int i = 0; i < clientList.Count; i++)
+        {            
+            playerListToSend.Add("Player" + (i + 1));
+        }
+        SendAll(MessageType.Setup, new Setup(playerListToSend));
+        //for (int i = 0; i < clientList.Count; i++)
+        //{
+        //    List<string> playerListToSend = new List<string>();
+        //    playerListToSend.Add("Player"+(i+1));
+
+        //    for (int j = 0; j < clientList.Count; j++)
+        //    {
+        //        if (j != i)
+        //        {
+        //            playerListToSend.Add("Player" + (j + 1));
+        //        }
+        //    }
+        //    base.Send(clientList[i], MessageType.Setup, new Setup(playerListToSend));
+        //}
+    }
 }

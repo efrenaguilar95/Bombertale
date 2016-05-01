@@ -14,13 +14,8 @@ public class ServerGameManager : MonoBehaviour
     {
         for (int i = 1; i <= 4; i++)
             _playerList.Add(GameObject.Find("Player" + i).GetComponent<NetworkPlayer>());
-        //_playerList.Add(GameObject.Find("Player1").GetComponent<NetworkPlayer>());
-        //_playerList.Add(GameObject.Find("Player2").GetComponent<NetworkPlayer>());
-        //_playerList.Add(GameObject.Find("Player3").GetComponent<NetworkPlayer>());
-        //_playerList.Add(GameObject.Find("Player4").GetComponent<NetworkPlayer>());
         _serverManager = GameObject.Find("ServerManager").GetComponent<ServerManager>();
         _serverManager.serverGameManager = this;
-
     }
 
     void Start()
@@ -29,6 +24,8 @@ public class ServerGameManager : MonoBehaviour
         {
             clientToPlayer.Add(_serverManager.clientList[i], _playerList[i]);
         }
+
+        _serverManager.SendSetup();
     }
 
     void FixedUpdate()
