@@ -41,14 +41,18 @@ public class ServerManager : NetworkHost
                 if (message.type == MessageType.Move)
                 {
                     Move playerMove = (Move)message.GetData();
-                    serverGameManager.SetPlayerDirection(recEvent.sender, playerMove.moveDir);                    
+                    serverGameManager.SetPlayerDirection(recEvent.sender, playerMove.moveDir);
+                    NetworkPlayer movingPlayer = serverGameManager.clientToPlayer[recEvent.sender];
+                    SendAll(MessageType.MoveReply, new MoveReply(movingPlayer.data.name, movingPlayer.data.direction));
                 }
                 if (message.type == MessageType.BombRequest)
                 {
                     BombRequest bombRequest = (BombRequest)message.GetData();
                     if (serverGameManager.DropBomb(recEvent.sender))
                     {
-                        //SendAll - tell everyone to drop a bomb at sender's location
+                        NetworkPlayer droppingPlayer = serverGameManager.clientToPlayer[recEvent.sender];
+                        //Vector2 bombLocation = droppingPlayer.GetGridLocation();
+                        SendAll(MessageType.BombReply, new BombReply(droppingPlayer.data));
                     }
                 }
                 break;
@@ -57,10 +61,10 @@ public class ServerManager : NetworkHost
 
     void LateUpdate()
     {
-        if (serverGameManager != null)
-        {
-            SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.clientToPlayer));
-        }
+        //if (serverGameManager != null)
+        //{
+        //    SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.clientToPlayer));
+        //}
     }
 
     public void SendAll(MessageType messageType, object data)
@@ -78,25 +82,25 @@ public class ServerManager : NetworkHost
 
     public void SendSetup()
     {
-        List<string> playerListToSend = new List<string>();
-        for (int i = 0; i < clientList.Count; i++)
-        {            
-            playerListToSend.Add("Player" + (i + 1));
-        }
-        SendAll(MessageType.Setup, new Setup(playerListToSend));
+        //List<string> playerListToSend = new List<string>();
         //for (int i = 0; i < clientList.Count; i++)
-        //{
-        //    List<string> playerListToSend = new List<string>();
-        //    playerListToSend.Add("Player"+(i+1));
-
-        //    for (int j = 0; j < clientList.Count; j++)
-        //    {
-        //        if (j != i)
-        //        {
-        //            playerListToSend.Add("Player" + (j + 1));
-        //        }
-        //    }
-        //    base.Send(clientList[i], MessageType.Setup, new Setup(playerListToSend));
+        //{            
+        //    playerListToSend.Add("Player" + (i + 1));
         //}
+        //SendAll(MessageType.Setup, new Setup(playerListToSend));
+        for (int i = 0; i < clientList.Count; i++)
+        {
+            List<string> playerListToSend = new List<string>();
+            playerListToSend.Add("Player" + (i + 1));
+
+            for (int j = 0; j < clientList.Count; j++)
+            {
+                if (j != i)
+                {
+                    playerListToSend.Add("Player" + (j + 1));
+                }
+            }
+            base.Send(clientList[i], MessageType.Setup, new Setup(playerListToSend));
+        }
     }
 }

@@ -62,8 +62,8 @@ public class NetworkHost : MonoBehaviour {
     {
         int connectionID;
         int channelID;
-        byte[] recBuffer = new byte[1024];
-        int bufferSize = 1024;
+        byte[] recBuffer = new byte[516];
+        int bufferSize = 516;
         int dataSize;
         byte error;
         NetworkEventType recData = NetworkTransport.ReceiveFromHost(this._hostID, out connectionID, out channelID, recBuffer, bufferSize, out dataSize, out error);
@@ -74,6 +74,6 @@ public class NetworkHost : MonoBehaviour {
     {
         string message = JsonUtility.ToJson(new Message(messageType, data));
         byte error;
-        NetworkTransport.Send(_hostID, connectionID, _myReliableChannelID, System.Text.Encoding.UTF8.GetBytes(message), 1024, out error);
+        NetworkTransport.Send(_hostID, connectionID, _myReliableChannelID, System.Text.Encoding.UTF8.GetBytes(message), 516, out error);
     }
 }

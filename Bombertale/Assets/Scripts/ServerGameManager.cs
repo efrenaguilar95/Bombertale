@@ -30,10 +30,10 @@ public class ServerGameManager : MonoBehaviour
 
     void LateUpdate()
     {
-        foreach (NetworkPlayer player in clientToPlayer.Values)
-        {
-            MovePlayer(player);
-        }
+        //foreach (NetworkPlayer player in clientToPlayer.Values)
+        //{
+        //    MovePlayer(player);
+        //}
     }
 
     public void SetPlayerDirection(int clientID, Direction direction)
@@ -47,7 +47,8 @@ public class ServerGameManager : MonoBehaviour
         if (player.data.bombCount > 0)
         {
             player.data.bombCount--;
-            Invoke("RefillBombCount", 2.5f);
+            //Invoke("RefillBombCount", 2.5f);
+            StartCoroutine(RefillBombCount(clientID, 2.5f));            
             return true;
         }
         else
@@ -56,29 +57,30 @@ public class ServerGameManager : MonoBehaviour
         }
     }
 
-    private void RefillBombCount(int clientID)
+    private IEnumerator RefillBombCount(int clientID, float delayTime)
     {
+        yield return new WaitForSeconds(delayTime);
         clientToPlayer[clientID].data.bombCount++;
     }
 
-    private void MovePlayer(NetworkPlayer player)
-    {
-        switch (player.data.direction)
-        {
-            case Direction.UP:
-                player.transform.Translate(new Vector2(0, player.data.speed * Time.deltaTime));
-                break;
-            case Direction.LEFT:
-                player.transform.Translate(new Vector2(-player.data.speed * Time.deltaTime, 0));
-                break;
-            case Direction.DOWN:
-                player.transform.Translate(new Vector2(0, -player.data.speed * Time.deltaTime));
-                break;
-            case Direction.RIGHT:
-                player.transform.Translate(new Vector2(player.data.speed * Time.deltaTime, 0));
-                break;
-            default:
-                break;
-        }
-    }
+    //private void MovePlayer(NetworkPlayer player)
+    //{
+    //    switch (player.data.direction)
+    //    {
+    //        case Direction.UP:
+    //            player.transform.Translate(new Vector2(0, player.data.speed * Time.deltaTime));
+    //            break;
+    //        case Direction.LEFT:
+    //            player.transform.Translate(new Vector2(-player.data.speed * Time.deltaTime, 0));
+    //            break;
+    //        case Direction.DOWN:
+    //            player.transform.Translate(new Vector2(0, -player.data.speed * Time.deltaTime));
+    //            break;
+    //        case Direction.RIGHT:
+    //            player.transform.Translate(new Vector2(player.data.speed * Time.deltaTime, 0));
+    //            break;
+    //        default:
+    //            break;
+    //    }
+    //}
 }

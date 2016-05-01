@@ -16,7 +16,9 @@ public class ClientManager : NetworkHost
     /// In-Game Variables
     private bool _isGameStarted = false;
     private bool _noneWasSent = false;
-    private List<NetworkPlayer> _players = new List<NetworkPlayer>();
+    //private List<NetworkPlayer> _players = new List<NetworkPlayer>();
+    NetworkPlayer myPlayer;
+    private Dictionary<string, NetworkPlayer> _players = new Dictionary<string, NetworkPlayer>();
 
     void Awake()
     {
@@ -54,23 +56,44 @@ public class ClientManager : NetworkHost
                 Setup setup = (Setup)message.GetData();
                 foreach (string playerName in setup.players)
                 {
-                    _players.Add(GameObject.Find(playerName).GetComponent<NetworkPlayer>());
-                }                                    
+                    //_players.Add(GameObject.Find(playerName).GetComponent<NetworkPlayer>());
+                    _players.Add(playerName, GameObject.Find(playerName).GetComponent<NetworkPlayer>());
+                }
+                myPlayer = _players[setup.players[0]];
             }
-            if (message.type == MessageType.StateUpdate)
+            //if (message.type == MessageType.StateUpdate)
+            //{
+            //    StateUpdate stateUpdate = (StateUpdate)message.GetData();
+            //    //for (int i = 0; i < stateUpdate.players.Count; i++)
+            //    foreach (PlayerData playerData in stateUpdate.players)
+            //    {
+            //        _players[playerData.name].GetComponent<Rigidbody2D>().MovePosition(playerData.worldLocation);
+            //        //_players[i].GetComponent<Rigidbody2D>().MovePosition(stateUpdate.players[i].worldLocation);
+            //    }
+            //    /// Need to set all the other data variables like powerups here as well to stay in sync with the server
+            //}
+            if (message.type == MessageType.BombReply)
             {
-                StateUpdate stateUpdate = (StateUpdate)message.GetData();
-                for (int i = 0; i < stateUpdate.players.Count; i++)
-                {         
-                    _players[i].GetComponent<Rigidbody2D>().MovePosition(stateUpdate.players[i].worldLocation);
-                }                
+                BombReply bombReply = (BombReply)message.GetData();
+                NetworkPlayer droppingPlayer = _players[bombReply.playerData.name];
+                droppingPlayer.DropBomb();
+            }
+            if (message.type == MessageType.MoveReply)
+            {
+                MoveReply moveReply = (MoveReply)message.GetData();
+                _players[moveReply.playerName].data.direction = moveReply.moveDir;
             }
         }
     }
 
     void LateUpdate()
     {
-        _playersInLobby.text = "Players: " + this._playerCount + "/4";
+        if (_playersInLobby != null)
+            _playersInLobby.text = "Players: " + this._playerCount + "/4";
+        foreach (NetworkPlayer player in _players.Values)
+        {
+            MovePlayer(player);
+        }
     }
 
     private void PollMovement()
@@ -115,6 +138,27 @@ public class ClientManager : NetworkHost
             {
                 base.Send(_server, MessageType.BombRequest, new BombRequest());
             }
+        }
+    }
+
+    private void MovePlayer(NetworkPlayer player)
+    {
+        switch (player.data.direction)
+        {
+            case Direction.UP:
+                player.transform.Translate(new Vector2(0, player.data.speed * Time.deltaTime));
+                break;
+            case Direction.LEFT:
+                player.transform.Translate(new Vector2(-player.data.speed * Time.deltaTime, 0));
+                break;
+            case Direction.DOWN:
+                player.transform.Translate(new Vector2(0, -player.data.speed * Time.deltaTime));
+                break;
+            case Direction.RIGHT:
+                player.transform.Translate(new Vector2(player.data.speed * Time.deltaTime, 0));
+                break;
+            default:
+                break;
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LocalGameBomb : MonoBehaviour {
+public class Bomb : MonoBehaviour {
     public float lifespan = 2.5f;
     public int size = 1;
     public GameObject exCenter;
@@ -13,12 +13,12 @@ public class LocalGameBomb : MonoBehaviour {
     public GameObject exVert;
 
     Mapper map;
-    AudioSource explosionSound;
+    //AudioSource explosionSound;
 
     void Awake()
     {
         map = GameObject.Find("Map").GetComponent<Mapper>();
-        explosionSound = GameObject.Find("GameManager").GetComponent<LocalGameManager>().bombSound;
+        //explosionSound = GameObject.Find("GameManager").GetComponent<LocalGameManager>().bombSound;
     }
 
     void Start () {
@@ -28,7 +28,7 @@ public class LocalGameBomb : MonoBehaviour {
     void Explode()
     {
         Destroy(this.gameObject);
-        explosionSound.Play();
+        //explosionSound.Play();
         Instantiate(exCenter, this.transform.position, Quaternion.identity);
 
         ExplosionDirection(Vector3.up);

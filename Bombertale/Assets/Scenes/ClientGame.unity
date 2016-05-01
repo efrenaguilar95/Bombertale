@@ -133,15 +133,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f279b6bfeafc8aa4db2fb3f7310f3c29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldLocation: {x: 0, y: 0}
-  gridLocation: {x: 0, y: 0}
-  direction: 4
-  isAlive: 0
-  speed: 3
-  bombCount: 1
-  explosionRadius: 1
-  isInvulnerable: 0
-  invulnTimeRemaining: 0
+  data:
+    worldLocation: {x: 0, y: 0}
+    direction: 0
+    isAlive: 0
+    speed: 0
+    bombCount: 0
+    explosionRadius: 0
+    isInvulnerable: 0
+    invulnTimeRemaining: 0
 --- !u!50 &97997695
 Rigidbody2D:
   serializedVersion: 2
@@ -319,15 +319,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f279b6bfeafc8aa4db2fb3f7310f3c29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldLocation: {x: 0, y: 0}
-  gridLocation: {x: 0, y: 0}
-  direction: 4
-  isAlive: 0
-  speed: 3
-  bombCount: 1
-  explosionRadius: 1
-  isInvulnerable: 0
-  invulnTimeRemaining: 0
+  data:
+    worldLocation: {x: 0, y: 0}
+    direction: 0
+    isAlive: 0
+    speed: 0
+    bombCount: 0
+    explosionRadius: 0
+    isInvulnerable: 0
+    invulnTimeRemaining: 0
 --- !u!95 &1513470725
 Animator:
   serializedVersion: 3
@@ -393,15 +393,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f279b6bfeafc8aa4db2fb3f7310f3c29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldLocation: {x: 0, y: 0}
-  gridLocation: {x: 0, y: 0}
-  direction: 4
-  isAlive: 0
-  speed: 3
-  bombCount: 1
-  explosionRadius: 1
-  isInvulnerable: 0
-  invulnTimeRemaining: 0
+  data:
+    worldLocation: {x: 0, y: 0}
+    direction: 0
+    isAlive: 0
+    speed: 0
+    bombCount: 0
+    explosionRadius: 0
+    isInvulnerable: 0
+    invulnTimeRemaining: 0
 --- !u!50 &1615384802
 Rigidbody2D:
   serializedVersion: 2
@@ -1133,15 +1133,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f279b6bfeafc8aa4db2fb3f7310f3c29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldLocation: {x: 0, y: 0}
-  gridLocation: {x: 0, y: 0}
-  direction: 4
-  isAlive: 0
-  speed: 3
-  bombCount: 1
-  explosionRadius: 1
-  isInvulnerable: 0
-  invulnTimeRemaining: 0
+  data:
+    worldLocation: {x: 0, y: 0}
+    direction: 0
+    isAlive: 0
+    speed: 0
+    bombCount: 0
+    explosionRadius: 0
+    isInvulnerable: 0
+    invulnTimeRemaining: 0
 --- !u!95 &2128131638
 Animator:
   serializedVersion: 3

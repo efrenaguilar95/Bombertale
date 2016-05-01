@@ -9,8 +9,10 @@ public enum MessageType
     StartGame,
     Setup,
     Move,
+    MoveReply,
     StateUpdate,
-    BombRequest
+    BombRequest,
+    BombReply
 }
 
 [System.Serializable]
@@ -50,6 +52,18 @@ public struct Move
 }
 
 [System.Serializable]
+public struct MoveReply
+{
+    public string playerName;
+    public Direction moveDir;
+    public MoveReply(string playerName, Direction direction)
+    {
+        this.playerName = playerName;
+        this.moveDir = direction;
+    }
+}
+
+[System.Serializable]
 public struct StateUpdate
 {    
     public List<PlayerData> players;
@@ -59,7 +73,9 @@ public struct StateUpdate
         this.players = new List<PlayerData>();
         foreach (NetworkPlayer player in playerDict.Values)
         {
-            players.Add(new PlayerData(player.data.worldLocation, player.data.direction, player.data.isAlive, player.data.speed, player.data.bombCount, player.data.explosionRadius, player.data.isInvulnerable, player.data.invulnTimeRemaining));
+            //players.Add(new PlayerData(player.data.name, player.data.worldLocation, player.data.direction, player.data.isAlive, 
+            //    player.data.speed, player.data.bombCount, player.data.explosionRadius, player.data.isInvulnerable, player.data.invulnTimeRemaining));
+            players.Add(new PlayerData(player.data));
         }
     }  
 }
@@ -68,6 +84,17 @@ public struct StateUpdate
 public struct BombRequest
 {
     
+}
+
+[System.Serializable]
+public struct BombReply
+{
+    public PlayerData playerData;
+
+    public BombReply(PlayerData playerData)
+    {
+        this.playerData = playerData;
+    }
 }
 
 [System.Serializable]
@@ -95,10 +122,14 @@ public class Message
                 return JsonUtility.FromJson<Setup>(subJson);
             case MessageType.Move:
                 return JsonUtility.FromJson<Move>(subJson);
+            case MessageType.MoveReply:
+                return JsonUtility.FromJson<MoveReply>(subJson);
             case MessageType.StateUpdate:
                 return JsonUtility.FromJson<StateUpdate>(subJson);
             case MessageType.BombRequest:
                 return JsonUtility.FromJson<BombRequest>(subJson);
+            case MessageType.BombReply:
+                return JsonUtility.FromJson<BombReply>(subJson);
             default:
                 return null;
         }

@@ -119,7 +119,7 @@ public class LocalGamePlayer : MonoBehaviour
         {
             bombCount--;
             GameObject newBomb = (GameObject)Instantiate(bomb, GridLocation(), Quaternion.identity);
-            LocalGameBomb bombScript = newBomb.GetComponent<LocalGameBomb>();
+            Bomb bombScript = newBomb.GetComponent<Bomb>();
             bombScript.size = bombSize;
             Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), newBomb.GetComponent<Collider2D>());
             Invoke("RefillBombCount", bombScript.lifespan);

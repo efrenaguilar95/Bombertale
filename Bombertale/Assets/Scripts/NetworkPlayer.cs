@@ -5,6 +5,7 @@ using System.Collections;
 // I'm sorry, we have to do this because JsonUtility sucks
 public struct PlayerData
 {
+    public string name;
     public Vector2 worldLocation;
     public Direction direction;
     public bool isAlive;
@@ -13,8 +14,9 @@ public struct PlayerData
     public int explosionRadius;
     public bool isInvulnerable;
     public float invulnTimeRemaining;
-    public PlayerData(Vector2 worldLocation, Direction direction, bool isAlive, float speed, int bombCount, int explosionRadius, bool isInvulnerable, float invulnTimeRemaining)
+    public PlayerData(string name, Vector2 worldLocation, Direction direction, bool isAlive, float speed, int bombCount, int explosionRadius, bool isInvulnerable, float invulnTimeRemaining)
     {
+        this.name = name;
         this.worldLocation = worldLocation;
         this.direction = direction;
         this.isAlive = isAlive;
@@ -24,16 +26,32 @@ public struct PlayerData
         this.isInvulnerable = isInvulnerable;
         this.invulnTimeRemaining = invulnTimeRemaining;
     }
+
+    //Copy constructor
+    public PlayerData(PlayerData previousPlayerData)
+    {
+        this.name = previousPlayerData.name;
+        this.worldLocation = previousPlayerData.worldLocation;
+        this.direction = previousPlayerData.direction;
+        this.isAlive = previousPlayerData.isAlive;
+        this.speed = previousPlayerData.speed;
+        this.bombCount = previousPlayerData.bombCount;
+        this.explosionRadius = previousPlayerData.explosionRadius;
+        this.isInvulnerable = previousPlayerData.isInvulnerable;
+        this.invulnTimeRemaining = previousPlayerData.invulnTimeRemaining;
+    }
 }
 
 public class NetworkPlayer : MonoBehaviour
 {
 
     public PlayerData data;
+    private GameObject bombPrefab;
 
     void Awake()
     {
-       this.data = new PlayerData(this.GetWorldLocation(), Direction.NONE, false, 3f, 1, 1, false, 0f);
+       this.data = new PlayerData(this.name, this.GetWorldLocation(), Direction.NONE, false, 3f, 1, 1, false, 0f);
+       this.bombPrefab = Resources.Load("Bomb") as GameObject;
     }    
 
     void Update()
@@ -61,5 +79,13 @@ public class NetworkPlayer : MonoBehaviour
     public Vector2 GetGridLocation()
     {
         return new Vector2((int)this.transform.position.x, (int)this.transform.position.y);
+    }
+
+    public void DropBomb()
+    {
+        GameObject newBomb = (GameObject)Instantiate(bombPrefab, this.GetGridLocation(), Quaternion.identity);
+        Bomb bombScript = newBomb.GetComponent<Bomb>();
+        bombScript.size = this.data.explosionRadius;
+        Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), newBomb.GetComponent<Collider2D>());        
     }
 }
