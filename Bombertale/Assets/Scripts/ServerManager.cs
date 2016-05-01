@@ -59,8 +59,16 @@ public class ServerManager : NetworkHost
                 {
                     TriggerRequest triggerRequest = (TriggerRequest)message.GetData();
                     NetworkPlayer triggeredPlayer = serverGameManager.clientToPlayer[recEvent.sender];
-                    Debug.Log(new Vector2((int)triggeredPlayer.transform.position.x, (int)triggeredPlayer.transform.position.y));
-                    Debug.Log(serverGameManager.map.grid[(int)triggeredPlayer.transform.position.x][(int)triggeredPlayer.transform.position.y]);
+                    int x = (int)triggeredPlayer.transform.position.x;
+                    int y = (int)triggeredPlayer.transform.position.y;
+                    if ((int)triggerRequest.triggerType == int.Parse(serverGameManager.map.grid[x][y]))
+                    {
+                        Debug.Log("I got hit");
+                        serverGameManager.TriggerUpdate(recEvent.sender, triggerRequest.triggerType);
+                        SendAll(MessageType.TriggerReply, new TriggerReply(triggeredPlayer.data, x, y));
+                    }
+                    //Debug.Log(new Vector2((int)triggeredPlayer.transform.position.x, (int)triggeredPlayer.transform.position.y));
+                    //Debug.Log(serverGameManager.map.grid[(int)triggeredPlayer.transform.position.x][(int)triggeredPlayer.transform.position.y]);
                 }
                 break;
         }

@@ -137,7 +137,14 @@ public struct TriggerRequest
 [System.Serializable]
 public struct TriggerReply
 {
-
+    public PlayerData playerData;
+    public int xLoc, yLoc;
+    public TriggerReply(PlayerData data, int x, int y)
+    {
+        this.playerData = data;
+        this.xLoc = x;
+        this.yLoc = y;
+    }
 }
 
 [System.Serializable]

@@ -59,6 +59,14 @@ public class NetworkPlayer : MonoBehaviour
     void Update()
     {
         this.data.worldLocation = GetWorldLocation();
+        if (this.data.invulnTimeRemaining > 0)
+        {
+            this.data.invulnTimeRemaining -= Time.deltaTime;
+        }
+        else
+        {
+            this.data.isInvulnerable = false;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)

@@ -39,7 +39,7 @@ public class ClientManager : NetworkHost
         if (recEvent.type == NetworkEventType.DataEvent)
         {
             Message message = recEvent.message;
-            Debug.Log(message.subJson);
+            //Debug.Log(message.subJson);
             if (message.type == MessageType.LobbyUpdate)
             {
                 LobbyUpdate lobbyUpdate = (LobbyUpdate)message.GetData();
@@ -101,10 +101,16 @@ public class ClientManager : NetworkHost
                 else
                 {
                     GameObject power = this.powerUps[puDrop.puIndex];
-                    Instantiate(power, new Vector2(puDrop.xLoc, puDrop.yLoc), Quaternion.identity);
+                    GameObject newPowerUp = (GameObject)Instantiate(power, new Vector2(puDrop.xLoc, puDrop.yLoc), Quaternion.identity);
                     map.grid[puDrop.xLoc][puDrop.yLoc] = puDrop.puIndex.ToString();
+                    map.gameObjectGrid[puDrop.xLoc][puDrop.yLoc] = newPowerUp;
                 }
-                Debug.Log(map.grid[puDrop.xLoc][puDrop.yLoc]);
+            }
+            if (message.type == MessageType.TriggerReply)
+            {
+                TriggerReply triggerReply = (TriggerReply)message.GetData();
+                _players[triggerReply.playerData.name].data = triggerReply.playerData;
+                Destroy(map.gameObjectGrid[triggerReply.xLoc][triggerReply.yLoc]);
             }
         }
     }

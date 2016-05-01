@@ -46,6 +46,32 @@ public class ServerGameManager : MonoBehaviour
         clientToPlayer[clientID].data.direction = direction;
     }
 
+    public void TriggerUpdate(int clientID, TriggerType triggerType)
+    {
+        switch (triggerType)
+        {
+            case TriggerType.Explosion:
+                if (!clientToPlayer[clientID].data.isInvulnerable)
+                    clientToPlayer[clientID].data.isAlive = false;
+                break;
+            case TriggerType.SpeedUp:
+                clientToPlayer[clientID].data.speed += .5f;
+                break;
+            case TriggerType.BombCount:
+                clientToPlayer[clientID].data.bombCount++;
+                break;
+            case TriggerType.ExplosionRadius:
+                clientToPlayer[clientID].data.explosionRadius++;
+                break;
+            case TriggerType.Determination:
+                clientToPlayer[clientID].data.isInvulnerable = true;
+                clientToPlayer[clientID].data.invulnTimeRemaining = 5f;
+                break;
+            default:
+                break;
+        }
+    }
+
     public bool DropBomb(int clientID)
     {
         NetworkPlayer player = clientToPlayer[clientID];
