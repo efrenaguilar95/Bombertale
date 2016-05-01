@@ -9,6 +9,7 @@ public class ClientManager : NetworkHost
     private int _server;
     private int _playerCount;
     private bool _isGameStarted = false;
+    private bool _noneWasSent = false;
     /// Lobby Variables
     private Text _playersInLobby;
 
@@ -58,26 +59,35 @@ public class ClientManager : NetworkHost
             if (Input.GetKeyDown(KeyCode.W))
             {
                 base.Send(_server, MessageType.Move, new Move(Direction.UP));
+                _noneWasSent = false;
             }
 
             if (Input.GetKeyDown(KeyCode.A))
             {
                 base.Send(_server, MessageType.Move, new Move(Direction.LEFT));
+                _noneWasSent = false;
             }
 
             if (Input.GetKeyDown(KeyCode.S))
             {
                 base.Send(_server, MessageType.Move, new Move(Direction.DOWN));
+                _noneWasSent = false;
             }
 
             if (Input.GetKeyDown(KeyCode.D))
             {
                 base.Send(_server, MessageType.Move, new Move(Direction.RIGHT));
+                _noneWasSent = false;
             }
 
             if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
             {
-                base.Send(_server, MessageType.Move, new Move(Direction.NONE));
+                //Used to prevent spamming the server.
+                if (!_noneWasSent)
+                {
+                    base.Send(_server, MessageType.Move, new Move(Direction.NONE));                    
+                    _noneWasSent = true;
+                }
             }
         }
     }
