@@ -28,7 +28,7 @@ public class ServerGameManager : MonoBehaviour
         _serverManager.SendSetup();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         foreach (NetworkPlayer player in clientToPlayer.Values)
         {

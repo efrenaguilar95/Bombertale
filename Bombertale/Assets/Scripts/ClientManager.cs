@@ -63,7 +63,8 @@ public class ClientManager : NetworkHost
                 for (int i = 0; i < stateUpdate.players.Count; i++)
                 {
                     //_players[i].SetPosition(stateUpdate.players[i].worldLocation);
-                    _players[i].transform.position = stateUpdate.players[i].worldLocation;
+                    //_players[i].transform.position = stateUpdate.players[i].worldLocation;
+                    _players[i].GetComponent<Rigidbody2D>().MovePosition(stateUpdate.players[i].worldLocation);
                 }
                 //Debug.Log(stateUpdate.players[0].direction);
             }
