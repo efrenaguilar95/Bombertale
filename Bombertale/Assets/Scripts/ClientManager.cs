@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 public class ClientManager : NetworkHost
 {
+    public GameObject[] powerUps;
     private int _server;
     private int _playerCount;
     
@@ -89,6 +90,12 @@ public class ClientManager : NetworkHost
             {
                 DestroySoftBlock rekt = (DestroySoftBlock)message.GetData();
                 map.gameObjectGrid[rekt.xLoc][rekt.yLoc].GetComponent<NetworkSoftBlock>().Fizzle();                
+            }
+            if (message.type == MessageType.PowerUpDrop)
+            {
+                PowerUpDrop puDrop = (PowerUpDrop)message.GetData();
+                GameObject power = this.powerUps[puDrop.puIndex];
+                Instantiate(power, new Vector2(puDrop.xLoc, puDrop.yLoc), Quaternion.identity);
             }
         }
     }

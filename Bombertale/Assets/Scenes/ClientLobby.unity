@@ -744,7 +744,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4503440b69b66e4bbc31c64fea5fcc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _myReliableChannelID: 0
   _hostID: 0
+  powerUps:
+  - {fileID: 111914, guid: f71ea9762d18c294f813dbd8f362e0a2, type: 2}
+  - {fileID: 120336, guid: f8094f19d2fbcb04db3b46f6f93f0774, type: 2}
+  - {fileID: 132434, guid: c97ba4e6a747bb049a63748b32893d8a, type: 2}
+  - {fileID: 143136, guid: 27f682f12db991449a62216d4bf40b5b, type: 2}
 --- !u!4 &568006133
 Transform:
   m_ObjectHideFlags: 0

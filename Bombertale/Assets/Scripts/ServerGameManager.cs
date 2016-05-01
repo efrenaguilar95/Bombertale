@@ -8,13 +8,16 @@ public class ServerGameManager : MonoBehaviour
     public Dictionary<int, NetworkPlayer> clientToPlayer = new Dictionary<int, NetworkPlayer>();
 
     private ServerManager _serverManager;
+    private ClientManager _clientManager;
     private List<NetworkPlayer> _playerList = new List<NetworkPlayer>();
 
     void Awake()
     {
         for (int i = 1; i <= 4; i++)
             _playerList.Add(GameObject.Find("Player" + i).GetComponent<NetworkPlayer>());
-        _serverManager = GameObject.Find("ServerManager").GetComponent<ServerManager>();
+        GameObject serverObject = GameObject.Find("ServerManager");
+        _clientManager = serverObject.GetComponent<ClientManager>();
+        _serverManager = serverObject.GetComponent<ServerManager>();
         _serverManager.serverGameManager = this;
     }
 
@@ -66,6 +69,12 @@ public class ServerGameManager : MonoBehaviour
     public void WrekSoftBlock(int xLoc, int yLoc)
     {
         _serverManager.SendAll(MessageType.DestroySoftBlock, new DestroySoftBlock(xLoc, yLoc));
+        float rand = Random.Range(0, 100);
+        int randPU = Random.Range(0, _clientManager.powerUps.Length);
+        if (rand >= 60)
+        {
+            _serverManager.SendAll(MessageType.PowerUpDrop, new PowerUpDrop(randPU, xLoc, yLoc));            
+        }
     }
 
     //private void MovePlayer(NetworkPlayer player)

@@ -59,6 +59,11 @@ public class NetworkPlayer : MonoBehaviour
         this.data.worldLocation = GetWorldLocation();
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+
+    }
+
     //public void Translate(Vector2 deltaPos)
     //{
     //    this.transform.Translate(deltaPos);
