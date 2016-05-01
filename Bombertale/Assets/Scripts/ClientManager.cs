@@ -20,6 +20,7 @@ public class ClientManager : NetworkHost
     //private List<NetworkPlayer> _players = new List<NetworkPlayer>();
     NetworkPlayer myPlayer;
     private Dictionary<string, NetworkPlayer> _players = new Dictionary<string, NetworkPlayer>();
+    private List<NetworkPlayer> _allPlayers = new List<NetworkPlayer>();
     private Mapper map;
 
     void Awake()
@@ -56,13 +57,23 @@ public class ClientManager : NetworkHost
             if (message.type == MessageType.Setup)
             {
                 Setup setup = (Setup)message.GetData();
+                map = GameObject.Find("Map").GetComponent<Mapper>();                
                 foreach (string playerName in setup.players)
                 {
                     //_players.Add(GameObject.Find(playerName).GetComponent<NetworkPlayer>());
                     _players.Add(playerName, GameObject.Find(playerName).GetComponent<NetworkPlayer>());
                 }
-                myPlayer = _players[setup.players[0]];
-                map = GameObject.Find("Map").GetComponent<Mapper>();
+                for (int i = 1; i <= 4; i++)
+                {
+                    NetworkPlayer player = GameObject.Find("Player" + i).GetComponent<NetworkPlayer>());
+                    if (_players.ContainsKey(player.data.name)){
+                        player.data.isAlive = true;
+                    }
+                    else{
+                        player.gameObject.SetActive(false);
+                    }
+                }
+                myPlayer = _players[setup.players[0]];                
             }
             //if (message.type == MessageType.StateUpdate)
             //{
