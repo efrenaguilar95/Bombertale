@@ -89,7 +89,7 @@ public class ClientManager : NetworkHost
             if (message.type == MessageType.DestroySoftBlock)
             {
                 DestroySoftBlock rekt = (DestroySoftBlock)message.GetData();
-                map.gameObjectGrid[rekt.xLoc][rekt.yLoc].GetComponent<NetworkSoftBlock>().Fizzle();                
+                map.gameObjectGrid[rekt.xLoc][rekt.yLoc].GetComponent<NetworkSoftBlock>().Fizzle();
             }
             if (message.type == MessageType.PowerUpDrop)
             {
@@ -110,6 +110,10 @@ public class ClientManager : NetworkHost
             {
                 TriggerReply triggerReply = (TriggerReply)message.GetData();
                 _players[triggerReply.playerData.name].data = triggerReply.playerData;
+                if (triggerReply.playerData.isAlive == false)
+                {
+                    _players[triggerReply.playerData.name].gameObject.SetActive(false);
+                }
                 Destroy(map.gameObjectGrid[triggerReply.xLoc][triggerReply.yLoc]);
             }
         }
