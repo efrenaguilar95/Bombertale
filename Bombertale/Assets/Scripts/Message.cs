@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public enum MessageType
 {
     None,
     LobbyUpdate,
     Setup,
-    Move
+    Move,
+    StateUpdate
 }
 
 [System.Serializable]
@@ -36,6 +38,51 @@ public struct Move
 }
 
 [System.Serializable]
+public struct StateUpdate
+{
+    public List<NetworkPlayer> players;
+
+    public StateUpdate(Dictionary<int, NetworkPlayer> playerDict)
+    {
+        this.players = new List<NetworkPlayer>();        
+        foreach (NetworkPlayer player in playerDict.Values)
+        {
+            players.Add(player);
+        }
+    }
+
+    //public Dictionary<int, NetworkPlayer> players;
+
+    //public List<int> _playersKeys = new List<int>();
+    //public List<NetworkPlayer> _playersValues = new List<NetworkPlayer>();
+
+    //public StateUpdate(Dictionary<int, NetworkPlayer> playerDict)
+    //{
+    //    this.players = playerDict;
+    //}
+
+    //public void OnBeforeSerialize()
+    //{
+    //    _playersKeys.Clear();
+    //    _playersValues.Clear();
+    //    foreach (var kvp in players)
+    //    {
+    //        _playersKeys.Add(kvp.Key);
+    //        _playersValues.Add(kvp.Value);
+    //    }
+    //}
+
+    //public void OnAfterDeserialize()
+    //{
+    //    players.Clear();
+    //    for (int i = 0; i != Mathf.Min(_playersKeys.Count, _playersValues.Count); i++)
+    //    {
+    //        players.Add(_playersKeys[i], _playersValues[i]);
+    //    }
+    //}
+}
+
+[System.Serializable]
 public class Message{
     public MessageType type;
     public string subJson;
@@ -57,6 +104,8 @@ public class Message{
                 return JsonUtility.FromJson<Setup>(subJson);
             case MessageType.Move:
                 return JsonUtility.FromJson<Move>(subJson);
+            case MessageType.StateUpdate:
+                return JsonUtility.FromJson<StateUpdate>(subJson);
             default:
                 return null;
         }

@@ -30,7 +30,7 @@ public class ClientManager : NetworkHost
         if (recEvent.type == NetworkEventType.DataEvent)
         {
             Message message = recEvent.message;
-            Debug.Log(message.subJson);
+            //Debug.Log(message.subJson);
             if (message.type == MessageType.LobbyUpdate)
             {
                 LobbyUpdate lobbyUpdate = (LobbyUpdate)message.GetData();
@@ -43,6 +43,11 @@ public class ClientManager : NetworkHost
                     SceneManager.LoadScene("ServerGame");
                 else
                     SceneManager.LoadScene("ClientGame");
+            }
+            if (message.type == MessageType.StateUpdate)
+            {
+                StateUpdate stateUpdate = (StateUpdate)message.GetData();
+                Debug.Log(stateUpdate.players[0].direction);
             }
         }
     }

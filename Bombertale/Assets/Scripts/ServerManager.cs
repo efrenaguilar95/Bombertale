@@ -26,7 +26,7 @@ public class ServerManager : NetworkHost
     }
 
     void Update()
-    {
+    {       
         ReceiveEvent recEvent = base.Receive();
         switch (recEvent.type)
         {
@@ -45,6 +45,14 @@ public class ServerManager : NetworkHost
                     //Debug.Log(playerMove.moveDir);
                 }
                 break;
+        }
+    }
+
+    void LateUpdate()
+    {
+        if (serverGameManager != null)
+        {
+            SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.clientToPlayer));
         }
     }
 

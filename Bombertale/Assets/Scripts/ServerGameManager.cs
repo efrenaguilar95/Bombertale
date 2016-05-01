@@ -31,17 +31,37 @@ public class ServerGameManager : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        foreach (var kvp in clientToPlayer)
+        foreach (NetworkPlayer player in clientToPlayer.Values)
         {
-            if (kvp.Value.direction != Direction.NONE)
-                Debug.Log(kvp.Key + ": " + kvp.Value.direction);
+            MovePlayer(player);
         }
     }
 
     public void SetPlayerDirection(int clientID, Direction direction)
     {
         clientToPlayer[clientID].direction = direction;
+    }
+
+    private void MovePlayer(NetworkPlayer player)
+    {
+        switch (player.direction)
+        {
+            case Direction.UP:
+                player.transform.Translate(new Vector2(0, player.speed * Time.deltaTime));
+                break;
+            case Direction.LEFT:
+                player.transform.Translate(new Vector2(-player.speed * Time.deltaTime, 0));
+                break;
+            case Direction.DOWN:
+                player.transform.Translate(new Vector2(0, -player.speed * Time.deltaTime));
+                break;
+            case Direction.RIGHT:
+                player.transform.Translate(new Vector2(player.speed * Time.deltaTime, 0));
+                break;
+            default:
+                break;
+        }
     }
 }
