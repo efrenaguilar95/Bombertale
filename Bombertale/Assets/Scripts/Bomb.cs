@@ -72,8 +72,16 @@ public class Bomb : MonoBehaviour {
             if (map.grid[xLoc][yLoc] != ".")    //Might break if we add IDs for players
             {
                 if (map.grid[xLoc][yLoc] == "S")
-                {                    
-                    map.gameObjectGrid[xLoc][yLoc].GetComponent<SoftBlock>().Fizzle();
+                {
+                    SoftBlock localSoftBlock = map.gameObjectGrid[xLoc][yLoc].GetComponent<SoftBlock>();
+                    if (localSoftBlock != null)
+                    {
+                        localSoftBlock.GetRekt();
+                    }
+                    else
+                    {
+                        map.gameObjectGrid[xLoc][yLoc].GetComponent<NetworkSoftBlock>().GetRekt();
+                    }
                 }
                 return;
             }
@@ -82,7 +90,7 @@ public class Bomb : MonoBehaviour {
                 Instantiate(connectPrefab, new Vector2(xLoc, yLoc), Quaternion.identity);
             else
                 Instantiate(endPrefab, new Vector2(xLoc, yLoc), Quaternion.identity);
-        }        
+        }
     }
 
     void OnTriggerEnter2D(Collider2D hitObject)

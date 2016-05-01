@@ -63,6 +63,11 @@ public class ServerGameManager : MonoBehaviour
         clientToPlayer[clientID].data.bombCount++;
     }
 
+    public void WrekSoftBlock(int xLoc, int yLoc)
+    {
+        _serverManager.SendAll(MessageType.DestroySoftBlock, new DestroySoftBlock(xLoc, yLoc));
+    }
+
     //private void MovePlayer(NetworkPlayer player)
     //{
     //    switch (player.data.direction)

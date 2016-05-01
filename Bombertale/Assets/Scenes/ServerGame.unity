@@ -94,10 +94,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 97997698}
   - 212: {fileID: 97997697}
-  - 61: {fileID: 97997696}
   - 50: {fileID: 97997695}
   - 95: {fileID: 97997693}
   - 114: {fileID: 97997694}
+  - 58: {fileID: 97997696}
   m_Layer: 8
   m_Name: Player4
   m_TagString: Player
@@ -133,15 +133,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f279b6bfeafc8aa4db2fb3f7310f3c29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldLocation: {x: 0, y: 0}
-  gridLocation: {x: 0, y: 0}
-  direction: 4
-  isAlive: 0
-  speed: 3
-  bombCount: 1
-  explosionRadius: 1
-  isInvulnerable: 0
-  invulnTimeRemaining: 0
+  data:
+    name: 
+    worldLocation: {x: 0, y: 0}
+    direction: 0
+    isAlive: 0
+    speed: 0
+    bombCount: 0
+    explosionRadius: 0
+    isInvulnerable: 0
+    invulnTimeRemaining: 0
 --- !u!50 &97997695
 Rigidbody2D:
   serializedVersion: 2
@@ -159,8 +160,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &97997696
-BoxCollider2D:
+--- !u!58 &97997696
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -172,7 +173,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.9}
+  m_Radius: 0.45
 --- !u!212 &97997697
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -224,10 +225,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 1513470722}
   - 212: {fileID: 1513470721}
-  - 61: {fileID: 1513470720}
   - 50: {fileID: 1513470723}
   - 95: {fileID: 1513470725}
   - 114: {fileID: 1513470724}
+  - 58: {fileID: 1513470720}
   m_Layer: 8
   m_Name: Player2
   m_TagString: Player
@@ -235,8 +236,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!61 &1513470720
-BoxCollider2D:
+--- !u!58 &1513470720
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -248,7 +249,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.9}
+  m_Radius: 0.45
 --- !u!212 &1513470721
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -319,15 +320,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f279b6bfeafc8aa4db2fb3f7310f3c29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldLocation: {x: 0, y: 0}
-  gridLocation: {x: 0, y: 0}
-  direction: 4
-  isAlive: 0
-  speed: 3
-  bombCount: 1
-  explosionRadius: 1
-  isInvulnerable: 0
-  invulnTimeRemaining: 0
+  data:
+    name: 
+    worldLocation: {x: 0, y: 0}
+    direction: 0
+    isAlive: 0
+    speed: 0
+    bombCount: 0
+    explosionRadius: 0
+    isInvulnerable: 0
+    invulnTimeRemaining: 0
 --- !u!95 &1513470725
 Animator:
   serializedVersion: 3
@@ -354,10 +356,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 1615384805}
   - 212: {fileID: 1615384804}
-  - 61: {fileID: 1615384803}
   - 50: {fileID: 1615384802}
   - 95: {fileID: 1615384800}
   - 114: {fileID: 1615384801}
+  - 58: {fileID: 1615384803}
   m_Layer: 8
   m_Name: Player3
   m_TagString: Player
@@ -393,15 +395,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f279b6bfeafc8aa4db2fb3f7310f3c29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldLocation: {x: 0, y: 0}
-  gridLocation: {x: 0, y: 0}
-  direction: 4
-  isAlive: 0
-  speed: 3
-  bombCount: 1
-  explosionRadius: 1
-  isInvulnerable: 0
-  invulnTimeRemaining: 0
+  data:
+    name: 
+    worldLocation: {x: 0, y: 0}
+    direction: 0
+    isAlive: 0
+    speed: 0
+    bombCount: 0
+    explosionRadius: 0
+    isInvulnerable: 0
+    invulnTimeRemaining: 0
 --- !u!50 &1615384802
 Rigidbody2D:
   serializedVersion: 2
@@ -419,8 +422,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &1615384803
-BoxCollider2D:
+--- !u!58 &1615384803
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -432,7 +435,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.9}
+  m_Radius: 0.45
 --- !u!212 &1615384804
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1028,7 +1031,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coneBlock: {fileID: 124822, guid: d4ebb7bf3cbcbbe4cab9121a9ebf365b, type: 2}
   hardBlock: {fileID: 133342, guid: e58ed06e992f6514ebe8681f78aa95e4, type: 2}
-  softBlock: {fileID: 170082, guid: 52c2bfeb26ecf4c43a88fe47c1aad4aa, type: 2}
+  softBlock: {fileID: 170082, guid: 8563f360dbc37524783c548e5b4e76a8, type: 2}
 --- !u!4 &2078816610
 Transform:
   m_ObjectHideFlags: 0
@@ -1050,10 +1053,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 2128131635}
   - 212: {fileID: 2128131634}
-  - 61: {fileID: 2128131633}
   - 50: {fileID: 2128131636}
   - 95: {fileID: 2128131638}
   - 114: {fileID: 2128131637}
+  - 58: {fileID: 2128131633}
   m_Layer: 8
   m_Name: Player1
   m_TagString: Player
@@ -1061,8 +1064,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!61 &2128131633
-BoxCollider2D:
+--- !u!58 &2128131633
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -1074,7 +1077,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.9}
+  m_Radius: 0.45
 --- !u!212 &2128131634
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1145,15 +1148,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f279b6bfeafc8aa4db2fb3f7310f3c29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldLocation: {x: 0, y: 0}
-  gridLocation: {x: 0, y: 0}
-  direction: 4
-  isAlive: 0
-  speed: 3
-  bombCount: 1
-  explosionRadius: 1
-  isInvulnerable: 0
-  invulnTimeRemaining: 0
+  data:
+    name: 
+    worldLocation: {x: 0, y: 0}
+    direction: 0
+    isAlive: 0
+    speed: 0
+    bombCount: 0
+    explosionRadius: 0
+    isInvulnerable: 0
+    invulnTimeRemaining: 0
 --- !u!95 &2128131638
 Animator:
   serializedVersion: 3

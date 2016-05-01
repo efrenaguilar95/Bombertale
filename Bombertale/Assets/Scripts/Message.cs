@@ -12,7 +12,8 @@ public enum MessageType
     MoveReply,
     StateUpdate,
     BombRequest,
-    BombReply
+    BombReply,
+    DestroySoftBlock
 }
 
 [System.Serializable]
@@ -98,6 +99,17 @@ public struct BombReply
 }
 
 [System.Serializable]
+public struct DestroySoftBlock
+{
+    public int xLoc, yLoc;
+    public DestroySoftBlock(int xLoc, int yLoc)
+    {
+        this.xLoc = xLoc;
+        this.yLoc = yLoc;
+    }
+}
+
+[System.Serializable]
 public class Message
 {
     public MessageType type;
@@ -130,6 +142,8 @@ public class Message
                 return JsonUtility.FromJson<BombRequest>(subJson);
             case MessageType.BombReply:
                 return JsonUtility.FromJson<BombReply>(subJson);
+            case MessageType.DestroySoftBlock:
+                return JsonUtility.FromJson<DestroySoftBlock>(subJson);
             default:
                 return null;
         }

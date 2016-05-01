@@ -19,6 +19,7 @@ public class ClientManager : NetworkHost
     //private List<NetworkPlayer> _players = new List<NetworkPlayer>();
     NetworkPlayer myPlayer;
     private Dictionary<string, NetworkPlayer> _players = new Dictionary<string, NetworkPlayer>();
+    private Mapper map;
 
     void Awake()
     {
@@ -60,6 +61,7 @@ public class ClientManager : NetworkHost
                     _players.Add(playerName, GameObject.Find(playerName).GetComponent<NetworkPlayer>());
                 }
                 myPlayer = _players[setup.players[0]];
+                map = GameObject.Find("Map").GetComponent<Mapper>();
             }
             //if (message.type == MessageType.StateUpdate)
             //{
@@ -82,6 +84,11 @@ public class ClientManager : NetworkHost
             {
                 MoveReply moveReply = (MoveReply)message.GetData();
                 _players[moveReply.playerName].data.direction = moveReply.moveDir;
+            }
+            if (message.type == MessageType.DestroySoftBlock)
+            {
+                DestroySoftBlock rekt = (DestroySoftBlock)message.GetData();
+                map.gameObjectGrid[rekt.xLoc][rekt.yLoc].GetComponent<NetworkSoftBlock>().Fizzle();                
             }
         }
     }

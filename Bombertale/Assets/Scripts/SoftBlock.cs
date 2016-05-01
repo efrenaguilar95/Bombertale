@@ -17,6 +17,11 @@ public class SoftBlock : MonoBehaviour {
         yLoc = (int)this.transform.position.y;  
     }
 
+    public void GetRekt()
+    {
+        Fizzle();
+    }
+
     public void Fizzle()
     {
         //Play Animations
