@@ -41,24 +41,24 @@ public class ServerGameManager : MonoBehaviour
 
     public void SetPlayerDirection(int clientID, Direction direction)
     {
-        clientToPlayer[clientID].direction = direction;
+        clientToPlayer[clientID].data.direction = direction;
     }
 
     private void MovePlayer(NetworkPlayer player)
     {
-        switch (player.direction)
+        switch (player.data.direction)
         {
             case Direction.UP:
-                player.transform.Translate(new Vector2(0, player.speed * Time.deltaTime));
+                player.transform.Translate(new Vector2(0, player.data.speed * Time.deltaTime));
                 break;
             case Direction.LEFT:
-                player.transform.Translate(new Vector2(-player.speed * Time.deltaTime, 0));
+                player.transform.Translate(new Vector2(-player.data.speed * Time.deltaTime, 0));
                 break;
             case Direction.DOWN:
-                player.transform.Translate(new Vector2(0, -player.speed * Time.deltaTime));
+                player.transform.Translate(new Vector2(0, -player.data.speed * Time.deltaTime));
                 break;
             case Direction.RIGHT:
-                player.transform.Translate(new Vector2(player.speed * Time.deltaTime, 0));
+                player.transform.Translate(new Vector2(player.data.speed * Time.deltaTime, 0));
                 break;
             default:
                 break;
