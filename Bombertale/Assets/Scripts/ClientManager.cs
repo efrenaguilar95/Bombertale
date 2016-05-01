@@ -94,8 +94,17 @@ public class ClientManager : NetworkHost
             if (message.type == MessageType.PowerUpDrop)
             {
                 PowerUpDrop puDrop = (PowerUpDrop)message.GetData();
-                GameObject power = this.powerUps[puDrop.puIndex];
-                Instantiate(power, new Vector2(puDrop.xLoc, puDrop.yLoc), Quaternion.identity);
+                if (puDrop.puIndex == -1)
+                {
+                    map.grid[puDrop.xLoc][puDrop.yLoc] = ".";
+                }
+                else
+                {
+                    GameObject power = this.powerUps[puDrop.puIndex];
+                    Instantiate(power, new Vector2(puDrop.xLoc, puDrop.yLoc), Quaternion.identity);
+                    map.grid[puDrop.xLoc][puDrop.yLoc] = puDrop.puIndex.ToString();
+                }
+                Debug.Log(map.grid[puDrop.xLoc][puDrop.yLoc]);
             }
         }
     }
@@ -174,5 +183,10 @@ public class ClientManager : NetworkHost
             default:
                 break;
         }
+    }
+
+    public void SendTriggerRequest(TriggerType triggerType)
+    {
+        base.Send(_server, MessageType.TriggerRequest, new TriggerRequest(triggerType));
     }
 }

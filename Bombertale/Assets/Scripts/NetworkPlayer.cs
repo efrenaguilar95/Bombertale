@@ -47,12 +47,14 @@ public class NetworkPlayer : MonoBehaviour
 
     public PlayerData data;
     private GameObject bombPrefab;
+    private ClientManager _clientManager;
 
     void Awake()
     {
-       this.data = new PlayerData(this.name, this.GetWorldLocation(), Direction.NONE, false, 3f, 1, 1, false, 0f);
-       this.bombPrefab = Resources.Load("Bomb") as GameObject;
-    }    
+        this.data = new PlayerData(this.name, this.GetWorldLocation(), Direction.NONE, false, 3f, 1, 1, false, 0f);
+        this.bombPrefab = Resources.Load("Bomb") as GameObject;
+        _clientManager = GameObject.Find("NetworkManager").GetComponent<ClientManager>();
+    }
 
     void Update()
     {
@@ -64,24 +66,28 @@ public class NetworkPlayer : MonoBehaviour
         if (other.CompareTag("Explosion"))
         {
             //Server I is ded?
+            _clientManager.SendTriggerRequest(TriggerType.Explosion);
         }
         if (other.CompareTag("PUSpeed"))
         {
             //Server I can go fast?
+            _clientManager.SendTriggerRequest(TriggerType.SpeedUp);
         }
         if (other.CompareTag("PUExplosion"))
         {
             //Server I can has bigger bombs?
+            _clientManager.SendTriggerRequest(TriggerType.ExplosionRadius);
         }
         if (other.CompareTag("PUBomb"))
         {
             //Server I can has more bombs?
+            _clientManager.SendTriggerRequest(TriggerType.BombCount);
         }
         if (other.CompareTag("PUDetermine"))
         {
             //Server I is determined?
-        }
-        Debug.Log(other.tag);
+            _clientManager.SendTriggerRequest(TriggerType.Determination);
+        }        
     }
 
     //public void Translate(Vector2 deltaPos)
@@ -111,6 +117,6 @@ public class NetworkPlayer : MonoBehaviour
         GameObject newBomb = (GameObject)Instantiate(bombPrefab, this.GetGridLocation(), Quaternion.identity);
         Bomb bombScript = newBomb.GetComponent<Bomb>();
         bombScript.size = this.data.explosionRadius;
-        Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), newBomb.GetComponent<Collider2D>());        
+        Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), newBomb.GetComponent<Collider2D>());
     }
 }

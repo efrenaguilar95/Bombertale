@@ -1439,7 +1439,7 @@ GameObject:
   - 114: {fileID: 2020122113}
   - 114: {fileID: 2020122114}
   m_Layer: 0
-  m_Name: ServerManager
+  m_Name: NetworkManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

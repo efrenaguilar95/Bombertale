@@ -35,6 +35,6 @@ public class NetworkSoftBlock : MonoBehaviour {
     {
         yield return new WaitForSeconds(time);
         Destroy(this.gameObject);
-        map.grid[xLoc][yLoc] = ".";
+        //map.grid[xLoc][yLoc] = ".";
     }
 }

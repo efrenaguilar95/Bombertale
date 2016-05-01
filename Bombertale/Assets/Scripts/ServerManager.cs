@@ -55,6 +55,13 @@ public class ServerManager : NetworkHost
                         SendAll(MessageType.BombReply, new BombReply(droppingPlayer.data));
                     }
                 }
+                if (message.type == MessageType.TriggerRequest)
+                {
+                    TriggerRequest triggerRequest = (TriggerRequest)message.GetData();
+                    NetworkPlayer triggeredPlayer = serverGameManager.clientToPlayer[recEvent.sender];
+                    Debug.Log(new Vector2((int)triggeredPlayer.transform.position.x, (int)triggeredPlayer.transform.position.y));
+                    Debug.Log(serverGameManager.map.grid[(int)triggeredPlayer.transform.position.x][(int)triggeredPlayer.transform.position.y]);
+                }
                 break;
         }
     }

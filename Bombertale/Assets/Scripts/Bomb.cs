@@ -30,6 +30,7 @@ public class Bomb : MonoBehaviour {
         Destroy(this.gameObject);
         //explosionSound.Play();
         Instantiate(exCenter, this.transform.position, Quaternion.identity);
+        map.grid[(int)this.transform.position.x][(int)this.transform.position.y] = "4";
 
         ExplosionDirection(Vector3.up);
         ExplosionDirection(Vector3.down);
@@ -69,7 +70,7 @@ public class Bomb : MonoBehaviour {
             int xLoc = bombX + (i * (int)direction.x);
             int yLoc = bombY + (i * (int)direction.y);
 
-            if (map.grid[xLoc][yLoc] != ".")    //Might break if we add IDs for players
+            if (map.grid[xLoc][yLoc] == "S" || map.grid[xLoc][yLoc] == "H" || map.grid[xLoc][yLoc] == "C")    //Might break if we add IDs for players
             {
                 if (map.grid[xLoc][yLoc] == "S")
                 {
@@ -90,6 +91,7 @@ public class Bomb : MonoBehaviour {
                 Instantiate(connectPrefab, new Vector2(xLoc, yLoc), Quaternion.identity);
             else
                 Instantiate(endPrefab, new Vector2(xLoc, yLoc), Quaternion.identity);
+            map.grid[xLoc][yLoc] = "4";
         }
     }
 

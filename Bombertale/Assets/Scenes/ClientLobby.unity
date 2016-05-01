@@ -727,7 +727,7 @@ GameObject:
   - 4: {fileID: 568006133}
   - 114: {fileID: 568006132}
   m_Layer: 0
-  m_Name: ClientManager
+  m_Name: NetworkManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
