@@ -743,7 +743,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1985025075}
-  - 114: {fileID: 1985025074}
   - 82: {fileID: 1985025078}
   - 82: {fileID: 1985025077}
   - 82: {fileID: 1985025076}
@@ -754,24 +753,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1985025074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1985025073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b52a81d3fa10dc34c91499eb66be471c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player1: {fileID: 2128131632}
-  player2: {fileID: 1513470719}
-  player3: {fileID: 1615384799}
-  player4: {fileID: 97997692}
-  bombSound: {fileID: 0}
-  deathSound: {fileID: 0}
-  pickupSound: {fileID: 0}
 --- !u!4 &1985025075
 Transform:
   m_ObjectHideFlags: 0

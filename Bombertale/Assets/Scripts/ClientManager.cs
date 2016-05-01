@@ -14,6 +14,7 @@ public class ClientManager : NetworkHost
 
     void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
         int randomPort = Random.Range(10000, 65000);
         base.Setup(randomPort, 1);
         _server = base.Connect(NetworkHost.ServerIP, NetworkHost.Port);
