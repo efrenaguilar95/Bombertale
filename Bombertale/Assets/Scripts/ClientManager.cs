@@ -16,11 +16,9 @@ public class ClientManager : NetworkHost
 
     /// In-Game Variables
     private bool _isGameStarted = false;
-    private bool _noneWasSent = false;
-    //private List<NetworkPlayer> _players = new List<NetworkPlayer>();
+    private bool _noneWasSent = false;    
     NetworkPlayer myPlayer;
-    private Dictionary<string, NetworkPlayer> _players = new Dictionary<string, NetworkPlayer>();
-    private List<NetworkPlayer> _allPlayers = new List<NetworkPlayer>();
+    private Dictionary<string, NetworkPlayer> _players = new Dictionary<string, NetworkPlayer>();    
     private Mapper map;
 
     void Awake()
@@ -65,7 +63,7 @@ public class ClientManager : NetworkHost
                 }
                 for (int i = 1; i <= 4; i++)
                 {
-                    NetworkPlayer player = GameObject.Find("Player" + i).GetComponent<NetworkPlayer>());
+                    NetworkPlayer player = GameObject.Find("Player" + i).GetComponent<NetworkPlayer>();
                     if (_players.ContainsKey(player.data.name)){
                         player.data.isAlive = true;
                     }
