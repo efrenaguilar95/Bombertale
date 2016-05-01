@@ -9,7 +9,8 @@ public enum MessageType
     StartGame,
     Setup,
     Move,
-    StateUpdate
+    StateUpdate,
+    BombRequest
 }
 
 [System.Serializable]
@@ -64,6 +65,12 @@ public struct StateUpdate
 }
 
 [System.Serializable]
+public struct BombRequest
+{
+    
+}
+
+[System.Serializable]
 public class Message
 {
     public MessageType type;
@@ -90,6 +97,8 @@ public class Message
                 return JsonUtility.FromJson<Move>(subJson);
             case MessageType.StateUpdate:
                 return JsonUtility.FromJson<StateUpdate>(subJson);
+            case MessageType.BombRequest:
+                return JsonUtility.FromJson<BombRequest>(subJson);
             default:
                 return null;
         }

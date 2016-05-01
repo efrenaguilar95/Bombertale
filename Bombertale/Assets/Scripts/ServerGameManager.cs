@@ -28,7 +28,7 @@ public class ServerGameManager : MonoBehaviour
         _serverManager.SendSetup();
     }
 
-    void Update()
+    void LateUpdate()
     {
         foreach (NetworkPlayer player in clientToPlayer.Values)
         {
@@ -39,6 +39,26 @@ public class ServerGameManager : MonoBehaviour
     public void SetPlayerDirection(int clientID, Direction direction)
     {
         clientToPlayer[clientID].data.direction = direction;
+    }
+
+    public bool DropBomb(int clientID)
+    {
+        NetworkPlayer player = clientToPlayer[clientID];
+        if (player.data.bombCount > 0)
+        {
+            player.data.bombCount--;
+            Invoke("RefillBombCount", 2.5f);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private void RefillBombCount(int clientID)
+    {
+        clientToPlayer[clientID].data.bombCount++;
     }
 
     private void MovePlayer(NetworkPlayer player)

@@ -41,8 +41,15 @@ public class ServerManager : NetworkHost
                 if (message.type == MessageType.Move)
                 {
                     Move playerMove = (Move)message.GetData();
-                    serverGameManager.SetPlayerDirection(recEvent.sender, playerMove.moveDir);
-                    //Debug.Log(playerMove.moveDir);
+                    serverGameManager.SetPlayerDirection(recEvent.sender, playerMove.moveDir);                    
+                }
+                if (message.type == MessageType.BombRequest)
+                {
+                    BombRequest bombRequest = (BombRequest)message.GetData();
+                    if (serverGameManager.DropBomb(recEvent.sender))
+                    {
+                        //SendAll - tell everyone to drop a bomb at sender's location
+                    }
                 }
                 break;
         }

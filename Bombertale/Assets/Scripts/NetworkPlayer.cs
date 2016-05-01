@@ -36,7 +36,7 @@ public class NetworkPlayer : MonoBehaviour
        this.data = new PlayerData(this.GetWorldLocation(), Direction.NONE, false, 3f, 1, 1, false, 0f);
     }    
 
-    void LateUpdate()
+    void Update()
     {
         this.data.worldLocation = GetWorldLocation();
     }
