@@ -40,14 +40,42 @@ public struct Move
 [System.Serializable]
 public struct StateUpdate
 {
-    public List<NetworkPlayer> players;
+    [System.Serializable]
+    // I'm sorry, we have to do this because JsonUtility sucks
+    public struct PlayerData
+    {
+        public Direction direction;
+        public bool isAlive;
+        public float speed;
+        public int bombCount;
+        public int explosionRadius;
+        public bool isInvulnerable;
+        public float invulnTimeRemaining;
+        public PlayerData(Direction direction, bool isAlive, float speed, int bombCount, int explosionRadius, bool isInvulnerable, float invulnTimeRemaining)
+        {
+            this.direction = direction;
+            this.isAlive = isAlive;
+            this.speed = speed;
+            this.bombCount = bombCount;
+            this.explosionRadius = explosionRadius;
+            this.isInvulnerable = isInvulnerable;
+            this.invulnTimeRemaining = invulnTimeRemaining;
+        }
+    }
+
+    public List<PlayerData> players;
 
     public StateUpdate(Dictionary<int, NetworkPlayer> playerDict)
     {
-        this.players = new List<NetworkPlayer>();        
+        this.players = new List<PlayerData>();
+        FillPlayers(playerDict);
+    }
+
+    private void FillPlayers(Dictionary<int, NetworkPlayer> playerDict)
+    {
         foreach (NetworkPlayer player in playerDict.Values)
         {
-            players.Add(player);
+            players.Add(new PlayerData(player.direction, player.isAlive, player.speed, player.bombCount, player.explosionRadius, player.isInvulnerable, player.invulnTimeRemaining));
         }
     }
 
@@ -83,7 +111,8 @@ public struct StateUpdate
 }
 
 [System.Serializable]
-public class Message{
+public class Message
+{
     public MessageType type;
     public string subJson;
 
