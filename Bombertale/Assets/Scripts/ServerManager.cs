@@ -61,7 +61,9 @@ public class ServerManager : NetworkHost
                     NetworkPlayer triggeredPlayer = serverGameManager.clientToPlayer[recEvent.sender];
                     int x = (int)triggeredPlayer.transform.position.x;
                     int y = (int)triggeredPlayer.transform.position.y;
-                    if ((int)triggerRequest.triggerType == int.Parse(serverGameManager.map.grid[x][y]))
+                    int triggerValue;
+                    bool success = int.TryParse(serverGameManager.map.grid[x][y], out triggerValue);
+                    if ((int)triggerRequest.triggerType == triggerValue)
                     {
                         serverGameManager.TriggerUpdate(recEvent.sender, triggerRequest.triggerType);
                         SendAll(MessageType.TriggerReply, new TriggerReply(triggeredPlayer.data, x, y));
