@@ -8,7 +8,7 @@ public class PowerUpHandler : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Explosion"))
         {
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
         }
     }
 }
