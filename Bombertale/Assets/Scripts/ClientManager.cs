@@ -101,7 +101,12 @@ public class ClientManager : NetworkHost
             if (message.type == MessageType.MoveReply)
             {
                 MoveReply moveReply = (MoveReply)message.GetData();
-                _players[moveReply.playerName].data.direction = moveReply.moveDir;
+                NetworkPlayer playerToMove = _players[moveReply.playerName];
+                if (playerToMove.GetGridLocation() != moveReply.gridLocation)
+                {
+                    playerToMove.GetComponent<Rigidbody2D>().MovePosition(new Vector2(moveReply.gridLocation.x + .5f, moveReply.gridLocation.y + .5f));
+                }
+                playerToMove.data.direction = moveReply.moveDir;
             }
             if (message.type == MessageType.DestroySoftBlock)
             {

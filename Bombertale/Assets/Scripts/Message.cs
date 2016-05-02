@@ -60,10 +60,13 @@ public struct MoveReply
 {
     public string playerName;
     public Direction moveDir;
-    public MoveReply(string playerName, Direction direction)
+    public Vector2 gridLocation;
+
+    public MoveReply(string playerName, Direction direction, Vector2 gridLoc)
     {
         this.playerName = playerName;
         this.moveDir = direction;
+        this.gridLocation = gridLoc;
     }
 }
 
