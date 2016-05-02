@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 89cbe1357c4388a489f1dceac718da83
-timeCreated: 1459536361
+timeCreated: 1462211879
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -152,7 +152,7 @@ TextureImporter:
         x: 0
         y: 315
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,7 +163,7 @@ TextureImporter:
         x: 30
         y: 315
         width: 30
-        height: 45
+        height: 43
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,7 +174,7 @@ TextureImporter:
         x: 60
         y: 315
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -185,7 +185,7 @@ TextureImporter:
         x: 90
         y: 315
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -196,7 +196,7 @@ TextureImporter:
         x: 120
         y: 315
         width: 30
-        height: 45
+        height: 43
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,10 +204,10 @@ TextureImporter:
     - name: CoolFrisk - WalkDown3
       rect:
         serializedVersion: 2
-        x: 150
+        x: 151
         y: 315
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -251,7 +251,7 @@ TextureImporter:
         x: 270
         y: 315
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -262,7 +262,7 @@ TextureImporter:
         x: 300
         y: 315
         width: 30
-        height: 45
+        height: 43
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -273,7 +273,7 @@ TextureImporter:
         x: 330
         y: 315
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,7 +284,7 @@ TextureImporter:
         x: 0
         y: 270
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -295,7 +295,7 @@ TextureImporter:
         x: 30
         y: 270
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -306,7 +306,7 @@ TextureImporter:
         x: 60
         y: 270
         width: 30
-        height: 45
+        height: 43
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -317,7 +317,7 @@ TextureImporter:
         x: 90
         y: 270
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -339,7 +339,7 @@ TextureImporter:
         x: 150
         y: 270
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -350,7 +350,7 @@ TextureImporter:
         x: 180
         y: 270
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -380,10 +380,10 @@ TextureImporter:
     - name: BlueFrisk - WalkLeft2
       rect:
         serializedVersion: 2
-        x: 270
+        x: 271
         y: 270
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -394,7 +394,7 @@ TextureImporter:
         x: 300
         y: 270
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -405,7 +405,7 @@ TextureImporter:
         x: 330
         y: 270
         width: 30
-        height: 45
+        height: 43
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -416,7 +416,7 @@ TextureImporter:
         x: 0
         y: 225
         width: 30
-        height: 45
+        height: 42
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -449,7 +449,7 @@ TextureImporter:
         x: 90
         y: 225
         width: 30
-        height: 45
+        height: 42
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -460,7 +460,7 @@ TextureImporter:
         x: 120
         y: 225
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -471,7 +471,7 @@ TextureImporter:
         x: 150
         y: 225
         width: 30
-        height: 45
+        height: 43
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -515,7 +515,7 @@ TextureImporter:
         x: 270
         y: 225
         width: 30
-        height: 45
+        height: 43
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -526,7 +526,7 @@ TextureImporter:
         x: 300
         y: 225
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -537,7 +537,7 @@ TextureImporter:
         x: 330
         y: 225
         width: 30
-        height: 45
+        height: 43
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -581,7 +581,7 @@ TextureImporter:
         x: 90
         y: 180
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -589,10 +589,10 @@ TextureImporter:
     - name: CoolFrisk - WalkUp1
       rect:
         serializedVersion: 2
-        x: 120
+        x: 119
         y: 180
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -603,7 +603,7 @@ TextureImporter:
         x: 150
         y: 180
         width: 30
-        height: 45
+        height: 43
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -647,7 +647,7 @@ TextureImporter:
         x: 270
         y: 180
         width: 30
-        height: 45
+        height: 43
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -658,7 +658,7 @@ TextureImporter:
         x: 300
         y: 180
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -669,7 +669,7 @@ TextureImporter:
         x: 330
         y: 180
         width: 30
-        height: 45
+        height: 43
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -680,7 +680,7 @@ TextureImporter:
         x: 0
         y: 135
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -691,7 +691,7 @@ TextureImporter:
         x: 30
         y: 135
         width: 30
-        height: 45
+        height: 43
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -702,7 +702,7 @@ TextureImporter:
         x: 60
         y: 135
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -757,7 +757,7 @@ TextureImporter:
         x: 211
         y: 135
         width: 28
-        height: 44
+        height: 43
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -812,7 +812,7 @@ TextureImporter:
         x: 0
         y: 90
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -823,7 +823,7 @@ TextureImporter:
         x: 30
         y: 90
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -834,7 +834,7 @@ TextureImporter:
         x: 60
         y: 90
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -944,7 +944,7 @@ TextureImporter:
         x: 0
         y: 45
         width: 30
-        height: 45
+        height: 43
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -955,7 +955,7 @@ TextureImporter:
         x: 30
         y: 45
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -966,7 +966,7 @@ TextureImporter:
         x: 60
         y: 45
         width: 30
-        height: 45
+        height: 43
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1076,7 +1076,7 @@ TextureImporter:
         x: 0
         y: 0
         width: 30
-        height: 45
+        height: 43
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1087,7 +1087,7 @@ TextureImporter:
         x: 31
         y: 0
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1098,7 +1098,7 @@ TextureImporter:
         x: 60
         y: 0
         width: 30
-        height: 45
+        height: 44
       alignment: 9
       pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}

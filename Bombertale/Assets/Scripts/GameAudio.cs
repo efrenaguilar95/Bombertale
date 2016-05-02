@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Audio : MonoBehaviour
+public class GameAudio : MonoBehaviour
 {
-    public AudioSource musicSource;
     public AudioClip[] music;
+    AudioSource[] sounds;
+    public AudioSource musicSource;
+    public AudioSource bombSound;
+    public AudioSource deathSound;
+    public AudioSource pickupSound; 
     public AudioClip dogSong;
     void Start()
     {

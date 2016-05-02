@@ -21,6 +21,10 @@ public class ClientManager : NetworkHost
     private Dictionary<string, NetworkPlayer> _players = new Dictionary<string, NetworkPlayer>();    
     private Mapper map;
 
+    public AudioSource bombSound;
+    public AudioSource deathSound;
+    public AudioSource pickupSound;
+
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -29,7 +33,9 @@ public class ClientManager : NetworkHost
         _server = base.Connect(NetworkHost.ServerIP, NetworkHost.Port);
 
         _playersInLobby = GameObject.Find("PlayersInLobbyText").GetComponent<Text>();
+
     }
+
 
     void Update()
     {
@@ -71,7 +77,9 @@ public class ClientManager : NetworkHost
                         player.gameObject.SetActive(false);
                     }
                 }
-                myPlayer = _players[setup.players[0]];                
+                myPlayer = _players[setup.players[0]];
+                pickupSound = GameObject.Find("GameAudioManager").GetComponent<GameAudio>().pickupSound;
+                deathSound = GameObject.Find("GameAudioManager").GetComponent<GameAudio>().deathSound;
             }
             //if (message.type == MessageType.StateUpdate)
             //{
@@ -122,6 +130,11 @@ public class ClientManager : NetworkHost
                 if (triggerReply.playerData.isAlive == false)
                 {
                     _players[triggerReply.playerData.name].gameObject.SetActive(false);
+                    deathSound.Play();
+                }
+                else
+                {
+                    pickupSound.Play();
                 }
                 Destroy(map.gameObjectGrid[triggerReply.xLoc][triggerReply.yLoc]);
             }

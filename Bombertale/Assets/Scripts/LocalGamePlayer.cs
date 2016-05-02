@@ -29,8 +29,8 @@ public class LocalGamePlayer : MonoBehaviour
     void Start()
     {
         playerAnim = this.GetComponent<Animator>();
-        deathSound = GameObject.Find("GameManager").GetComponent<LocalGameManager>().deathSound;
-        pickupSound = GameObject.Find("GameManager").GetComponent<LocalGameManager>().pickupSound;
+        deathSound = GameObject.Find("GameAudioManager").GetComponent<GameAudio>().deathSound;
+        pickupSound = GameObject.Find("GameAudioManager").GetComponent<GameAudio>().pickupSound;
         //startPos = this.transform.position;
     }
 

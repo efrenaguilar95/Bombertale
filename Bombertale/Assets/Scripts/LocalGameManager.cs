@@ -31,14 +31,6 @@ public class LocalGameManager : MonoBehaviour {
     PlayerStruct p3Struct;
     PlayerStruct p4Struct;
 
-    AudioSource[] sounds;
-    public AudioSource bombSound;
-    public AudioSource deathSound;
-    public AudioSource pickupSound;
-
-
-    int numSongs;
-    int musicSelector;
     public static int win = 0;
     
 
@@ -47,10 +39,6 @@ public class LocalGameManager : MonoBehaviour {
         p2Struct = new PlayerStruct(player2, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.DownArrow, KeyCode.RightArrow, KeyCode.Mouse0);
         p3Struct = new PlayerStruct(player3, KeyCode.Keypad5, KeyCode.Keypad1, KeyCode.Keypad2, KeyCode.Keypad3, KeyCode.Keypad0);
         p4Struct = new PlayerStruct(player4, KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, KeyCode.P);
-        sounds = GetComponents<AudioSource>();
-        bombSound = sounds[0];
-        deathSound = sounds[1];
-        pickupSound = sounds[2];
     }
 
     void Update()
