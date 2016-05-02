@@ -131,6 +131,8 @@ public class ClientManager : NetworkHost
                 {
                     _players[triggerReply.playerData.name].gameObject.SetActive(false);
                     deathSound.Play();
+                    GameObject napstablook = (GameObject)Instantiate(Resources.Load("Napstablook"),triggerReply.playerData.worldLocation, Quaternion.identity);
+                    Destroy(napstablook, 1.5f);
                 }
                 else
                 {
