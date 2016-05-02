@@ -48,12 +48,14 @@ public class NetworkPlayer : MonoBehaviour
     public PlayerData data;
     private GameObject bombPrefab;
     private ClientManager _clientManager;
+    private Animator playerAnim;
 
     void Awake()
     {
         this.data = new PlayerData(this.name, this.GetWorldLocation(), Direction.NONE, false, 3f, 1, 1, false, 0f);
         this.bombPrefab = Resources.Load("Bomb") as GameObject;
         _clientManager = GameObject.Find("NetworkManager").GetComponent<ClientManager>();
+        playerAnim = this.GetComponent<Animator>();
     }
 
     void Update()
@@ -66,6 +68,31 @@ public class NetworkPlayer : MonoBehaviour
         else
         {
             this.data.isInvulnerable = false;
+        }
+        if (this.data.direction == Direction.NONE)
+        {
+            playerAnim.SetBool("Moving", false);
+        }
+        else
+        {
+            playerAnim.SetBool("Moving", true);
+            switch (this.data.direction)
+            {
+                case Direction.UP:
+                    playerAnim.Play("WalkUp");
+                    break;
+                case Direction.LEFT:
+                    playerAnim.Play("WalkLeft");
+                    break;
+                case Direction.DOWN:
+                    playerAnim.Play("WalkDown");
+                    break;
+                case Direction.RIGHT:
+                    playerAnim.Play("WalkRight");
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
