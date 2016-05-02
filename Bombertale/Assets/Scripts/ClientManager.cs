@@ -111,7 +111,9 @@ public class ClientManager : NetworkHost
             if (message.type == MessageType.DestroySoftBlock)
             {
                 DestroySoftBlock rekt = (DestroySoftBlock)message.GetData();
-                map.gameObjectGrid[rekt.xLoc][rekt.yLoc].GetComponent<NetworkSoftBlock>().Fizzle();
+                GameObject softBlockToDestroy = map.gameObjectGrid[rekt.xLoc][rekt.yLoc];
+                if (softBlockToDestroy != null)
+                    softBlockToDestroy.GetComponent<NetworkSoftBlock>().Fizzle();
             }
             if (message.type == MessageType.PowerUpDrop)
             {
