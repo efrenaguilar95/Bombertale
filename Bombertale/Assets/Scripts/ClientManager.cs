@@ -52,6 +52,7 @@ public class ClientManager : NetworkHost
         if (recEvent.type == NetworkEventType.DisconnectEvent)
         {
             Debug.Log("Server kicked me");
+            SceneManager.LoadScene("ServerList");
         }
         if (recEvent.type == NetworkEventType.DataEvent)
         {

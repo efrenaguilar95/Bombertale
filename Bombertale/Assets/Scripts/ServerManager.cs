@@ -49,11 +49,17 @@ public class ServerManager : NetworkHost
                 break;
             case NetworkEventType.DisconnectEvent:
                 Debug.Log("Connection lost: " + recEvent.sender);
-                NetworkPlayer disconnectedPlayer = serverGameManager.clientToPlayer[recEvent.sender];
-                disconnectedPlayer.data.isAlive = false;
-                int xLoc = (int)disconnectedPlayer.transform.position.x;
-                int yLoc = (int)disconnectedPlayer.transform.position.y;
-                SendAll(MessageType.TriggerReply, new TriggerReply(disconnectedPlayer.data, xLoc, yLoc));
+                if (serverGameManager != null)
+                {
+                    NetworkPlayer disconnectedPlayer = serverGameManager.clientToPlayer[recEvent.sender];
+                    disconnectedPlayer.data.isAlive = false;
+                    int xLoc = (int)disconnectedPlayer.transform.position.x;
+                    int yLoc = (int)disconnectedPlayer.transform.position.y;
+                    SendAll(MessageType.TriggerReply, new TriggerReply(disconnectedPlayer.data, xLoc, yLoc));
+                }
+                clientList.Remove(recEvent.sender);
+                _databaseManager.UpdatePlayers("Bombertale", clientList.Count);
+                SendAll(MessageType.LobbyUpdate, new LobbyUpdate(clientList.Count));
                 break;
             case NetworkEventType.DataEvent:
                 Message message = recEvent.message;

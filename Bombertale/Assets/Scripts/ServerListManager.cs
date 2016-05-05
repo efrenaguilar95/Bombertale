@@ -74,10 +74,17 @@ public class ServerListManager : MonoBehaviour
 
     private void splitString(string message)
     {
-        string temp;
-        temp = message.Substring(6, message.Length - 6);
-        serverList = temp.Split('#');
-        serverCount = serverList.Length;
+        if (message.Substring(0, 4) == "BL00")
+        {
+            string temp;
+            temp = message.Substring(6, message.Length - 6);
+            serverList = temp.Split('#');
+            serverCount = serverList.Length;
+        }
+        else
+        {
+            Debug.Log("No servers hosted");
+        }
     }
 
     private void ClearServers()
