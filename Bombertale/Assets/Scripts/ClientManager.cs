@@ -29,6 +29,7 @@ public class ClientManager : NetworkHost
     {
         if (SceneManager.GetActiveScene().name != "ClientLobby" && SceneManager.GetActiveScene().name != "ClientGame" && SceneManager.GetActiveScene().name != "ServerLobby" && SceneManager.GetActiveScene().name != "ServerGame")
         {
+            NetworkTransport.Shutdown();
             Destroy(this.gameObject);
         }
     }
