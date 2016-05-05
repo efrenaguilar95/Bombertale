@@ -44,8 +44,8 @@ public class ServerListManager : MonoBehaviour
 
     public void Refresh()
     {
-        splitString(_databaseManager.GetServers());        
         ClearServers();
+        splitString(_databaseManager.GetServers());
         for (int i = 0; i < serverCount; i++)
         {
             string[] temp;
@@ -84,6 +84,7 @@ public class ServerListManager : MonoBehaviour
         else
         {
             Debug.Log("No servers hosted");
+            serverCount = 0;
         }
     }
 
