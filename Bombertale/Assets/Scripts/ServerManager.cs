@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class ServerManager : NetworkHost
 {
@@ -10,6 +11,16 @@ public class ServerManager : NetworkHost
     public ServerGameManager serverGameManager;
 
     private DatabaseManager _databaseManager;
+
+    void OnLevelWasLoaded(int level)
+    {
+        if (SceneManager.GetActiveScene().name != "ServerLobby" && SceneManager.GetActiveScene().name != "ServerGame")
+        {
+            NetworkTransport.Shutdown();
+            Debug.Log(SceneManager.GetActiveScene().name);
+            Destroy(this.gameObject);
+        }
+    }
 
     void Awake()
     {

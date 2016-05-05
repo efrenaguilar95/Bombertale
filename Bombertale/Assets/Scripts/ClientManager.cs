@@ -25,6 +25,14 @@ public class ClientManager : NetworkHost
     public AudioSource deathSound;
     public AudioSource pickupSound;
 
+    void OnLevelWasLoaded(int level)
+    {
+        if (SceneManager.GetActiveScene().name != "ClientLobby" && SceneManager.GetActiveScene().name != "ClientGame" && SceneManager.GetActiveScene().name != "ServerLobby" && SceneManager.GetActiveScene().name != "ServerGame")
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -41,6 +49,10 @@ public class ClientManager : NetworkHost
     {
         PollMovement();
         ReceiveEvent recEvent = base.Receive();
+        if (recEvent.type == NetworkEventType.DisconnectEvent)
+        {
+            Debug.Log("Server kicked me");
+        }
         if (recEvent.type == NetworkEventType.DataEvent)
         {
             Message message = recEvent.message;
