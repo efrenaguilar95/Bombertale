@@ -40,7 +40,8 @@ public class NetworkHost : MonoBehaviour {
         _config = new ConnectionConfig();
         _myReliableChannelID = _config.AddChannel(QosType.Reliable);
         _topology = new HostTopology(_config, maxConnections);
-        _hostID = NetworkTransport.AddHost(_topology, port);
+        //_hostID = NetworkTransport.AddHost(_topology, port);
+        _hostID = NetworkTransport.AddHostWithSimulator(_topology, 200, 400, port);
     }
 
     public int Connect(string ipAddress, int port)
