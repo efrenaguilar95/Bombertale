@@ -38,6 +38,11 @@ public class ServerManager : NetworkHost
                 break;
             case NetworkEventType.DisconnectEvent:
                 Debug.Log("Connection lost: " + recEvent.sender);
+                NetworkPlayer disconnectedPlayer = serverGameManager.clientToPlayer[recEvent.sender];
+                disconnectedPlayer.data.isAlive = false;
+                int xLoc = (int)disconnectedPlayer.transform.position.x;
+                int yLoc = (int)disconnectedPlayer.transform.position.y;
+                SendAll(MessageType.TriggerReply, new TriggerReply(disconnectedPlayer.data, xLoc, yLoc));
                 break;
             case NetworkEventType.DataEvent:
                 Message message = recEvent.message;
