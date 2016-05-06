@@ -20,5 +20,7 @@ public class ServerSelection : MonoBehaviour {
         NetworkHost.ServerName = _serverNameObject.text;
         NetworkHost.ServerIP = _serverListManager.servers[_serverNameObject.text].IP;
         NetworkHost.Port = _serverListManager.servers[_serverNameObject.text].port;
+        NetworkHost.ServerPassword = _serverListManager.servers[_serverNameObject.text].password;
+        NetworkHost.IsPrivate = _serverListManager.servers[_serverNameObject.text].security;
     }
 }

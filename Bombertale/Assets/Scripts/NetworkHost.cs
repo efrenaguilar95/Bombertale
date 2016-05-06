@@ -24,6 +24,8 @@ public class NetworkHost : MonoBehaviour {
     public static string ServerIP = "";
     public static int Port = 100;
     public static string ServerName = "";
+    public static string ServerPassword = "";
+    public static bool IsPrivate = false;
 
     private ConnectionConfig _config;
     public int _myReliableChannelID;
