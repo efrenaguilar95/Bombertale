@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ServerListManager : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class ServerListManager : MonoBehaviour
     public Dictionary<string, Server> servers = new Dictionary<string, Server>();
     private DatabaseManager _databaseManager;
 
-    //private List<Server> servers = new List<Server>();    
+    //private List<Server> servers = new List<Server>();
     private string[] serverList;
     private int serverCount;
 
@@ -42,8 +43,15 @@ public class ServerListManager : MonoBehaviour
         Refresh();
     }
 
+    public void PressJoin()
+    {
+        if (_databaseManager.JoinServer(NetworkHost.ServerName).Substring(0, 4) == "BL13")
+            SceneManager.LoadScene("ClientLobby");
+    }
+
     public void Refresh()
     {
+        NetworkHost.ServerIP = "";
         ClearServers();
         splitString(_databaseManager.GetServers());
         for (int i = 0; i < serverCount; i++)

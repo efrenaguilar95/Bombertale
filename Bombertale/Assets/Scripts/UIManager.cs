@@ -31,10 +31,7 @@ public class UIManager : MonoBehaviour {
 		SceneManager.LoadScene("Login");
 	}
 
-    public void GoToClientLobby()
-    {
-        SceneManager.LoadScene("ClientLobby");
-    }
+    
     public void Flee()
     {
         Application.Quit();

@@ -21,8 +21,9 @@ public struct ReceiveEvent
 
 public class NetworkHost : MonoBehaviour {
     //Pre-set the ServerIP to connect to or host from as this machine's local IP
-    public static string ServerIP = "127.0.0.1";
+    public static string ServerIP = "";
     public static int Port = 100;
+    public static string ServerName = "";
 
     private ConnectionConfig _config;
     public int _myReliableChannelID;

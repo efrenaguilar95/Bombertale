@@ -5,19 +5,20 @@ using UnityEngine.UI;
 public class ServerSelection : MonoBehaviour {
 
     private ServerListManager _serverListManager;
-    private Text _serverName;
+    private Text _serverNameObject;
 
     void Awake()
     {
         _serverListManager = GameObject.Find("ServerListManager").GetComponent<ServerListManager>();
-        _serverName = this.transform.FindChild("ServerName").GetComponent<Text>();
+        _serverNameObject = this.transform.FindChild("ServerName").GetComponent<Text>();
     }
 
     public void OnServerSelection()
     {
-        Debug.Log(_serverListManager.servers[_serverName.text].IP);
-        Debug.Log(_serverListManager.servers[_serverName.text].port);
-        NetworkHost.ServerIP = _serverListManager.servers[_serverName.text].IP;
-        NetworkHost.Port = _serverListManager.servers[_serverName.text].port;
+        Debug.Log(_serverListManager.servers[_serverNameObject.text].IP);
+        Debug.Log(_serverListManager.servers[_serverNameObject.text].port);
+        NetworkHost.ServerName = _serverNameObject.text;
+        NetworkHost.ServerIP = _serverListManager.servers[_serverNameObject.text].IP;
+        NetworkHost.Port = _serverListManager.servers[_serverNameObject.text].port;
     }
 }
