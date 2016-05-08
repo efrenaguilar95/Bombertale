@@ -147,7 +147,8 @@ public class LocalGamePlayer : MonoBehaviour
     }
     private void Undetermined()
     {
-        if ((determCounter--) == 0)
+        determCounter--;
+        if (determCounter == 0)
         {
             isDetermined = false;
             isOrigColor = true;
