@@ -71,7 +71,7 @@ public class DialogueBoxManager : MonoBehaviour
         //    Debug.Log("AY");
         //}
 
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.anyKeyDown)
         {
             if (textBox.activeSelf)
             {
