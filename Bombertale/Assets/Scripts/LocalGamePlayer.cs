@@ -15,12 +15,12 @@ public class LocalGamePlayer : MonoBehaviour
     public float speedPU = .5f;
     public int sizePU = 1;
     public bool isDetermined = false;
-    private int determCounter;
+    private bool flashCalled;
     private bool isOrigColor = true;
     private Color flashColor;
     private SpriteRenderer spriteRenderer;
     public int bombCount = 1;
-    public float determinedTime = 5f;
+    private float determinedTime = 0f;
     public bool respawnPU = false;
     public GameObject spawnPoint;
     Mapper map;
@@ -65,7 +65,16 @@ public class LocalGamePlayer : MonoBehaviour
             default:
                 break;
         }
-        if(!isOrigColor && !isDetermined)
+        if (determinedTime > 0)
+        {
+            determinedTime -= Time.deltaTime;
+            StartCoroutine("Flash");
+        }
+        else
+        {
+            Undetermined();
+        }
+        if (!isOrigColor && !isDetermined)
         {
             isOrigColor = true;
             spriteRenderer.color = Color.white;
@@ -113,11 +122,8 @@ public class LocalGamePlayer : MonoBehaviour
         else if (hitObject.CompareTag("PUDetermine"))
         {
             pickupSound.Play();
-            determCounter++;
-            if (!isDetermined)
-                StartCoroutine("Flash");
+            determinedTime = 5.0f;
             isDetermined = true;
-            Invoke("Undetermined", determinedTime);
             Destroy(hitObject.gameObject);
         }
         //else if (hitObject.CompareTag("PURespawn"))
@@ -147,14 +153,12 @@ public class LocalGamePlayer : MonoBehaviour
     }
     private void Undetermined()
     {
-        determCounter--;
-        if (determCounter == 0)
-        {
-            isDetermined = false;
-            isOrigColor = true;
-            spriteRenderer.color = Color.white;
-            StopCoroutine("Flash");
-        }
+        isDetermined = false;
+        flashCalled = false;
+        isOrigColor = true;
+        spriteRenderer.color = Color.white;
+        StopCoroutine("Flash");
+        determinedTime = 0.0f;
     }
 
     public Vector2 GridLocation()
@@ -179,7 +183,8 @@ public class LocalGamePlayer : MonoBehaviour
 
     private IEnumerator Flash()
     {
-        while (determCounter != 0)
+        flashCalled = true;
+        while (determinedTime > 0)
         {
             toggleFlash();
             yield return new WaitForSeconds(.15f);

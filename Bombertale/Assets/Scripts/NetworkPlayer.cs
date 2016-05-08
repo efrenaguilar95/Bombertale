@@ -49,6 +49,9 @@ public class NetworkPlayer : MonoBehaviour
     private GameObject bombPrefab;
     private ClientManager _clientManager;
     private Animator playerAnim;
+    private bool isOrigColor = true;
+    private Color flashColor;
+    private SpriteRenderer spriteRenderer;
 
     void Awake()
     {
@@ -56,6 +59,8 @@ public class NetworkPlayer : MonoBehaviour
         this.bombPrefab = Resources.Load("Bomb") as GameObject;
         _clientManager = GameObject.Find("NetworkManager").GetComponent<ClientManager>();
         playerAnim = this.GetComponent<Animator>();
+        spriteRenderer = this.GetComponent<SpriteRenderer>();
+        flashColor = new Color(1.0f, 0, 0);
     }
 
     void Update()
@@ -64,10 +69,12 @@ public class NetworkPlayer : MonoBehaviour
         if (this.data.invulnTimeRemaining > 0)
         {
             this.data.invulnTimeRemaining -= Time.deltaTime;
+            StartCoroutine("Flash");
         }
         else
         {
             this.data.isInvulnerable = false;
+            StopCoroutine("Flash");
         }
         if (this.data.direction == Direction.NONE)
         {
@@ -93,6 +100,10 @@ public class NetworkPlayer : MonoBehaviour
                 default:
                     break;
             }
+        }
+        if(!isOrigColor && !this.data.isInvulnerable)
+        {
+            spriteRenderer.color = Color.white;
         }
     }
 
@@ -125,6 +136,24 @@ public class NetworkPlayer : MonoBehaviour
         }        
     }
 
+    private void toggleFlash()
+    {
+        if (!isOrigColor)
+            spriteRenderer.color = Color.white;
+        else
+            spriteRenderer.color = flashColor;
+        isOrigColor = !isOrigColor;
+    }
+
+    private IEnumerator Flash()
+    {
+        while(this.data.isInvulnerable)
+        {
+            toggleFlash();
+            yield return new WaitForSeconds(.15f);
+        }
+    }
+
     //public void Translate(Vector2 deltaPos)
     //{
     //    this.transform.Translate(deltaPos);
@@ -154,4 +183,6 @@ public class NetworkPlayer : MonoBehaviour
         bombScript.size = this.data.explosionRadius;
         Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), newBomb.GetComponent<Collider2D>());
     }
+
+
 }
