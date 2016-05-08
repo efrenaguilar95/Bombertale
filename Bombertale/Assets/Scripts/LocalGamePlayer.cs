@@ -15,6 +15,10 @@ public class LocalGamePlayer : MonoBehaviour
     public float speedPU = .5f;
     public int sizePU = 1;
     public bool isDetermined = false;
+    private int determCounter;
+    private bool isOrigColor = true;
+    private Color flashColor;
+    private SpriteRenderer spriteRenderer;
     public int bombCount = 1;
     public float determinedTime = 5f;
     public bool respawnPU = false;
@@ -31,6 +35,8 @@ public class LocalGamePlayer : MonoBehaviour
         playerAnim = this.GetComponent<Animator>();
         deathSound = GameObject.Find("GameAudioManager").GetComponent<GameAudio>().deathSound;
         pickupSound = GameObject.Find("GameAudioManager").GetComponent<GameAudio>().pickupSound;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        flashColor = new Color(1.0f, 0, 0);
         //startPos = this.transform.position;
     }
 
@@ -59,6 +65,12 @@ public class LocalGamePlayer : MonoBehaviour
             default:
                 break;
         }
+        if(!isOrigColor && !isDetermined)
+        {
+            isOrigColor = true;
+            spriteRenderer.color = Color.white;
+        }
+        
     }
 
     void OnTriggerEnter2D(Collider2D hitObject)
@@ -101,6 +113,9 @@ public class LocalGamePlayer : MonoBehaviour
         else if (hitObject.CompareTag("PUDetermine"))
         {
             pickupSound.Play();
+            determCounter++;
+            if (!isDetermined)
+                StartCoroutine("Flash");
             isDetermined = true;
             Invoke("Undetermined", determinedTime);
             Destroy(hitObject.gameObject);
@@ -132,7 +147,13 @@ public class LocalGamePlayer : MonoBehaviour
     }
     private void Undetermined()
     {
-        isDetermined = false;
+        if ((determCounter--) == 0)
+        {
+            isDetermined = false;
+            isOrigColor = true;
+            spriteRenderer.color = Color.white;
+            StopCoroutine("Flash");
+        }
     }
 
     public Vector2 GridLocation()
@@ -143,6 +164,25 @@ public class LocalGamePlayer : MonoBehaviour
     public void SetAnim(string animation)
     {
         playerAnim.Play(animation);
+    }
+
+    //Called to make a player sprite flash when determined
+    private void toggleFlash()
+    {
+        if (!isOrigColor)
+            spriteRenderer.color = Color.white;
+        else
+            spriteRenderer.color = flashColor;
+        isOrigColor = !isOrigColor;
+    }
+
+    private IEnumerator Flash()
+    {
+        while (determCounter != 0)
+        {
+            toggleFlash();
+            yield return new WaitForSeconds(.15f);
+        }
     }
 
     public void toggleMovement()
