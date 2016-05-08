@@ -31,7 +31,11 @@ public class UIManager : MonoBehaviour {
 		SceneManager.LoadScene("Login");
 	}
 
-    
+    public void GoToTuToriel()
+    {
+        SceneManager.LoadScene("TuToriel");
+    }
+
     public void Flee()
     {
         Application.Quit();
