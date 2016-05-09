@@ -12,6 +12,9 @@ public class ServerManager : NetworkHost
 
     private DatabaseManager _databaseManager;
 
+    float randMusic;
+    int indexMusic;
+
     void OnLevelWasLoaded(int level)
     {
         if (SceneManager.GetActiveScene().name != "ServerLobby" && SceneManager.GetActiveScene().name != "ServerGame")
@@ -29,6 +32,8 @@ public class ServerManager : NetworkHost
         base.Setup(NetworkHost.Port, 4);
         _databaseManager = this.GetComponent<DatabaseManager>();
         _databaseManager.CreateServer("Bombertale", NetworkHost.ServerIP, NetworkHost.Port, false, "", clientList.Count);
+        randMusic = Random.Range(0, 1000);
+        indexMusic = Random.Range(0, 9);
     }
 
     void OnDestroy()
@@ -129,6 +134,11 @@ public class ServerManager : NetworkHost
         //    playerListToSend.Add("Player" + (i + 1));
         //}
         //SendAll(MessageType.Setup, new Setup(playerListToSend));
+        if(randMusic <= 1)
+        {
+            Debug.Log(randMusic);
+            indexMusic = 9;
+        }
         for (int i = 0; i < clientList.Count; i++)
         {
             List<string> playerListToSend = new List<string>();
@@ -141,7 +151,8 @@ public class ServerManager : NetworkHost
                     playerListToSend.Add("Player" + (j + 1));
                 }
             }
-            base.Send(clientList[i], MessageType.Setup, new Setup(playerListToSend));
+            
+            base.Send(clientList[i], MessageType.Setup, new Setup(playerListToSend, indexMusic));
         }
     }
 }

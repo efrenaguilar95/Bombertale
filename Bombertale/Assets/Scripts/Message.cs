@@ -39,9 +39,11 @@ public struct StartGame
 public struct Setup
 {
     public List<string> players;
-    public Setup(List<string> players)
+    public int songSelection;
+    public Setup(List<string> players, int songSelection)
     {
         this.players = players;
+        this.songSelection = songSelection;
     }
 }
 

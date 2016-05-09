@@ -94,6 +94,8 @@ public class ClientManager : NetworkHost
                 myPlayer = _players[setup.players[0]];
                 pickupSound = GameObject.Find("GameAudioManager").GetComponent<GameAudio>().pickupSound;
                 deathSound = GameObject.Find("GameAudioManager").GetComponent<GameAudio>().deathSound;
+                GameObject.Find("GameAudioManager").GetComponent<GameAudio>().SelectMusic(setup.songSelection);
+
             }
             //if (message.type == MessageType.StateUpdate)
             //{
