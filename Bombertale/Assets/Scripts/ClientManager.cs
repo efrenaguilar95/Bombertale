@@ -12,7 +12,7 @@ public class ClientManager : NetworkHost
     private int _playerCount;
     
     /// Lobby Variables
-    private Text _playersInLobby;
+    private Text _playersInLobby, _serverName;
 
     /// In-Game Variables
     private bool _isGameStarted = false;
@@ -42,7 +42,9 @@ public class ClientManager : NetworkHost
         _server = base.Connect(NetworkHost.ServerIP, NetworkHost.Port);
 
         _playersInLobby = GameObject.Find("PlayersInLobbyText").GetComponent<Text>();
-
+        _serverName = GameObject.Find("ServerName").GetComponent<Text>();
+        if (_serverName != null)
+            _serverName.text = "Lobby: " + NetworkHost.ServerName;
     }
 
 

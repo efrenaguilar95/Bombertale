@@ -32,7 +32,9 @@ public class ServerManager : NetworkHost
         DontDestroyOnLoad(this.gameObject);
         base.Setup(NetworkHost.Port, 4);
         _databaseManager = this.GetComponent<DatabaseManager>();
-        _databaseManager.CreateServer("Bombertale", NetworkHost.ServerIP, NetworkHost.Port, false, "", clientList.Count);
+        _databaseManager.CreateServer("Bombertale", NetworkHost.ServerIP, NetworkHost.Port, false, "", clientList.Count);   //Placeholder
+
+        NetworkHost.ServerName = "Bombertale";  //Placeholder
         randMusic = Random.Range(0, 1000);
         indexMusic = Random.Range(0, 9);
         clientUsernames = new string[4];
