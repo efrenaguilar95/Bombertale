@@ -21,9 +21,9 @@ public class ClientManager : NetworkHost
     private Dictionary<string, NetworkPlayer> _players = new Dictionary<string, NetworkPlayer>();    
     private Mapper map;
 
-    public AudioSource bombSound;
-    public AudioSource deathSound;
-    public AudioSource pickupSound;
+    private AudioSource bombSound;
+    private AudioSource deathSound;
+    private AudioSource pickupSound;
 
     void OnLevelWasLoaded(int level)
     {

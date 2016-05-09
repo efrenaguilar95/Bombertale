@@ -10,6 +10,7 @@ public class ServerManager : NetworkHost
     public List<int> clientList = new List<int>();
     public string[] clientUsernames;
     public ServerGameManager serverGameManager;
+    private AudioSource joinSound;
 
     private DatabaseManager _databaseManager;
 
@@ -38,6 +39,7 @@ public class ServerManager : NetworkHost
         randMusic = Random.Range(0, 1000);
         indexMusic = Random.Range(0, 9);
         clientUsernames = new string[4];
+        joinSound = GameObject.Find("LobbyAudioManager").GetComponent<AudioSource>();
     }
 
     void OnDestroy()
@@ -70,7 +72,10 @@ public class ServerManager : NetworkHost
                 clientList.Remove(recEvent.sender);
                 //Debug.Log(recEvent.sender.ToString() + "Disconnected!");
                 _databaseManager.UpdatePlayers("Bombertale", clientList.Count);
-                SendAll(MessageType.LobbyUpdate, new LobbyUpdate(clientList.Count, null));
+                clientUsernames[recEvent.sender - 1] = "";
+                GameObject.Find("Player" + (recEvent.sender).ToString()).GetComponent<UnityEngine.UI.Text>().text = "[Joinable]";
+                GameObject.Find("Player" + (recEvent.sender).ToString() + " Avatar").GetComponent<Animator>().SetBool("Joined", false);
+                SendAll(MessageType.LobbyUpdate, new LobbyUpdate(clientList.Count, clientUsernames));
                 break;
             case NetworkEventType.DataEvent:
                 Message message = recEvent.message;
@@ -79,6 +84,19 @@ public class ServerManager : NetworkHost
                     UsernameReply username = (UsernameReply)message.GetData();
                     clientUsernames[recEvent.sender-1] = username.username;
                     SendAll(MessageType.LobbyUpdate, new LobbyUpdate(clientList.Count, clientUsernames));
+                    for (int i = 0; i<clientUsernames.Length; i++)
+                    {
+                        if (clientUsernames[i] == null || clientUsernames[i] == "[Joinable]")
+                            clientUsernames[i] = "[Joinable]";
+                        else
+                        {
+                            if (clientUsernames[i] == "")
+                                clientUsernames[i] = "Frisk";
+                            GameObject.Find("Player" + (i + 1).ToString()).GetComponent<UnityEngine.UI.Text>().text = clientUsernames[i];
+                            GameObject.Find("Player" + (i + 1).ToString() + " Avatar").GetComponent<Animator>().SetBool("Joined", true);
+                            joinSound.Play();
+                        }
+                    }
                 }
                 if(message.type == MessageType.LobbyUpdate)
                 {
