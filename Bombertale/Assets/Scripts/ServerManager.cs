@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class ServerManager : NetworkHost
 {
     public List<int> clientList = new List<int>();
+    public string[] clientUsernames;
     public ServerGameManager serverGameManager;
 
     private DatabaseManager _databaseManager;
@@ -34,6 +35,7 @@ public class ServerManager : NetworkHost
         _databaseManager.CreateServer("Bombertale", NetworkHost.ServerIP, NetworkHost.Port, false, "", clientList.Count);
         randMusic = Random.Range(0, 1000);
         indexMusic = Random.Range(0, 9);
+        clientUsernames = new string[4];
     }
 
     void OnDestroy()
@@ -49,11 +51,12 @@ public class ServerManager : NetworkHost
             case NetworkEventType.ConnectEvent:
                 Debug.Log("New connection: " + recEvent.sender);
                 clientList.Add(recEvent.sender);
+                Debug.Log(recEvent.sender.ToString() + "Joined!");
                 _databaseManager.UpdatePlayers("Bombertale", clientList.Count);
-                SendAll(MessageType.LobbyUpdate, new LobbyUpdate(clientList.Count));
+                SendAll(MessageType.UsernameRequest, new UsernameRequest());
                 break;
             case NetworkEventType.DisconnectEvent:
-                Debug.Log("Connection lost: " + recEvent.sender);
+                //Debug.Log("Connection lost: " + recEvent.sender);
                 if (serverGameManager != null)
                 {
                     NetworkPlayer disconnectedPlayer = serverGameManager.clientToPlayer[recEvent.sender];
@@ -63,11 +66,22 @@ public class ServerManager : NetworkHost
                     SendAll(MessageType.TriggerReply, new TriggerReply(disconnectedPlayer.data, xLoc, yLoc));
                 }
                 clientList.Remove(recEvent.sender);
+                //Debug.Log(recEvent.sender.ToString() + "Disconnected!");
                 _databaseManager.UpdatePlayers("Bombertale", clientList.Count);
-                SendAll(MessageType.LobbyUpdate, new LobbyUpdate(clientList.Count));
+                SendAll(MessageType.LobbyUpdate, new LobbyUpdate(clientList.Count, null));
                 break;
             case NetworkEventType.DataEvent:
                 Message message = recEvent.message;
+                if(message.type == MessageType.UsernameReply)
+                {
+                    UsernameReply username = (UsernameReply)message.GetData();
+                    clientUsernames[recEvent.sender-1] = username.username;
+                    SendAll(MessageType.LobbyUpdate, new LobbyUpdate(clientList.Count, clientUsernames));
+                }
+                if(message.type == MessageType.LobbyUpdate)
+                {
+
+                }
                 if (message.type == MessageType.Move)
                 {
                     Move playerMove = (Move)message.GetData();

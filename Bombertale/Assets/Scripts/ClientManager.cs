@@ -59,10 +59,18 @@ public class ClientManager : NetworkHost
         {
             Message message = recEvent.message;
             //Debug.Log(message.subJson);
+            if(message.type == MessageType.UsernameRequest)
+            {
+                base.Send(_server, MessageType.UsernameReply, new UsernameReply(UIManager.userName));
+            }
             if (message.type == MessageType.LobbyUpdate)
             {
                 LobbyUpdate lobbyUpdate = (LobbyUpdate)message.GetData();
                 _playerCount = lobbyUpdate.playerCount;
+                for (int i = 0; i < lobbyUpdate.usernames.Length; i++)
+                {
+                    Debug.Log(i.ToString() + ":" + lobbyUpdate.usernames[i]);
+                }
             }
             if (message.type == MessageType.StartGame)
             {

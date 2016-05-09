@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
 
 	private string unityPassword = "ICS168";
+    public static string userName;
 
     public void PressLocalGame()
     {
@@ -36,6 +37,11 @@ public class UIManager : MonoBehaviour {
         SceneManager.LoadScene("TuToriel");
     }
 
+    public void goToJoinOrHost()
+    {
+        SceneManager.LoadScene("JoinOrHost");
+    }
+
     public void Flee()
     {
         Application.Quit();
@@ -51,8 +57,8 @@ public class UIManager : MonoBehaviour {
 
 		if (returnCode == "BC00")
 		{
-			//login success
-			//WE NEED TO SET A GLOBAL USERNAME HERE
+            //login success
+            userName = username;
 			GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "";
 			SceneManager.LoadScene ("JoinOrHost");
 		}

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public enum MessageType
 {
     None,
+    UsernameRequest,
+    UsernameReply,
     LobbyUpdate,
     StartGame,
     Setup,
@@ -20,12 +22,30 @@ public enum MessageType
 }
 
 [System.Serializable]
+public struct UsernameRequest
+{
+
+}
+
+[System.Serializable]
+public struct UsernameReply
+{
+    public string username;
+    public UsernameReply(string username)
+    {
+        this.username = username;
+    }
+}
+
+[System.Serializable]
 public struct LobbyUpdate
 {
     public int playerCount;
-    public LobbyUpdate(int playerCount)
+    public string[] usernames;
+    public LobbyUpdate(int playerCount, string[] usernames)
     {
         this.playerCount = playerCount;
+        this.usernames = usernames;
     }
 }
 
@@ -169,6 +189,8 @@ public class Message
     {
         switch (this.type)
         {
+            case MessageType.UsernameReply:
+                return JsonUtility.FromJson<UsernameReply>(subJson);
             case MessageType.LobbyUpdate:
                 return JsonUtility.FromJson<LobbyUpdate>(subJson);
             case MessageType.StartGame:
