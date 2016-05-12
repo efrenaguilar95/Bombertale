@@ -35,3 +35,7 @@ BC06:	Failed to create account
 BC07:	Reset email sent
 BC08:	No such email in database
 BC09:	Failed to send email
+BC10:	User already logged in
+BC11:	Failed to login
+BC12:	Logout successful
+BC13:	Failed to logout

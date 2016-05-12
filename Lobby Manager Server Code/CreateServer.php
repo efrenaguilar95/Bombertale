@@ -22,22 +22,6 @@
 	$password = 	strip_tags($_GET['password']);
 	$players = 		strip_tags($_GET['players']);
 
-	$query = "SELECT * FROM $serversTablename WHERE server_name = '$serverName'";
-
-	//if(!$result)
-	//{
-	//	include 'Cleanup.php';
-	//	die('BD04: ' . mysql_error());
-	//}
-
-	$rows = mysql_num_rows($result);
-
-	if($rows > 0)
-	{
-		include 'Cleanup.php';
-		die('BL04: Server name already taken');
-	}
-
 
 	$query = "INSERT INTO $serversTablename (server_name, server_ip, port, private, password, players)
 				VALUES ('$serverName', '$serverIp', '$port', '$private', '$password', '$players')";
