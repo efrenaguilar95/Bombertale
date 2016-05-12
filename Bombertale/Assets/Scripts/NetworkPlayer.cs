@@ -6,6 +6,7 @@ using System.Collections;
 public struct PlayerData
 {
     public string name;
+    public string userName;
     public Vector2 worldLocation;
     public Direction direction;
     public bool isAlive;
@@ -14,9 +15,10 @@ public struct PlayerData
     public int explosionRadius;
     public bool isInvulnerable;
     public float invulnTimeRemaining;
-    public PlayerData(string name, Vector2 worldLocation, Direction direction, bool isAlive, float speed, int bombCount, int explosionRadius, bool isInvulnerable, float invulnTimeRemaining)
+    public PlayerData(string name, string userName, Vector2 worldLocation, Direction direction, bool isAlive, float speed, int bombCount, int explosionRadius, bool isInvulnerable, float invulnTimeRemaining)
     {
         this.name = name;
+        this.userName = userName;
         this.worldLocation = worldLocation;
         this.direction = direction;
         this.isAlive = isAlive;
@@ -31,6 +33,7 @@ public struct PlayerData
     public PlayerData(PlayerData previousPlayerData)
     {
         this.name = previousPlayerData.name;
+        this.userName = previousPlayerData.userName;
         this.worldLocation = previousPlayerData.worldLocation;
         this.direction = previousPlayerData.direction;
         this.isAlive = previousPlayerData.isAlive;
@@ -55,7 +58,7 @@ public class NetworkPlayer : MonoBehaviour
 
     void Awake()
     {
-        this.data = new PlayerData(this.name, this.GetWorldLocation(), Direction.NONE, false, 3f, 1, 1, false, 0f);
+        this.data = new PlayerData(this.name, "", this.GetWorldLocation(), Direction.NONE, false, 3f, 1, 1, false, 0f);
         this.bombPrefab = Resources.Load("Bomb") as GameObject;
         _clientManager = GameObject.Find("NetworkManager").GetComponent<ClientManager>();
         playerAnim = this.GetComponent<Animator>();

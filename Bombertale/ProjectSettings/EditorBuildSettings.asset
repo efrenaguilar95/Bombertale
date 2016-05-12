@@ -28,6 +28,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ClientGame.unity
   - enabled: 1
-    path: Assets/Scenes/EndScreen.unity
+    path: Assets/Scenes/LocalEndScreen.unity
+  - enabled: 1
+    path: Assets/Scenes/NetworkEndScreen.unity
   - enabled: 1
     path: Assets/Scenes/TuToriel.unity

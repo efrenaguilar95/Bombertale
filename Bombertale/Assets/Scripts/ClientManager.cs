@@ -15,6 +15,7 @@ public class ClientManager : NetworkHost
     private Text _playersInLobby, _serverName;
 
     /// In-Game Variables
+    public string winnerMessage;
     private bool _isGameStarted = false;
     private bool _noneWasSent = false;    
     NetworkPlayer myPlayer;
@@ -60,7 +61,7 @@ public class ClientManager : NetworkHost
         if (recEvent.type == NetworkEventType.DataEvent)
         {
             Message message = recEvent.message;
-            //Debug.Log(message.subJson);
+            Debug.Log(message.subJson);
             if(message.type == MessageType.UsernameRequest)
             {
                 base.Send(_server, MessageType.UsernameReply, new UsernameReply(UIManager.userName));
@@ -85,7 +86,7 @@ public class ClientManager : NetworkHost
             if (message.type == MessageType.Setup)
             {
                 Setup setup = (Setup)message.GetData();
-                map = GameObject.Find("Map").GetComponent<Mapper>();                
+                map = GameObject.Find("Map").GetComponent<Mapper>();
                 foreach (string playerName in setup.players)
                 {
                     //_players.Add(GameObject.Find(playerName).GetComponent<NetworkPlayer>());
@@ -107,17 +108,6 @@ public class ClientManager : NetworkHost
                 GameObject.Find("GameAudioManager").GetComponent<GameAudio>().SelectMusic(setup.songSelection);
 
             }
-            //if (message.type == MessageType.StateUpdate)
-            //{
-            //    StateUpdate stateUpdate = (StateUpdate)message.GetData();
-            //    //for (int i = 0; i < stateUpdate.players.Count; i++)
-            //    foreach (PlayerData playerData in stateUpdate.players)
-            //    {
-            //        _players[playerData.name].GetComponent<Rigidbody2D>().MovePosition(playerData.worldLocation);
-            //        //_players[i].GetComponent<Rigidbody2D>().MovePosition(stateUpdate.players[i].worldLocation);
-            //    }
-            //    /// Need to set all the other data variables like powerups here as well to stay in sync with the server
-            //}
             if (message.type == MessageType.BombReply)
             {
                 BombReply bombReply = (BombReply)message.GetData();
@@ -172,6 +162,13 @@ public class ClientManager : NetworkHost
                     pickupSound.Play();
                 }
                 Destroy(map.gameObjectGrid[triggerReply.xLoc][triggerReply.yLoc]);
+            }
+            if (message.type == MessageType.GameOver)
+            {
+                GameOver gameOver = (GameOver)message.GetData();
+                this.winnerMessage = gameOver.winnerMessage;
+                _isGameStarted = false;
+                SceneManager.LoadScene("NetworkEndScreen");
             }
         }
     }

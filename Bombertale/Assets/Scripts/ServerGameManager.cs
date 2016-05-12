@@ -28,6 +28,7 @@ public class ServerGameManager : MonoBehaviour
         for (int i = 0; i < _serverManager.clientList.Count && i < 4; i++)
         {
             clientToPlayer.Add(_serverManager.clientList[i], _playerList[i]);
+            clientToPlayer[_serverManager.clientList[i]].data.userName = _serverManager.clientUsernames[i];
         }
 
         _serverManager.SendSetup();
@@ -35,6 +36,7 @@ public class ServerGameManager : MonoBehaviour
 
     void LateUpdate()
     {
+        CheckGameOver();
         //foreach (NetworkPlayer player in clientToPlayer.Values)
         //{
         //    MovePlayer(player);
@@ -78,7 +80,6 @@ public class ServerGameManager : MonoBehaviour
         if (player.data.bombCount > 0)
         {
             player.data.bombCount--;
-            //Invoke("RefillBombCount", 2.5f);
             StartCoroutine(RefillBombCount(clientID, 2.5f));            
             return true;
         }
@@ -109,24 +110,21 @@ public class ServerGameManager : MonoBehaviour
         }
     }
 
-    //private void MovePlayer(NetworkPlayer player)
-    //{
-    //    switch (player.data.direction)
-    //    {
-    //        case Direction.UP:
-    //            player.transform.Translate(new Vector2(0, player.data.speed * Time.deltaTime));
-    //            break;
-    //        case Direction.LEFT:
-    //            player.transform.Translate(new Vector2(-player.data.speed * Time.deltaTime, 0));
-    //            break;
-    //        case Direction.DOWN:
-    //            player.transform.Translate(new Vector2(0, -player.data.speed * Time.deltaTime));
-    //            break;
-    //        case Direction.RIGHT:
-    //            player.transform.Translate(new Vector2(player.data.speed * Time.deltaTime, 0));
-    //            break;
-    //        default:
-    //            break;
-    //    }
-    //}
+    private void CheckGameOver()
+    {
+        List<NetworkPlayer> alivePlayers = new List<NetworkPlayer>();
+
+        foreach (NetworkPlayer player in _playerList)
+        {
+            if (player.data.isAlive)
+                alivePlayers.Add(player);
+            if (alivePlayers.Count >= 2)
+                return;
+        }
+
+        if (alivePlayers.Count == 1)
+            _serverManager.SendAll(MessageType.GameOver, new GameOver(alivePlayers[0].data.userName + " Wins!"));
+        else if (alivePlayers.Count == 0)
+            _serverManager.SendAll(MessageType.GameOver, new GameOver("Tie!"));
+    }
 }

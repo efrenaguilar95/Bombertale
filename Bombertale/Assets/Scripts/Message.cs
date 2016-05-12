@@ -18,7 +18,8 @@ public enum MessageType
     DestroySoftBlock,
     PowerUpDrop,
     TriggerRequest,
-    TriggerReply
+    TriggerReply,
+    GameOver
 }
 
 [System.Serializable]
@@ -173,6 +174,16 @@ public struct TriggerReply
 }
 
 [System.Serializable]
+public struct GameOver
+{
+    public string winnerMessage;
+    public GameOver(string name)
+    {
+        this.winnerMessage = name;
+    }
+}
+
+[System.Serializable]
 public class Message
 {
     public MessageType type;
@@ -215,6 +226,8 @@ public class Message
                 return JsonUtility.FromJson<TriggerRequest>(subJson);
             case MessageType.TriggerReply:
                 return JsonUtility.FromJson<TriggerReply>(subJson);
+            case MessageType.GameOver:
+                return JsonUtility.FromJson<GameOver>(subJson);
             default:
                 return null;
         }
