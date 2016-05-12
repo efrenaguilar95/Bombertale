@@ -22,7 +22,7 @@ public struct ReceiveEvent
 public class NetworkHost : MonoBehaviour {
     //Pre-set the ServerIP to connect to or host from as this machine's local IP
     public static string ServerIP = "";
-    public static int Port = 100;
+    public static int Port = 9000;
     public static string ServerName = "";
     public static string ServerPassword = "";
     public static bool IsPrivate = false;

@@ -193,24 +193,28 @@ public class ClientManager : NetworkHost
             if (Input.GetKeyDown(KeyCode.W))
             {
                 base.Send(_server, MessageType.Move, new Move(Direction.UP));
+                myPlayer.data.direction = Direction.UP;
                 _noneWasSent = false;
             }
 
             if (Input.GetKeyDown(KeyCode.A))
             {
                 base.Send(_server, MessageType.Move, new Move(Direction.LEFT));
+                myPlayer.data.direction = Direction.LEFT;
                 _noneWasSent = false;
             }
 
             if (Input.GetKeyDown(KeyCode.S))
             {
                 base.Send(_server, MessageType.Move, new Move(Direction.DOWN));
+                myPlayer.data.direction = Direction.DOWN;
                 _noneWasSent = false;
             }
 
             if (Input.GetKeyDown(KeyCode.D))
             {
                 base.Send(_server, MessageType.Move, new Move(Direction.RIGHT));
+                myPlayer.data.direction = Direction.RIGHT;
                 _noneWasSent = false;
             }
 
