@@ -44,7 +44,7 @@ public class ServerManager : NetworkHost
 
     void OnDestroy()
     {
-        _databaseManager.DeleteServer("Bombertale");
+        _databaseManager.DeleteServer(NetworkHost.ServerName);
     }
 
     void Update()
@@ -56,7 +56,7 @@ public class ServerManager : NetworkHost
                 Debug.Log("New connection: " + recEvent.sender);
                 clientList.Add(recEvent.sender);
                 Debug.Log(recEvent.sender.ToString() + "Joined!");
-                _databaseManager.UpdatePlayers("Bombertale", clientList.Count);
+                _databaseManager.UpdatePlayers(NetworkHost.ServerName, clientList.Count);
                 SendAll(MessageType.UsernameRequest, new UsernameRequest());
                 break;
             case NetworkEventType.DisconnectEvent:
@@ -71,7 +71,7 @@ public class ServerManager : NetworkHost
                 }
                 clientList.Remove(recEvent.sender);
                 //Debug.Log(recEvent.sender.ToString() + "Disconnected!");
-                _databaseManager.UpdatePlayers("Bombertale", clientList.Count);
+                _databaseManager.UpdatePlayers(NetworkHost.ServerName, clientList.Count);
                 clientUsernames[recEvent.sender - 1] = "";
                 GameObject.Find("Player" + (recEvent.sender).ToString()).GetComponent<UnityEngine.UI.Text>().text = "[Joinable]";
                 GameObject.Find("Player" + (recEvent.sender).ToString() + " Avatar").GetComponent<Animator>().SetBool("Joined", false);
