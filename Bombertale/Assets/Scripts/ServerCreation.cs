@@ -8,9 +8,9 @@ public class ServerCreation : MonoBehaviour {
 
     void Awake()
     {
-        nameInput.placeholder.GetComponent<Text>().text = NetworkHost.ServerName;
-        ipInput.placeholder.GetComponent<Text>().text = NetworkHost.ServerIP;
-        portInput.placeholder.GetComponent<Text>().text = NetworkHost.Port.ToString();
+        nameInput.placeholder.GetComponent<Text>().text = "Bombertale";
+        ipInput.placeholder.GetComponent<Text>().text = Network.player.ipAddress;
+        portInput.placeholder.GetComponent<Text>().text = "9001";
     }
 
     public void CreateServer()

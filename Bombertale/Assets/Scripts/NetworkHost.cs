@@ -21,8 +21,8 @@ public struct ReceiveEvent
 
 public class NetworkHost : MonoBehaviour {
     //Pre-set the ServerIP to connect to or host from as this machine's local IP
-    public static string ServerIP = Network.player.ipAddress;
-    public static int Port = 9000;
+    public static string ServerIP = "";
+    public static int Port = 0;
     public static string ServerName = "Bombertale";
     public static string ServerPassword = "";
     public static bool IsPrivate = false;
