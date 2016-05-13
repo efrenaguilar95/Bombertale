@@ -102,7 +102,7 @@ public class ServerGameManager : MonoBehaviour
         _serverManager.SendAll(MessageType.DestroySoftBlock, new DestroySoftBlock(xLoc, yLoc));
         float rand = Random.Range(0, 100);
         int randPU = Random.Range(0, _clientManager.powerUps.Length);
-        if (rand >= 60)
+        if (rand >= 30)
         {
             _serverManager.SendAll(MessageType.PowerUpDrop, new PowerUpDrop(randPU, xLoc, yLoc));
         }
