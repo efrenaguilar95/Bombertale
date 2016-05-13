@@ -36,7 +36,6 @@ public class ServerGameManager : MonoBehaviour
 
     void LateUpdate()
     {
-        CheckGameOver();
         //foreach (NetworkPlayer player in clientToPlayer.Values)
         //{
         //    MovePlayer(player);
@@ -54,7 +53,10 @@ public class ServerGameManager : MonoBehaviour
         {
             case TriggerType.Explosion:
                 if (!clientToPlayer[clientID].data.isInvulnerable)
+                {
                     clientToPlayer[clientID].data.isAlive = false;
+                    CheckGameOver();
+                }
                 break;
             case TriggerType.SpeedUp:
                 clientToPlayer[clientID].data.speed += .5f;
