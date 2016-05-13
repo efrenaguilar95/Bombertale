@@ -29,13 +29,13 @@ public class ServerManager : NetworkHost
 
     void Awake()
     {
-        NetworkHost.ServerIP = Network.player.ipAddress;    //Placeholder until we get UI on create game
+        //NetworkHost.ServerIP = Network.player.ipAddress;    //Placeholder until we get UI on create game
         DontDestroyOnLoad(this.gameObject);
         base.Setup(NetworkHost.Port, 4);
         _databaseManager = this.GetComponent<DatabaseManager>();
-        _databaseManager.CreateServer("Bombertale", NetworkHost.ServerIP, NetworkHost.Port, false, "", clientList.Count);   //Placeholder
+        _databaseManager.CreateServer(NetworkHost.ServerName, NetworkHost.ServerIP, NetworkHost.Port, NetworkHost.IsPrivate, NetworkHost.ServerPassword, clientList.Count);
 
-        NetworkHost.ServerName = "Bombertale";  //Placeholder
+        //NetworkHost.ServerName = "Bombertale";  //Placeholder
         randMusic = Random.Range(0, 1000);
         indexMusic = Random.Range(0, 9);
         clientUsernames = new string[4];
