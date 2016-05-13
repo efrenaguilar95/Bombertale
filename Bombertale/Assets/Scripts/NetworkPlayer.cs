@@ -112,31 +112,34 @@ public class NetworkPlayer : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Explosion"))
+        if (this.data.isAlive)
         {
-            //Server I is ded?
-            _clientManager.SendTriggerRequest(TriggerType.Explosion);
+            if (other.CompareTag("Explosion"))
+            {
+                //Server I is ded?
+                _clientManager.SendTriggerRequest(TriggerType.Explosion);
+            }
+            if (other.CompareTag("PUSpeed"))
+            {
+                //Server I can go fast?
+                _clientManager.SendTriggerRequest(TriggerType.SpeedUp);
+            }
+            if (other.CompareTag("PUExplosion"))
+            {
+                //Server I can has bigger bombs?
+                _clientManager.SendTriggerRequest(TriggerType.ExplosionRadius);
+            }
+            if (other.CompareTag("PUBomb"))
+            {
+                //Server I can has more bombs?
+                _clientManager.SendTriggerRequest(TriggerType.BombCount);
+            }
+            if (other.CompareTag("PUDetermine"))
+            {
+                //Server I is determined?
+                _clientManager.SendTriggerRequest(TriggerType.Determination);
+            }
         }
-        if (other.CompareTag("PUSpeed"))
-        {
-            //Server I can go fast?
-            _clientManager.SendTriggerRequest(TriggerType.SpeedUp);
-        }
-        if (other.CompareTag("PUExplosion"))
-        {
-            //Server I can has bigger bombs?
-            _clientManager.SendTriggerRequest(TriggerType.ExplosionRadius);
-        }
-        if (other.CompareTag("PUBomb"))
-        {
-            //Server I can has more bombs?
-            _clientManager.SendTriggerRequest(TriggerType.BombCount);
-        }
-        if (other.CompareTag("PUDetermine"))
-        {
-            //Server I is determined?
-            _clientManager.SendTriggerRequest(TriggerType.Determination);
-        }        
     }
 
     private void toggleFlash()

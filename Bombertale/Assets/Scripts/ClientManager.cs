@@ -77,7 +77,6 @@ public class ClientManager : NetworkHost
             }
             if (message.type == MessageType.StartGame)
             {
-                this._isGameStarted = true;
                 if (this.GetComponent<ServerManager>() != null)
                     SceneManager.LoadScene("ServerGame");
                 else
@@ -106,7 +105,7 @@ public class ClientManager : NetworkHost
                 pickupSound = GameObject.Find("GameAudioManager").GetComponent<GameAudio>().pickupSound;
                 deathSound = GameObject.Find("GameAudioManager").GetComponent<GameAudio>().deathSound;
                 GameObject.Find("GameAudioManager").GetComponent<GameAudio>().SelectMusic(setup.songSelection);
-
+                this._isGameStarted = true;
             }
             if (message.type == MessageType.BombReply)
             {
@@ -185,7 +184,7 @@ public class ClientManager : NetworkHost
 
     private void PollMovement()
     {
-        if (_isGameStarted)
+        if (_isGameStarted && myPlayer.data.isAlive)
         {
             if (Input.GetKeyDown(KeyCode.W))
             {
