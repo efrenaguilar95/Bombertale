@@ -160,6 +160,8 @@ public class ClientManager : NetworkHost
                 {
                     pickupSound.Play();
                 }
+                if (map.grid[triggerReply.xLoc][triggerReply.yLoc] != "4")
+                    map.grid[triggerReply.xLoc][triggerReply.yLoc] = ".";
                 Destroy(map.gameObjectGrid[triggerReply.xLoc][triggerReply.yLoc]);
             }
             if (message.type == MessageType.GameOver)
