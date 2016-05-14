@@ -153,10 +153,12 @@ public struct PowerUpDrop
 [System.Serializable]
 public struct TriggerRequest
 {
-    public TriggerType triggerType;
-    public TriggerRequest(TriggerType type)
+    //public CellID triggerType;
+    public char cellId;
+    public TriggerRequest(char id)
     {
-        this.triggerType = type;
+        //this.triggerType = type;
+        this.cellId = id;
     }
 }
 

@@ -23,7 +23,7 @@ public class Explosion : MonoBehaviour
     private IEnumerator Destroy(float time)
     {
         yield return new WaitForSeconds(time);
-        map.grid[xLoc][yLoc] = ".";
+        map.grid[xLoc][yLoc] = CellID.Empty;
         Destroy(this.gameObject);
     }
 }

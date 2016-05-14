@@ -52,6 +52,7 @@ public class ClientManager : NetworkHost
     void Update()
     {
         PollMovement();
+        CheckForCollisions();
         ReceiveEvent recEvent = base.Receive();
         if (recEvent.type == NetworkEventType.DisconnectEvent)
         {
@@ -61,7 +62,7 @@ public class ClientManager : NetworkHost
         if (recEvent.type == NetworkEventType.DataEvent)
         {
             Message message = recEvent.message;
-            Debug.Log(message.subJson);
+            //Debug.Log(message.subJson);
             if(message.type == MessageType.UsernameRequest)
             {
                 base.Send(_server, MessageType.UsernameReply, new UsernameReply(UIManager.userName));
@@ -135,13 +136,13 @@ public class ClientManager : NetworkHost
                 PowerUpDrop puDrop = (PowerUpDrop)message.GetData();
                 if (puDrop.puIndex == -1)
                 {
-                    map.grid[puDrop.xLoc][puDrop.yLoc] = ".";
+                    map.grid[puDrop.xLoc][puDrop.yLoc] = CellID.Empty;
                 }
                 else
                 {
                     GameObject power = this.powerUps[puDrop.puIndex];
                     GameObject newPowerUp = (GameObject)Instantiate(power, new Vector2(puDrop.xLoc, puDrop.yLoc), Quaternion.identity);
-                    map.grid[puDrop.xLoc][puDrop.yLoc] = puDrop.puIndex.ToString();
+                    map.grid[puDrop.xLoc][puDrop.yLoc] = puDrop.puIndex.ToString()[0];
                     map.gameObjectGrid[puDrop.xLoc][puDrop.yLoc] = newPowerUp;
                 }
             }
@@ -160,8 +161,8 @@ public class ClientManager : NetworkHost
                 {
                     pickupSound.Play();
                 }
-                if (map.grid[triggerReply.xLoc][triggerReply.yLoc] != "4")
-                    map.grid[triggerReply.xLoc][triggerReply.yLoc] = ".";
+                if (map.grid[triggerReply.xLoc][triggerReply.yLoc] != CellID.Explosion)
+                    map.grid[triggerReply.xLoc][triggerReply.yLoc] = CellID.Empty;
                 Destroy(map.gameObjectGrid[triggerReply.xLoc][triggerReply.yLoc]);
             }
             if (message.type == MessageType.GameOver)
@@ -233,6 +234,21 @@ public class ClientManager : NetworkHost
         }
     }
 
+    private void CheckForCollisions()
+    {
+        if (_isGameStarted && myPlayer.data.isAlive)
+        {
+            Vector2 myGridLoc = myPlayer.GetGridLocation();
+            char cellChar = map.grid[(int)myGridLoc.x][(int)myGridLoc.y];
+            int triggerValue = (int)System.Char.GetNumericValue(cellChar);
+            //bool success = int.TryParse(map.grid[(int)myGridLoc.x][(int)myGridLoc.y].ToString(), out triggerValue);
+            if (0 <= triggerValue && triggerValue <= 4) // 0:speed, 1:bombup, 2: explosionup, 3: determination, 4: explosion.... hardcoded... but commented code above is more flexible
+            {
+                SendTriggerRequest(cellChar);
+            }
+        }
+    }
+
     private void MovePlayer(NetworkPlayer player)
     {
         switch (player.data.direction)
@@ -254,8 +270,9 @@ public class ClientManager : NetworkHost
         }
     }
 
-    public void SendTriggerRequest(TriggerType triggerType)
+    public void SendTriggerRequest(char cellID)
     {
-        base.Send(_server, MessageType.TriggerRequest, new TriggerRequest(triggerType));
+        //base.Send(_server, MessageType.TriggerRequest, new TriggerRequest(triggerType));
+        base.Send(_server, MessageType.TriggerRequest, new TriggerRequest(cellID));
     }
 }

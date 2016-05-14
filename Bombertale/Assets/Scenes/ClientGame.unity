@@ -135,6 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     name: 
+    userName: 
     worldLocation: {x: 0, y: 0}
     direction: 0
     isAlive: 0
@@ -322,6 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     name: 
+    userName: 
     worldLocation: {x: 0, y: 0}
     direction: 0
     isAlive: 0
@@ -397,6 +399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     name: 
+    userName: 
     worldLocation: {x: 0, y: 0}
     direction: 0
     isAlive: 0
@@ -1006,6 +1009,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     name: 
+    userName: 
     worldLocation: {x: 0, y: 0}
     direction: 0
     isAlive: 0

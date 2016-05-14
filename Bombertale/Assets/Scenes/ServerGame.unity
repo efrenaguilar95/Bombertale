@@ -135,6 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     name: 
+    userName: 
     worldLocation: {x: 0, y: 0}
     direction: 0
     isAlive: 0
@@ -173,7 +174,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.45
+  m_Radius: 0.4
 --- !u!212 &97997697
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -291,7 +292,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.45
+  m_Radius: 0.4
 --- !u!212 &1513470721
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -364,6 +365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     name: 
+    userName: 
     worldLocation: {x: 0, y: 0}
     direction: 0
     isAlive: 0
@@ -439,6 +441,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     name: 
+    userName: 
     worldLocation: {x: 0, y: 0}
     direction: 0
     isAlive: 0
@@ -477,7 +480,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.45
+  m_Radius: 0.4
 --- !u!212 &1615384804
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -946,7 +949,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.45
+  m_Radius: 0.4
 --- !u!212 &2128131634
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1019,6 +1022,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     name: 
+    userName: 
     worldLocation: {x: 0, y: 0}
     direction: 0
     isAlive: 0

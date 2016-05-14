@@ -43,7 +43,7 @@ public class SoftBlock : MonoBehaviour {
     {
         if (!isQuitting)
         {
-            map.grid[xLoc][yLoc] = ".";
+            map.grid[xLoc][yLoc] = CellID.Empty;
             float rand = Random.Range(0, 100);
             int randPU = Random.Range(0, powerUps.Length);
             GameObject power = powerUps[randPU];

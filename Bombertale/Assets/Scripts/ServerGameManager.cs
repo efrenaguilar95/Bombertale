@@ -47,33 +47,55 @@ public class ServerGameManager : MonoBehaviour
         clientToPlayer[clientID].data.direction = direction;
     }
 
-    public void TriggerUpdate(int clientID, TriggerType triggerType)
+    //public void TriggerUpdate(int clientID, CellID triggerType)
+    public void TriggerUpdate(int clientID, char triggerType)
     {
-        switch (triggerType)
+        if (triggerType == CellID.Explosion)
         {
-            case TriggerType.Explosion:
-                if (!clientToPlayer[clientID].data.isInvulnerable)
-                {
-                    clientToPlayer[clientID].data.isAlive = false;
-                    CheckGameOver();
-                }
-                break;
-            case TriggerType.SpeedUp:
-                clientToPlayer[clientID].data.speed += .5f;
-                break;
-            case TriggerType.BombCount:
-                clientToPlayer[clientID].data.bombCount++;
-                break;
-            case TriggerType.ExplosionRadius:
-                clientToPlayer[clientID].data.explosionRadius++;
-                break;
-            case TriggerType.Determination:
-                clientToPlayer[clientID].data.isInvulnerable = true;
-                clientToPlayer[clientID].data.invulnTimeRemaining = 5f;
-                break;
-            default:
-                break;
+            if (!clientToPlayer[clientID].data.isInvulnerable)
+            {
+                clientToPlayer[clientID].data.isAlive = false;
+                CheckGameOver();
+            }
         }
+        else if (triggerType == CellID.SpeedUp)
+            clientToPlayer[clientID].data.speed += .5f;
+        else if (triggerType == CellID.BombUp)
+            clientToPlayer[clientID].data.bombCount++;
+        else if (triggerType == CellID.ExplosionUp)
+            clientToPlayer[clientID].data.explosionRadius++;
+        else if (triggerType == CellID.Determination)
+        {
+            clientToPlayer[clientID].data.isInvulnerable = true;
+            clientToPlayer[clientID].data.invulnTimeRemaining = 5f;
+        }
+
+
+        //switch (triggerType)
+        //{
+        //    case CellID.Explosion:
+        //        if (!clientToPlayer[clientID].data.isInvulnerable)
+        //        {
+        //            clientToPlayer[clientID].data.isAlive = false;
+        //            CheckGameOver();
+        //        }
+        //        break;
+        //    case CellID.SpeedUp:
+        //        clientToPlayer[clientID].data.speed += .5f;
+        //        break;
+        //    case CellID.BombCount:
+        //        clientToPlayer[clientID].data.bombCount++;
+        //        break;
+        //    case CellID.ExplosionRadius:
+        //        clientToPlayer[clientID].data.explosionRadius++;
+        //        break;
+        //    case CellID.Determination:
+        //        clientToPlayer[clientID].data.isInvulnerable = true;
+        //        clientToPlayer[clientID].data.invulnTimeRemaining = 5f;
+        //        break;
+        //    default:
+        //        break;
+        //}
     }
 
     public bool DropBomb(int clientID)
@@ -82,7 +104,7 @@ public class ServerGameManager : MonoBehaviour
         if (player.data.bombCount > 0)
         {
             player.data.bombCount--;
-            StartCoroutine(RefillBombCount(clientID, 2.5f));            
+            StartCoroutine(RefillBombCount(clientID, 2.5f));
             return true;
         }
         else

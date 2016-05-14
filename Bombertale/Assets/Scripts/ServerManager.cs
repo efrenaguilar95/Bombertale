@@ -122,14 +122,17 @@ public class ServerManager : NetworkHost
                 if (message.type == MessageType.TriggerRequest)
                 {
                     TriggerRequest triggerRequest = (TriggerRequest)message.GetData();
+                    Debug.Log("TriggerRequest from Player" + recEvent.sender + " - " + triggerRequest.cellId);
                     NetworkPlayer triggeredPlayer = serverGameManager.clientToPlayer[recEvent.sender];
                     int x = (int)triggeredPlayer.transform.position.x;
                     int y = (int)triggeredPlayer.transform.position.y;
-                    int triggerValue;
-                    bool success = int.TryParse(serverGameManager.map.grid[x][y], out triggerValue);
-                    if ((int)triggerRequest.triggerType == triggerValue)
+                    //int triggerValue;
+                    //bool success = int.TryParse(serverGameManager.map.grid[x][y], out triggerValue);
+                    //if ((int)System.Char.GetNumericValue(triggerRequest.cellId) == triggerValue)
+                    if (triggerRequest.cellId == serverGameManager.map.grid[x][y])
                     {
-                        serverGameManager.TriggerUpdate(recEvent.sender, triggerRequest.triggerType);
+                        //serverGameManager.TriggerUpdate(recEvent.sender, triggerRequest.triggerType);
+                        serverGameManager.TriggerUpdate(recEvent.sender, triggerRequest.cellId);
                         SendAll(MessageType.TriggerReply, new TriggerReply(triggeredPlayer.data, x, y));
                     }
                     //Debug.Log(new Vector2((int)triggeredPlayer.transform.position.x, (int)triggeredPlayer.transform.position.y));

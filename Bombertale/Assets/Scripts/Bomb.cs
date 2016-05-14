@@ -30,7 +30,7 @@ public class Bomb : MonoBehaviour {
         Destroy(this.gameObject);
         bombSound.Play();
         Instantiate(exCenter, this.transform.position, Quaternion.identity);
-        map.grid[(int)this.transform.position.x][(int)this.transform.position.y] = "4";
+        map.grid[(int)this.transform.position.x][(int)this.transform.position.y] = CellID.Explosion;
 
         ExplosionDirection(Vector3.up);
         ExplosionDirection(Vector3.down);
@@ -70,9 +70,9 @@ public class Bomb : MonoBehaviour {
             int xLoc = bombX + (i * (int)direction.x);
             int yLoc = bombY + (i * (int)direction.y);
 
-            if (map.grid[xLoc][yLoc] == "S" || map.grid[xLoc][yLoc] == "H" || map.grid[xLoc][yLoc] == "C")    //Might break if we add IDs for players
+            if (map.grid[xLoc][yLoc] == CellID.SoftBlock || map.grid[xLoc][yLoc] == CellID.HardBlock || map.grid[xLoc][yLoc] == CellID.ConeBlock)    //Might break if we add IDs for players
             {
-                if (map.grid[xLoc][yLoc] == "S")
+                if (map.grid[xLoc][yLoc] == CellID.SoftBlock)
                 {
                     SoftBlock localSoftBlock = map.gameObjectGrid[xLoc][yLoc].GetComponent<SoftBlock>();
                     if (localSoftBlock != null)
@@ -91,7 +91,7 @@ public class Bomb : MonoBehaviour {
                 Instantiate(connectPrefab, new Vector2(xLoc, yLoc), Quaternion.identity);
             else
                 Instantiate(endPrefab, new Vector2(xLoc, yLoc), Quaternion.identity);
-            map.grid[xLoc][yLoc] = "4";
+            map.grid[xLoc][yLoc] = CellID.Explosion;
         }
     }
 
