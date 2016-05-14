@@ -19,7 +19,9 @@ public class ClientManager : NetworkHost
     private bool _isGameStarted = false;
     private bool _noneWasSent = false;    
     NetworkPlayer myPlayer;
-    private Dictionary<string, NetworkPlayer> _players = new Dictionary<string, NetworkPlayer>();    
+    private Dictionary<string, NetworkPlayer> _players = new Dictionary<string, NetworkPlayer>();
+    private List<List<bool>> powerupSentHistory = new List<List<bool>>();
+    //private bool[][] powerupSentHistory = null;
     private Mapper map;
 
     private AudioSource bombSound;
@@ -87,6 +89,14 @@ public class ClientManager : NetworkHost
             {
                 Setup setup = (Setup)message.GetData();
                 map = GameObject.Find("Map").GetComponent<Mapper>();
+                
+                for (int col = 0; col < map.grid.Count; col++)
+                {
+                    powerupSentHistory.Add(new List<bool>());
+                    for (int row = 0; row < map.grid[col].Count; row++)
+                        powerupSentHistory[col].Add(false);
+                }
+
                 foreach (string playerName in setup.players)
                 {
                     //_players.Add(GameObject.Find(playerName).GetComponent<NetworkPlayer>());
@@ -149,7 +159,8 @@ public class ClientManager : NetworkHost
             if (message.type == MessageType.TriggerReply)
             {
                 TriggerReply triggerReply = (TriggerReply)message.GetData();
-                _players[triggerReply.playerData.name].data = triggerReply.playerData;
+                NetworkPlayer triggeredPlayer = _players[triggerReply.playerData.name];
+                triggeredPlayer.data = triggerReply.playerData;
                 if (triggerReply.playerData.isAlive == false)
                 {
                     _players[triggerReply.playerData.name].gameObject.SetActive(false);
@@ -164,6 +175,8 @@ public class ClientManager : NetworkHost
                 if (map.grid[triggerReply.xLoc][triggerReply.yLoc] != CellID.Explosion)
                     map.grid[triggerReply.xLoc][triggerReply.yLoc] = CellID.Empty;
                 Destroy(map.gameObjectGrid[triggerReply.xLoc][triggerReply.yLoc]);
+                if (triggeredPlayer == myPlayer)
+                    powerupSentHistory[triggerReply.xLoc][triggerReply.yLoc] = false;
             }
             if (message.type == MessageType.GameOver)
             {
@@ -239,12 +252,18 @@ public class ClientManager : NetworkHost
         if (_isGameStarted && myPlayer.data.isAlive)
         {
             Vector2 myGridLoc = myPlayer.GetGridLocation();
-            char cellChar = map.grid[(int)myGridLoc.x][(int)myGridLoc.y];
-            int triggerValue = (int)System.Char.GetNumericValue(cellChar);
-            //bool success = int.TryParse(map.grid[(int)myGridLoc.x][(int)myGridLoc.y].ToString(), out triggerValue);
-            if (0 <= triggerValue && triggerValue <= 4) // 0:speed, 1:bombup, 2: explosionup, 3: determination, 4: explosion.... hardcoded... but commented code above is more flexible
+            int xLoc = (int)myGridLoc.x;
+            int yLoc = (int)myGridLoc.y;
+            if (!powerupSentHistory[xLoc][yLoc])
             {
-                SendTriggerRequest(cellChar);
+                char cellChar = map.grid[xLoc][yLoc];
+                int triggerValue = (int)System.Char.GetNumericValue(cellChar);
+                //bool success = int.TryParse(map.grid[(int)myGridLoc.x][(int)myGridLoc.y].ToString(), out triggerValue);
+                if (0 <= triggerValue && triggerValue <= 4) // 0:speed, 1:bombup, 2: explosionup, 3: determination, 4: explosion.... hardcoded... but commented code above is more flexible
+                {
+                    SendTriggerRequest(cellChar);
+                    powerupSentHistory[xLoc][yLoc] = true;
+                }
             }
         }
     }

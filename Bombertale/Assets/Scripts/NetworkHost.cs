@@ -31,6 +31,7 @@ public class NetworkHost : MonoBehaviour {
     public int _myReliableChannelID;
     private HostTopology _topology;
     public int _hostID;
+    private int bufferSize = 1024;
 
     //public virtual void Awake()
     //{
@@ -65,8 +66,7 @@ public class NetworkHost : MonoBehaviour {
     {
         int connectionID;
         int channelID;
-        byte[] recBuffer = new byte[516];
-        int bufferSize = 516;
+        byte[] recBuffer = new byte[bufferSize];
         int dataSize;
         byte error;
         NetworkEventType recData = NetworkTransport.ReceiveFromHost(this._hostID, out connectionID, out channelID, recBuffer, bufferSize, out dataSize, out error);
@@ -77,6 +77,6 @@ public class NetworkHost : MonoBehaviour {
     {
         string message = JsonUtility.ToJson(new Message(messageType, data));
         byte error;
-        NetworkTransport.Send(_hostID, connectionID, _myReliableChannelID, System.Text.Encoding.UTF8.GetBytes(message), 516, out error);
+        NetworkTransport.Send(_hostID, connectionID, _myReliableChannelID, System.Text.Encoding.UTF8.GetBytes(message), bufferSize, out error);
     }
 }
