@@ -95,11 +95,13 @@ public struct MoveReply
 
 [System.Serializable]
 public struct StateUpdate
-{    
+{
+    public string mapString;
     public List<PlayerData> players;
 
-    public StateUpdate(Dictionary<int, NetworkPlayer> playerDict)
+    public StateUpdate(List<List<char>> map, Dictionary<int, NetworkPlayer> playerDict)
     {
+        this.mapString = Mapper.MapToString(map);
         this.players = new List<PlayerData>();
         foreach (NetworkPlayer player in playerDict.Values)
         {

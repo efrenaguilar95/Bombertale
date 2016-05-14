@@ -17,6 +17,9 @@ public class ServerManager : NetworkHost
     float randMusic;
     int indexMusic;
 
+    float updateFrequency = 1f;
+    float stateUpdateCooldown = 0f;
+
     void OnLevelWasLoaded(int level)
     {
         if (SceneManager.GetActiveScene().name != "ServerLobby" && SceneManager.GetActiveScene().name != "ServerGame")
@@ -144,10 +147,15 @@ public class ServerManager : NetworkHost
 
     void LateUpdate()
     {
-        //if (serverGameManager != null)
-        //{
-        //    SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.clientToPlayer));
-        //}
+        if (serverGameManager != null && stateUpdateCooldown <= 0f)
+        {
+            SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.map.grid, serverGameManager.clientToPlayer));
+            stateUpdateCooldown = updateFrequency;
+        }
+        else
+        {
+            stateUpdateCooldown -= Time.deltaTime;
+        }
     }
 
     public void SendAll(MessageType messageType, object data)
