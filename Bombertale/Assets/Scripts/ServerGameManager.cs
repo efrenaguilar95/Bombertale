@@ -6,21 +6,23 @@ public class ServerGameManager : MonoBehaviour
 {
 
     public Dictionary<int, NetworkPlayer> clientToPlayer = new Dictionary<int, NetworkPlayer>();
-    public Mapper map;
+    //public Mapper map;
 
     private ServerManager _serverManager;
     private ClientManager _clientManager;
     private List<NetworkPlayer> _playerList = new List<NetworkPlayer>();
+    public List<List<char>> charMap;
 
     void Awake()
     {
         for (int i = 1; i <= 4; i++)
             _playerList.Add(GameObject.Find("Player" + i).GetComponent<NetworkPlayer>());
-        map = GameObject.Find("Map").GetComponent<Mapper>();
+        //map = GameObject.Find("Map").GetComponent<Mapper>();
         GameObject serverObject = GameObject.Find("NetworkManager");
         _clientManager = serverObject.GetComponent<ClientManager>();
         _serverManager = serverObject.GetComponent<ServerManager>();
         _serverManager.serverGameManager = this;
+        charMap = Mapper.StringToMap(Mapper.mapString);
     }
 
     void Start()
@@ -50,52 +52,31 @@ public class ServerGameManager : MonoBehaviour
     //public void TriggerUpdate(int clientID, CellID triggerType)
     public void TriggerUpdate(int clientID, char triggerType)
     {
+        NetworkPlayer triggeredPlayer = clientToPlayer[clientID];
         if (triggerType == CellID.Explosion)
         {
-            if (!clientToPlayer[clientID].data.isInvulnerable)
+            if (!triggeredPlayer.data.isInvulnerable)
             {
-                clientToPlayer[clientID].data.isAlive = false;
+                triggeredPlayer.data.isAlive = false;
                 CheckGameOver();
             }
         }
         else if (triggerType == CellID.SpeedUp)
-            clientToPlayer[clientID].data.speed += .5f;
+            triggeredPlayer.data.speed += .5f;
         else if (triggerType == CellID.BombUp)
-            clientToPlayer[clientID].data.bombCount++;
+            triggeredPlayer.data.bombCount++;
         else if (triggerType == CellID.ExplosionUp)
-            clientToPlayer[clientID].data.explosionRadius++;
+            triggeredPlayer.data.explosionRadius++;
         else if (triggerType == CellID.Determination)
         {
-            clientToPlayer[clientID].data.isInvulnerable = true;
-            clientToPlayer[clientID].data.invulnTimeRemaining = 5f;
+            triggeredPlayer.data.isInvulnerable = true;
+            triggeredPlayer.data.invulnTimeRemaining = 5f;
         }
 
-
-        //switch (triggerType)
-        //{
-        //    case CellID.Explosion:
-        //        if (!clientToPlayer[clientID].data.isInvulnerable)
-        //        {
-        //            clientToPlayer[clientID].data.isAlive = false;
-        //            CheckGameOver();
-        //        }
-        //        break;
-        //    case CellID.SpeedUp:
-        //        clientToPlayer[clientID].data.speed += .5f;
-        //        break;
-        //    case CellID.BombCount:
-        //        clientToPlayer[clientID].data.bombCount++;
-        //        break;
-        //    case CellID.ExplosionRadius:
-        //        clientToPlayer[clientID].data.explosionRadius++;
-        //        break;
-        //    case CellID.Determination:
-        //        clientToPlayer[clientID].data.isInvulnerable = true;
-        //        clientToPlayer[clientID].data.invulnTimeRemaining = 5f;
-        //        break;
-        //    default:
-        //        break;
-        //}
+        Vector2 playerLoc = triggeredPlayer.GetGridLocation();
+        int xLoc = (int)playerLoc.x;
+        int yLoc = (int)playerLoc.y;
+        charMap[xLoc][yLoc] = CellID.Empty;
     }
 
     public bool DropBomb(int clientID)
@@ -122,16 +103,16 @@ public class ServerGameManager : MonoBehaviour
     public void WrekSoftBlock(int xLoc, int yLoc)
     {
         _serverManager.SendAll(MessageType.DestroySoftBlock, new DestroySoftBlock(xLoc, yLoc));
-        float rand = Random.Range(0, 100);
-        int randPU = Random.Range(0, _clientManager.powerUps.Length);
-        if (rand >= 30)
-        {
-            _serverManager.SendAll(MessageType.PowerUpDrop, new PowerUpDrop(randPU, xLoc, yLoc));
-        }
-        else
-        {
-            _serverManager.SendAll(MessageType.PowerUpDrop, new PowerUpDrop(-1, xLoc, yLoc));
-        }
+        //float rand = Random.Range(0, 100);
+        //int randPU = Random.Range(0, _clientManager.powerUps.Length);
+        //if (rand >= 30)
+        //{
+        //    _serverManager.SendAll(MessageType.PowerUpDrop, new PowerUpDrop(randPU, xLoc, yLoc));
+        //}
+        //else
+        //{
+        //    _serverManager.SendAll(MessageType.PowerUpDrop, new PowerUpDrop(-1, xLoc, yLoc));
+        //}
     }
 
     private void CheckGameOver()

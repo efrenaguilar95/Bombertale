@@ -132,7 +132,8 @@ public class ServerManager : NetworkHost
                     //int triggerValue;
                     //bool success = int.TryParse(serverGameManager.map.grid[x][y], out triggerValue);
                     //if ((int)System.Char.GetNumericValue(triggerRequest.cellId) == triggerValue)
-                    if (triggerRequest.cellId == serverGameManager.map.grid[x][y])
+                    //if (triggerRequest.cellId == serverGameManager.map.grid[x][y])
+                    if (triggerRequest.cellId == serverGameManager.charMap[x][y])
                     {
                         //serverGameManager.TriggerUpdate(recEvent.sender, triggerRequest.triggerType);
                         serverGameManager.TriggerUpdate(recEvent.sender, triggerRequest.cellId);
@@ -149,7 +150,8 @@ public class ServerManager : NetworkHost
     {
         if (serverGameManager != null && stateUpdateCooldown <= 0f)
         {
-            SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.map.grid, serverGameManager.clientToPlayer));
+            //SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.map.grid, serverGameManager.clientToPlayer));
+            SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.charMap, serverGameManager.clientToPlayer));
             stateUpdateCooldown = updateFrequency;
         }
         else

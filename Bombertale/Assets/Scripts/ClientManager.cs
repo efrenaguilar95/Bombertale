@@ -22,7 +22,9 @@ public class ClientManager : NetworkHost
     private Dictionary<string, NetworkPlayer> _players = new Dictionary<string, NetworkPlayer>();
     //private List<List<bool>> powerupSentHistory = new List<List<bool>>();
     //private bool[][] powerupSentHistory = null;
-    private Mapper map;
+    //private Mapper map;
+    public List<List<char>> charMap;
+    public List<List<GameObject>> gameObjectMap;
 
     private AudioSource bombSound;
     private AudioSource deathSound;
@@ -64,7 +66,7 @@ public class ClientManager : NetworkHost
         if (recEvent.type == NetworkEventType.DataEvent)
         {
             Message message = recEvent.message;
-            //Debug.Log(message.subJson);
+            Debug.Log(message.subJson);
             if (message.type == MessageType.UsernameRequest)
             {
                 base.Send(_server, MessageType.UsernameReply, new UsernameReply(UIManager.userName));
@@ -88,7 +90,9 @@ public class ClientManager : NetworkHost
             if (message.type == MessageType.Setup)
             {
                 Setup setup = (Setup)message.GetData();
-                map = GameObject.Find("Map").GetComponent<Mapper>();
+                //map = GameObject.Find("Map").GetComponent<Mapper>();
+                charMap = Mapper.StringToMap(Mapper.mapString);
+                gameObjectMap = Mapper.CreateGameObjectMap(charMap);
 
                 //for (int col = 0; col < map.grid.Count; col++)
                 //{
@@ -133,6 +137,7 @@ public class ClientManager : NetworkHost
                 NetworkPlayer droppingPlayer = _players[bombReply.playerData.name];
                 droppingPlayer.DropBomb();
             }
+
             if (message.type == MessageType.MoveReply)
             {
                 MoveReply moveReply = (MoveReply)message.GetData();
@@ -146,7 +151,8 @@ public class ClientManager : NetworkHost
             if (message.type == MessageType.DestroySoftBlock)
             {
                 DestroySoftBlock rekt = (DestroySoftBlock)message.GetData();
-                GameObject softBlockToDestroy = map.gameObjectGrid[rekt.xLoc][rekt.yLoc];
+                //GameObject softBlockToDestroy = map.gameObjectGrid[rekt.xLoc][rekt.yLoc];
+                GameObject softBlockToDestroy = gameObjectMap[rekt.xLoc][rekt.yLoc];
                 if (softBlockToDestroy != null)
                     softBlockToDestroy.GetComponent<NetworkSoftBlock>().Fizzle();
             }
@@ -155,14 +161,16 @@ public class ClientManager : NetworkHost
                 PowerUpDrop puDrop = (PowerUpDrop)message.GetData();
                 if (puDrop.puIndex == -1)
                 {
-                    map.grid[puDrop.xLoc][puDrop.yLoc] = CellID.Empty;
+                    //map.grid[puDrop.xLoc][puDrop.yLoc] = CellID.Empty;
+                    charMap[puDrop.xLoc][puDrop.yLoc] = CellID.Empty;
                 }
                 else
                 {
-                    GameObject power = this.powerUps[puDrop.puIndex];
-                    GameObject newPowerUp = (GameObject)Instantiate(power, new Vector2(puDrop.xLoc, puDrop.yLoc), Quaternion.identity);
-                    map.grid[puDrop.xLoc][puDrop.yLoc] = puDrop.puIndex.ToString()[0];
-                    map.gameObjectGrid[puDrop.xLoc][puDrop.yLoc] = newPowerUp;
+                    //GameObject power = this.powerUps[puDrop.puIndex];
+                    //GameObject newPowerUp = (GameObject)Instantiate(power, new Vector2(puDrop.xLoc, puDrop.yLoc), Quaternion.identity);
+                    //map.grid[puDrop.xLoc][puDrop.yLoc] = puDrop.puIndex.ToString()[0];
+                    charMap[puDrop.xLoc][puDrop.yLoc] = puDrop.puIndex.ToString()[0];
+                    //map.gameObjectGrid[puDrop.xLoc][puDrop.yLoc] = newPowerUp;
                 }
             }
             if (message.type == MessageType.TriggerReply)
@@ -181,9 +189,12 @@ public class ClientManager : NetworkHost
                 {
                     pickupSound.Play();
                 }
-                if (map.grid[triggerReply.xLoc][triggerReply.yLoc] != CellID.Explosion)
-                    map.grid[triggerReply.xLoc][triggerReply.yLoc] = CellID.Empty;
-                Destroy(map.gameObjectGrid[triggerReply.xLoc][triggerReply.yLoc]);
+                //if (map.grid[triggerReply.xLoc][triggerReply.yLoc] != CellID.Explosion)
+                //    map.grid[triggerReply.xLoc][triggerReply.yLoc] = CellID.Empty;
+                //Destroy(map.gameObjectGrid[triggerReply.xLoc][triggerReply.yLoc]);
+                if (charMap[triggerReply.xLoc][triggerReply.yLoc] != CellID.Explosion)
+                    charMap[triggerReply.xLoc][triggerReply.yLoc] = CellID.Empty;
+                Destroy(gameObjectMap[triggerReply.xLoc][triggerReply.yLoc]);
                 //if (triggeredPlayer == myPlayer)
                 //    powerupSentHistory[triggerReply.xLoc][triggerReply.yLoc] = false;
             }
@@ -209,7 +220,8 @@ public class ClientManager : NetworkHost
 
     private void SyncMap(string mapString)
     {
-        if (Mapper.MapToString(map.grid) == mapString)
+        //if (Mapper.MapToString(map.grid) == mapString)
+        if (Mapper.MapToString(charMap) == mapString)
         {
             Debug.Log("No changes to map");
             return;
@@ -223,17 +235,23 @@ public class ClientManager : NetworkHost
                 for (int row = 0; row < newMap[col].Count; row++)
                 {
                     char newCell = newMap[col][row];
-                    char myCell = map.grid[col][row];
-                    if (myCell == CellID.Empty && newCell != CellID.Empty)
+                    char myCell = charMap[col][row];
+                    if (myCell != newCell)
                     {
-                        //Instantiate
-                    }
-                    else if (newCell == CellID.Empty && myCell != CellID.Empty)
-                    {
-                        //Delete whatever object I have here
+                        if (newCell == CellID.Empty)
+                        {
+                            //Destroy w/e I have
+                        }
+                        else
+                        {
+                            //Instantiate
+                            gameObjectMap[col][row] = Mapper.CreateCell(newCell, col, row);
+                        }
                     }
                 }
             }
+
+            charMap = newMap;
         }
     }
 
@@ -295,7 +313,8 @@ public class ClientManager : NetworkHost
             int yLoc = (int)myGridLoc.y;
             //if (!powerupSentHistory[xLoc][yLoc])
             //{
-            char cellChar = map.grid[xLoc][yLoc];
+            //char cellChar = map.grid[xLoc][yLoc];
+            char cellChar = charMap[xLoc][yLoc];
             int triggerValue = (int)System.Char.GetNumericValue(cellChar);
             //bool success = int.TryParse(map.grid[(int)myGridLoc.x][(int)myGridLoc.y].ToString(), out triggerValue);
             if (0 <= triggerValue && triggerValue <= 4) // 0:speed, 1:bombup, 2: explosionup, 3: determination, 4: explosion.... hardcoded... but commented code above is more flexible
