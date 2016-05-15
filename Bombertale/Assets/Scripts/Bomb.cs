@@ -17,12 +17,14 @@ public class Bomb : MonoBehaviour {
 
     //This will break local game
     private ClientManager _clientManager;
+    private ServerGameManager _serverGameManager;
 
     void Awake()
     {
         map = GameObject.Find("Map").GetComponent<Mapper>();
         bombSound = GameObject.Find("GameAudioManager").GetComponent<GameAudio>().bombSound;
         _clientManager = GameObject.Find("NetworkManager").GetComponent<ClientManager>();
+        _serverGameManager = GameObject.Find("GameManager").GetComponent<ServerGameManager>();
     }
 
     void Start () {
@@ -36,6 +38,8 @@ public class Bomb : MonoBehaviour {
         Instantiate(exCenter, this.transform.position, Quaternion.identity);
         //map.grid[(int)this.transform.position.x][(int)this.transform.position.y] = CellID.Explosion;
         _clientManager.charMap[(int)this.transform.position.x][(int)this.transform.position.y] = CellID.Explosion;
+        if (_serverGameManager != null)
+            _serverGameManager.charMap[(int)this.transform.position.x][(int)this.transform.position.y] = CellID.Explosion;
 
         ExplosionDirection(Vector3.up);
         ExplosionDirection(Vector3.down);
@@ -102,6 +106,8 @@ public class Bomb : MonoBehaviour {
                 Instantiate(endPrefab, new Vector2(xLoc, yLoc), Quaternion.identity);
             //map.grid[xLoc][yLoc] = CellID.Explosion;
             _clientManager.charMap[xLoc][yLoc] = CellID.Explosion;
+            if (_serverGameManager != null)
+                _serverGameManager.charMap[xLoc][yLoc] = CellID.Explosion;
         }
     }
 
