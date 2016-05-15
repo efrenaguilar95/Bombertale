@@ -241,6 +241,7 @@ public class ClientManager : NetworkHost
                         if (newCell == CellID.Empty)
                         {
                             //Destroy w/e I have
+                            Destroy(gameObjectMap[col][row]);
                         }
                         else
                         {

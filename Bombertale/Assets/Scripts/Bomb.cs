@@ -79,6 +79,12 @@ public class Bomb : MonoBehaviour {
             int xLoc = bombX + (i * (int)direction.x);
             int yLoc = bombY + (i * (int)direction.y);
 
+            //if (_serverGameManager.charMap[xLoc][yLoc] == CellID.SpeedUp || _serverGameManager.charMap[xLoc][yLoc] == CellID.BombUp ||
+            //    _serverGameManager.charMap[xLoc][yLoc] == CellID.ExplosionUp || _serverGameManager.charMap[xLoc][yLoc] == CellID.Determination)
+            //{
+
+            //}
+
             //if (map.grid[xLoc][yLoc] == CellID.SoftBlock || map.grid[xLoc][yLoc] == CellID.HardBlock || map.grid[xLoc][yLoc] == CellID.ConeBlock)    //Might break if we add IDs for players
             if (_clientManager.charMap[xLoc][yLoc] == CellID.SoftBlock || _clientManager.charMap[xLoc][yLoc] == CellID.HardBlock || _clientManager.charMap[xLoc][yLoc] == CellID.ConeBlock)
             {

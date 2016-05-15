@@ -30,7 +30,7 @@ public class Explosion : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         //map.grid[xLoc][yLoc] = CellID.Empty;
-        _clientManager.charMap[xLoc][yLoc] = CellID.Empty;
+        //_clientManager.charMap[xLoc][yLoc] = CellID.Empty;
         if (_serverGM != null)
             _serverGM.charMap[xLoc][yLoc] = CellID.Empty;
         Destroy(this.gameObject);
