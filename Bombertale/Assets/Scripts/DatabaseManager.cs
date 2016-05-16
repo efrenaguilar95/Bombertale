@@ -151,6 +151,7 @@ public class DatabaseManager : MonoBehaviour
 	{
 		/*
 			CAN RETURN:
+				BL08:	Could not find server by that name
 				BL16:	Reported dead server
 				BL17:	Failed to report dead server
 				BL18:	Server has checked in recently, did not report
