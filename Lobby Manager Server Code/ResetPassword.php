@@ -62,14 +62,15 @@
 <meta charset="UTF-8">
 <title>Reset Password</title>
 <link href="_css/main.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script type="text/javascript">
 	function resetPassword()
 	{
 		var newPassword = document.getElementById("new_password_input").value;
 		document.getElementById('new_password_input').style.display = 'none';
 		document.getElementById('reset_button').style.display = 'none';
-		document.getElementById('new_password_label').innerHTML = 'Password updated!';
-		document.getElementById('new_password_label').style.color = 'green';
+		var resetLink = 'http://apedestrian.com/bombertale/SendPasswordResetRequest.php?resetId=<?php echo $resetId; ?>&newPassword=' + newPassword;
+		$("#new_password_label").load(resetLink);
 	}
 </script>
 </head>
@@ -81,7 +82,7 @@
     <br />
     <input id="new_password_input" type="password" />
     <br />
-    <button id="reset_button" onclick="resetPassword()">Reset</button>
+    <button id="reset_button" onclick="resetPassword();">Reset</button>
 </div>
 </body>
 </html>
