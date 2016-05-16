@@ -35,8 +35,14 @@
 
 	if(mysql_result($result, 0, 'online') == '1')
 	{
-		include 'Cleanup.php';
-		die('BC10: User already logged in');
+		$lastCheckin = strtotime(mysql_result($result, 0, 'last_checkin'));
+
+		//if it has been more than 5mins since the user checked in, they probably disconnected
+		if(time() - $lastCheckin < 300)
+		{
+			include 'Cleanup.php';
+			die('BC10: User already logged in');
+		}
 	}
 
 	$encodedPassword = mysql_result($result, 0, 'password');
@@ -47,10 +53,11 @@
 		die('BC05: Incorrect password');
 	}
 
-	$query = "UPDATE $usersTablename SET online='1' WHERE username = '$clientUsername'";
+	$timestamp = date('Y-m-d G:i:s');
+
+	$query = "UPDATE $usersTablename SET online=1, last_checkin = '$timestamp' WHERE username = '$clientUsername'";
 
 	echo mysql_query($query) === TRUE ? 'BC00: Login successful' : 'BC11: Failed to login';
-
 
 	include 'Cleanup.php';
 

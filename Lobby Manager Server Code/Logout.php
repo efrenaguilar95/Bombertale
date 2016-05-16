@@ -3,7 +3,7 @@
 	include 'Setup.php';
 
 	if(!(
-		isset($_GET['username'])
+		isset($_GET['clientUsername'])
 		))
 	{
 		include 'Cleanup.php';

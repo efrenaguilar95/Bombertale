@@ -1,0 +1,37 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body {
+	background-color: #000000;
+}
+#bombertale_logo {
+	margin: 0 auto;
+	width: 835px;
+	height: 127px;
+}
+#reset_form {
+	margin-top: 40px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 0;
+	width: 50%;
+	text-align: center;
+}
+#new_password_label {
+	color: #FFFFFF;
+	font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
+	font-size: large;
+}
+#new_password_input {
+	background-color: #FFFFFF;
+	padding-top: 8px;
+	padding-right: 8px;
+	padding-bottom: 8px;
+	padding-left: 8px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#reset_button {
+	font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
+	font-size: large;
+}

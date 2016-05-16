@@ -21,10 +21,11 @@
 	$private = 		strip_tags($_GET['private']);
 	$password = 	strip_tags($_GET['password']);
 	$players = 		strip_tags($_GET['players']);
+	$timestamp = 	date('Y-m-d G:i:s');
 
 
-	$query = "INSERT INTO $serversTablename (server_name, server_ip, port, private, password, players)
-				VALUES ('$serverName', '$serverIp', '$port', '$private', '$password', '$players')";
+	$query = "INSERT INTO $serversTablename (server_name, server_ip, port, private, password, players, last_checkin)
+				VALUES ('$serverName', '$serverIp', '$port', '$private', '$password', '$players', '$timestamp')";
 
 	echo mysql_query($query) === TRUE ? 'BL03: Server created successfully' : 'BL11: Failed to create server';
 

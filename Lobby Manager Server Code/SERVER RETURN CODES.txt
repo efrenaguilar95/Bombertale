@@ -8,7 +8,7 @@ BD03:	Missing arguments
 BD04:	Unknown database error
 
 
-LOBBY CONNECTION RELATED
+SERVER CONNECTION RELATED
 BL00:	Got servers successfully
 BL01:	No servers hosted
 BL02:	Failed to get servers
@@ -22,6 +22,11 @@ BL10:	Failed to update players
 BL11:	Failed to create server
 BL12:	Server is full
 BL13:	Server is ready to be joined
+BL14:	Checked in server successfully
+BL15:	Failed to checkin server
+BL16:	Reported dead server
+BL17:	Failed to report dead server
+BL18:	Server has checked in recently, did not report
 
 
 CLIENT CONNECTION RELATED
@@ -39,3 +44,5 @@ BC10:	User already logged in
 BC11:	Failed to login
 BC12:	Logout successful
 BC13:	Failed to logout
+BC14:	Checked in client successfully
+BC15:	Failed to checkin client	

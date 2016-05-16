@@ -125,6 +125,40 @@ public class DatabaseManager : MonoBehaviour
 		return GetText (url);
 	}
 
+	public string ServerCheckin(string serverName)
+	{
+		/*
+			CAN RETURN:
+				BL14:	Checkin successful
+				BL15:	Failed to checkin
+		*/
+		string url = "http://apedestrian.com/bombertale/ServerCheckin.php?unityPassword=" + unityPassword +  "&serverName=" + serverName;
+		return GetText (url);
+	}
+
+	public string clientCheckin(string clientUsername)
+	{
+		/*
+			CAN RETURN:
+				BC14:	Checkin successful
+				BC15:	Failed to checkin
+		*/
+		string url = "http://apedestrian.com/bombertale/ServerCheckin.php?unityPassword=" + unityPassword +  "&clientUsername=" + clientUsername;
+		return GetText (url);
+	}
+
+	public string cannotConnect(string serverName)
+	{
+		/*
+			CAN RETURN:
+				BL16:	Reported dead server
+				BL17:	Failed to report dead server
+				BL18:	Server has checked in recently, did not report
+		*/
+		string url = "http://apedestrian.com/bombertale/CannotConnect.php?unityPassword=" + unityPassword +  "&serverName=" + serverName;
+		return GetText (url);
+	}
+
 	private string GetText(string url)
 	{
 		WWW www = new WWW(url.Replace(" ", "%20"));

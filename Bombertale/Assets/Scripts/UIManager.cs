@@ -67,6 +67,11 @@ public class UIManager : MonoBehaviour {
 			//wrong login information
 			GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Wrong Login Information";
 		}
+		else if(returnCode == "BC10")
+		{
+			//user logged in
+			GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "That User Is Already Logged In";
+		}
 		else
 		{
 			//could not reach server
