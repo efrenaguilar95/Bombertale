@@ -70,6 +70,7 @@ public class ClientManager : NetworkHost
             Debug.Log(message.subJson);
             if (message.type == MessageType.UsernameRequest)
             {
+                //efren's code touch all you want
                 if(UIManager.userName == "")
                     base.Send(_server, MessageType.UsernameReply, new UsernameReply("Frisk"));
                 else

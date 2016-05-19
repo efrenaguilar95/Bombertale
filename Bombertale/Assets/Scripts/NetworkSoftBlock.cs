@@ -48,7 +48,7 @@ public class NetworkSoftBlock : MonoBehaviour {
             }
             _serverGameManager._serverManager.SendAll(MessageType.StateUpdate, new StateUpdate(_serverGameManager.charMap, _serverGameManager.clientToPlayer));
         }
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
         //map.grid[xLoc][yLoc] = ".";
     }
 }
