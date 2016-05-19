@@ -243,6 +243,11 @@ public class ClientManager : NetworkHost
                             //Destroy w/e I have
                             Destroy(gameObjectMap[col][row]);
                         }
+                        else if (myCell == CellID.SoftBlock && newCell != CellID.SoftBlock)
+                        {
+                            Destroy(gameObjectMap[col][row]);
+                            gameObjectMap[col][row] = Mapper.CreateCell(newCell, col, row);
+                        }
                         else
                         {
                             //Instantiate

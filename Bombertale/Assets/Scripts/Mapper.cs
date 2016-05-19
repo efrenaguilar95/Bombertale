@@ -104,38 +104,52 @@ public class Mapper : MonoBehaviour
     {
         GameObject cell;
 
-        if (cellID == CellID.ConeBlock)
+        switch (cellID)
         {
-            cell = (GameObject)Instantiate(coneBlock, new Vector2(x, y), Quaternion.identity);
+            case CellID.ConeBlock:
+                cell = (GameObject)Instantiate(coneBlock, new Vector2(x, y), Quaternion.identity); break;
+            case CellID.HardBlock:
+                cell = (GameObject)Instantiate(hardBlock, new Vector2(x, y), Quaternion.identity); break;
+            case CellID.SoftBlock:
+                cell = (GameObject)Instantiate(softBlock, new Vector2(x, y), Quaternion.identity); break;
+            case CellID.SpeedUp:
+                cell = (GameObject)Instantiate(speedUp, new Vector2(x, y), Quaternion.identity); break;
+            case CellID.BombUp:
+                cell = (GameObject)Instantiate(bombUp, new Vector2(x, y), Quaternion.identity); break;
+            case CellID.ExplosionUp:
+                cell = (GameObject)Instantiate(explosionUp, new Vector2(x, y), Quaternion.identity); break;
+            case CellID.Determination:
+                cell = (GameObject)Instantiate(determination, new Vector2(x, y), Quaternion.identity); break;
+            default:
+                cell = null; break;
         }
-        else if (cellID == CellID.HardBlock)
-        {
-            cell = (GameObject)Instantiate(hardBlock, new Vector2(x, y), Quaternion.identity);
-        }
-        else if (cellID == CellID.SoftBlock)
-        {
-            cell = (GameObject)Instantiate(softBlock, new Vector2(x, y), Quaternion.identity);
-        }
-        else if (cellID == CellID.SpeedUp)
-        {
-            cell = (GameObject)Instantiate(speedUp, new Vector2(x, y), Quaternion.identity);
-        }
-        else if (cellID == CellID.BombUp)
-        {
-            cell = (GameObject)Instantiate(bombUp, new Vector2(x, y), Quaternion.identity);
-        }
-        else if (cellID == CellID.ExplosionUp)
-        {
-            cell = (GameObject)Instantiate(explosionUp, new Vector2(x, y), Quaternion.identity);
-        }
-        else if (cellID == CellID.Determination)
-        {
-            cell = (GameObject)Instantiate(determination, new Vector2(x, y), Quaternion.identity);
-        }
-        else
-        {
-            cell = null;
-        }
+
+
+
+        //else if (cellID == CellID.SoftBlock)
+        //{
+        //    cell = (GameObject)Instantiate(softBlock, new Vector2(x, y), Quaternion.identity);
+        //}
+        //else if (cellID == CellID.SpeedUp)
+        //{
+        //    cell = (GameObject)Instantiate(speedUp, new Vector2(x, y), Quaternion.identity);
+        //}
+        //else if (cellID == CellID.BombUp)
+        //{
+        //    cell = (GameObject)Instantiate(bombUp, new Vector2(x, y), Quaternion.identity);
+        //}
+        //else if (cellID == CellID.ExplosionUp)
+        //{
+        //    cell = (GameObject)Instantiate(explosionUp, new Vector2(x, y), Quaternion.identity);
+        //}
+        //else if (cellID == CellID.Determination)
+        //{
+        //    cell = (GameObject)Instantiate(determination, new Vector2(x, y), Quaternion.identity);
+        //}
+        //else
+        //{
+        //    cell = null;
+        //}
 
         return cell;
     }
