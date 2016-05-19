@@ -10,7 +10,6 @@ public class ServerManager : NetworkHost
     public List<int> clientList = new List<int>();
     public string[] clientUsernames;
     public ServerGameManager serverGameManager;
-    private AudioSource joinSound;
 
     private DatabaseManager _databaseManager;
 
@@ -32,15 +31,17 @@ public class ServerManager : NetworkHost
 
     void Awake()
     {
+        //NetworkHost.ServerIP = Network.player.ipAddress;    //Placeholder until we get UI on create game
         DontDestroyOnLoad(this.gameObject);
         base.Setup(NetworkHost.Port, 4);
         _databaseManager = this.GetComponent<DatabaseManager>();
         _databaseManager.CreateServer(NetworkHost.ServerName, NetworkHost.ServerIP, NetworkHost.Port, NetworkHost.IsPrivate, NetworkHost.ServerPassword, clientList.Count);
 
+        //NetworkHost.ServerName = "Bombertale";  //Placeholder
         randMusic = Random.Range(0, 1000);
         indexMusic = Random.Range(0, 9);
         clientUsernames = new string[4];
-        joinSound = GameObject.Find("LobbyAudioManager").GetComponent<AudioSource>();
+
     }
 
     void OnDestroy()
@@ -61,6 +62,7 @@ public class ServerManager : NetworkHost
                 SendAll(MessageType.UsernameRequest, new UsernameRequest());
                 break;
             case NetworkEventType.DisconnectEvent:
+                //Debug.Log("Connection lost: " + recEvent.sender);
                 if (serverGameManager != null)
                 {
                     NetworkPlayer disconnectedPlayer = serverGameManager.clientToPlayer[recEvent.sender];
@@ -70,6 +72,7 @@ public class ServerManager : NetworkHost
                     SendAll(MessageType.TriggerReply, new TriggerReply(disconnectedPlayer.data, xLoc, yLoc));
                 }
                 clientList.Remove(recEvent.sender);
+                //Debug.Log(recEvent.sender.ToString() + "Disconnected!");
                 _databaseManager.UpdatePlayers(NetworkHost.ServerName, clientList.Count);
                 clientUsernames[recEvent.sender - 1] = "";
                 GameObject.Find("Player" + (recEvent.sender).ToString()).GetComponent<UnityEngine.UI.Text>().text = "[Joinable]";
@@ -83,19 +86,6 @@ public class ServerManager : NetworkHost
                     UsernameReply username = (UsernameReply)message.GetData();
                     clientUsernames[recEvent.sender-1] = username.username;
                     SendAll(MessageType.LobbyUpdate, new LobbyUpdate(clientList.Count, clientUsernames));
-                    for (int i = 0; i<clientUsernames.Length; i++)
-                    {
-                        if (clientUsernames[i] == null || clientUsernames[i] == "[Joinable]")
-                            clientUsernames[i] = "[Joinable]";
-                        else
-                        {
-                            if (clientUsernames[i] == "")
-                                clientUsernames[i] = "Frisk";
-                            GameObject.Find("Player" + (i + 1).ToString()).GetComponent<UnityEngine.UI.Text>().text = clientUsernames[i];
-                            GameObject.Find("Player" + (i + 1).ToString() + " Avatar").GetComponent<Animator>().SetBool("Joined", true);
-                            joinSound.Play();
-                        }
-                    }
                 }
                 if(message.type == MessageType.LobbyUpdate)
                 {
@@ -114,6 +104,7 @@ public class ServerManager : NetworkHost
                     if (serverGameManager.DropBomb(recEvent.sender))
                     {
                         NetworkPlayer droppingPlayer = serverGameManager.clientToPlayer[recEvent.sender];
+                        //Vector2 bombLocation = droppingPlayer.GetGridLocation();
                         SendAll(MessageType.BombReply, new BombReply(droppingPlayer.data));
                     }
                 }
@@ -124,12 +115,18 @@ public class ServerManager : NetworkHost
                     NetworkPlayer triggeredPlayer = serverGameManager.clientToPlayer[recEvent.sender];
                     int x = (int)triggeredPlayer.transform.position.x;
                     int y = (int)triggeredPlayer.transform.position.y;
-
+                    //int triggerValue;
+                    //bool success = int.TryParse(serverGameManager.map.grid[x][y], out triggerValue);
+                    //if ((int)System.Char.GetNumericValue(triggerRequest.cellId) == triggerValue)
+                    //if (triggerRequest.cellId == serverGameManager.map.grid[x][y])
                     if (triggerRequest.cellId == serverGameManager.charMap[x][y])
                     {
+                        //serverGameManager.TriggerUpdate(recEvent.sender, triggerRequest.triggerType);
                         serverGameManager.TriggerUpdate(recEvent.sender, triggerRequest.cellId);
                         SendAll(MessageType.TriggerReply, new TriggerReply(triggeredPlayer.data, x, y));
                     }
+                    //Debug.Log(new Vector2((int)triggeredPlayer.transform.position.x, (int)triggeredPlayer.transform.position.y));
+                    //Debug.Log(serverGameManager.map.grid[(int)triggeredPlayer.transform.position.x][(int)triggeredPlayer.transform.position.y]);
                 }
                 break;
         }
@@ -139,6 +136,7 @@ public class ServerManager : NetworkHost
     {
         if (serverGameManager != null && stateUpdateCooldown <= 0f)
         {
+            //SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.map.grid, serverGameManager.clientToPlayer));
             SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.charMap, serverGameManager.clientToPlayer));
             stateUpdateCooldown = updateFrequency;
         }
@@ -163,6 +161,12 @@ public class ServerManager : NetworkHost
 
     public void SendSetup()
     {
+        //List<string> playerListToSend = new List<string>();
+        //for (int i = 0; i < clientList.Count; i++)
+        //{            
+        //    playerListToSend.Add("Player" + (i + 1));
+        //}
+        //SendAll(MessageType.Setup, new Setup(playerListToSend));
         if(randMusic <= 1)
         {
             Debug.Log(randMusic);
