@@ -40,12 +40,10 @@ public class NetworkSoftBlock : MonoBehaviour {
             int randPU = Random.Range(0, 4);
             if (rand >= 30)
             {
-                //_serverManager.SendAll(MessageType.PowerUpDrop, new PowerUpDrop(randPU, xLoc, yLoc));
                 _serverGameManager.charMap[xLoc][yLoc] = randPU.ToString()[0];
             }
             else
             {
-                //_serverManager.SendAll(MessageType.PowerUpDrop, new PowerUpDrop(-1, xLoc, yLoc));
                 _serverGameManager.charMap[xLoc][yLoc] = CellID.Empty;
             }
         }

@@ -105,8 +105,6 @@ public struct StateUpdate
         this.players = new List<PlayerData>();
         foreach (NetworkPlayer player in playerDict.Values)
         {
-            //players.Add(new PlayerData(player.data.name, player.data.worldLocation, player.data.direction, player.data.isAlive, 
-            //    player.data.speed, player.data.bombCount, player.data.explosionRadius, player.data.isInvulnerable, player.data.invulnTimeRemaining));
             players.Add(new PlayerData(player.data));
         }
     }  

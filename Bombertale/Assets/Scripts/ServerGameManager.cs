@@ -6,7 +6,6 @@ public class ServerGameManager : MonoBehaviour
 {
 
     public Dictionary<int, NetworkPlayer> clientToPlayer = new Dictionary<int, NetworkPlayer>();
-    //public Mapper map;
 
     private ServerManager _serverManager;
     private ClientManager _clientManager;
@@ -17,7 +16,6 @@ public class ServerGameManager : MonoBehaviour
     {
         for (int i = 1; i <= 4; i++)
             _playerList.Add(GameObject.Find("Player" + i).GetComponent<NetworkPlayer>());
-        //map = GameObject.Find("Map").GetComponent<Mapper>();
         GameObject serverObject = GameObject.Find("NetworkManager");
         _clientManager = serverObject.GetComponent<ClientManager>();
         _serverManager = serverObject.GetComponent<ServerManager>();
@@ -36,20 +34,11 @@ public class ServerGameManager : MonoBehaviour
         _serverManager.SendSetup();
     }
 
-    void LateUpdate()
-    {
-        //foreach (NetworkPlayer player in clientToPlayer.Values)
-        //{
-        //    MovePlayer(player);
-        //}
-    }
-
     public void SetPlayerDirection(int clientID, Direction direction)
     {
         clientToPlayer[clientID].data.direction = direction;
     }
 
-    //public void TriggerUpdate(int clientID, CellID triggerType)
     public void TriggerUpdate(int clientID, char triggerType)
     {
         NetworkPlayer triggeredPlayer = clientToPlayer[clientID];
@@ -103,16 +92,6 @@ public class ServerGameManager : MonoBehaviour
     public void WrekSoftBlock(int xLoc, int yLoc)
     {
         _serverManager.SendAll(MessageType.DestroySoftBlock, new DestroySoftBlock(xLoc, yLoc));
-        //float rand = Random.Range(0, 100);
-        //int randPU = Random.Range(0, _clientManager.powerUps.Length);
-        //if (rand >= 30)
-        //{
-        //    _serverManager.SendAll(MessageType.PowerUpDrop, new PowerUpDrop(randPU, xLoc, yLoc));
-        //}
-        //else
-        //{
-        //    _serverManager.SendAll(MessageType.PowerUpDrop, new PowerUpDrop(-1, xLoc, yLoc));
-        //}
     }
 
     private void CheckGameOver()
