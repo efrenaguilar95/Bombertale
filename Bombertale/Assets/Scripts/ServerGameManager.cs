@@ -7,7 +7,7 @@ public class ServerGameManager : MonoBehaviour
 
     public Dictionary<int, NetworkPlayer> clientToPlayer = new Dictionary<int, NetworkPlayer>();
 
-    private ServerManager _serverManager;
+    public ServerManager _serverManager;
     private ClientManager _clientManager;
     private List<NetworkPlayer> _playerList = new List<NetworkPlayer>();
     public List<List<char>> charMap;

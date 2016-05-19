@@ -8,6 +8,10 @@ public struct PlayerData
     public string name;
     public string userName;
     public Vector2 worldLocation;
+    public Vector2 gridLocation
+    {
+        get { return new Vector2((int)worldLocation.x, (int)worldLocation.y); }
+    }
     public Direction direction;
     public bool isAlive;
     public float speed;

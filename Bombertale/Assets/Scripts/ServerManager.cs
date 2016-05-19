@@ -96,7 +96,8 @@ public class ServerManager : NetworkHost
                     Move playerMove = (Move)message.GetData();
                     serverGameManager.SetPlayerDirection(recEvent.sender, playerMove.moveDir);
                     NetworkPlayer movingPlayer = serverGameManager.clientToPlayer[recEvent.sender];
-                    SendAll(MessageType.MoveReply, new MoveReply(movingPlayer.data.name, movingPlayer.data.direction, movingPlayer.GetGridLocation()));
+                    //SendAll(MessageType.MoveReply, new MoveReply(movingPlayer.data.name, movingPlayer.data.direction, movingPlayer.GetGridLocation()));
+                    SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.charMap, serverGameManager.clientToPlayer));
                 }
                 if (message.type == MessageType.BombRequest)
                 {
