@@ -68,143 +68,42 @@ public class ClientManager : NetworkHost
         {
             Message message = recEvent.message;
             Debug.Log(message.subJson);
-            if (message.type == MessageType.UsernameRequest)
-            {
-                //efren's code touch all you want
-                if(UIManager.userName == "")
-                    base.Send(_server, MessageType.UsernameReply, new UsernameReply("Frisk"));
-                else
-                    base.Send(_server, MessageType.UsernameReply, new UsernameReply(UIManager.userName));
-            }
-            if (message.type == MessageType.LobbyUpdate)
-            {
-                LobbyUpdate lobbyUpdate = (LobbyUpdate)message.GetData();
-                _playerCount = lobbyUpdate.playerCount;
-                clientUsernames = lobbyUpdate.usernames;
-                for (int i = 0; i < clientUsernames.Length; i++)
-                {
-                    if (clientUsernames[i] == null || clientUsernames[i] == "[Joinable]" || clientUsernames[i] == "")
-                        clientUsernames[i] = "[Joinable]";
-                    else
-                    {
-                        GameObject.Find("Player" + (i + 1).ToString()).GetComponent<UnityEngine.UI.Text>().text = clientUsernames[i];
-                        GameObject.Find("Player" + (i + 1).ToString() + " Avatar").GetComponent<Animator>().SetBool("Joined", true);
-                        joinSound.Play();
-                    }
-                }
-            }
-            if (message.type == MessageType.StartGame)
-            {
-                if (this.GetComponent<ServerManager>() != null)
-                    SceneManager.LoadScene("ServerGame");
-                else
-                    SceneManager.LoadScene("ClientGame");
-            }
-            if (message.type == MessageType.Setup)
-            {
-                Setup setup = (Setup)message.GetData();
-                charMap = Mapper.StringToMap(Mapper.mapString);
-                gameObjectMap = Mapper.CreateGameObjectMap(charMap);
 
-                foreach (string playerName in setup.players)
-                {
-                    _players.Add(playerName, GameObject.Find(playerName).GetComponent<NetworkPlayer>());
-                }
-                for (int i = 1; i <= 4; i++)
-                {
-                    NetworkPlayer player = GameObject.Find("Player" + i).GetComponent<NetworkPlayer>();
-                    if (_players.ContainsKey(player.data.name))
-                    {
-                        player.data.isAlive = true;
-                    }
-                    else
-                    {
-                        player.gameObject.SetActive(false);
-                    }
-                }
-                myPlayer = _players[setup.players[0]];
-                GameAudio _gameAudio = GameObject.Find("GameAudioManager").GetComponent<GameAudio>();
-                pickupSound = _gameAudio.pickupSound;
-                deathSound = _gameAudio.deathSound;
-                _gameAudio.SelectMusic(setup.songSelection);
-                this._isGameStarted = true;
-            }
-
-            if (message.type == MessageType.StateUpdate)
+            switch (message.type)
             {
-                StateUpdate stateUpdate = (StateUpdate)message.GetData();
-                SyncMap(stateUpdate.mapString);
-                foreach (PlayerData serverPlayer in stateUpdate.players)
-                {
-                    NetworkPlayer player = _players[serverPlayer.name];
-                    if (player.data.gridLocation != serverPlayer.gridLocation)
-                    {
-                        player.GetComponent<Rigidbody2D>().MovePosition(new Vector2(serverPlayer.gridLocation.x + .5f, serverPlayer.gridLocation.y + .5f));
-                    }
-                    player.data.direction = serverPlayer.direction;
-                }
-            }
-
-            if (message.type == MessageType.BombReply)
-            {
-                BombReply bombReply = (BombReply)message.GetData();
-                NetworkPlayer droppingPlayer = _players[bombReply.playerData.name];
-                droppingPlayer.DropBomb();
-            }
-
-            if (message.type == MessageType.MoveReply)
-            {
-                MoveReply moveReply = (MoveReply)message.GetData();
-                NetworkPlayer playerToMove = _players[moveReply.playerName];
-                if (playerToMove.GetGridLocation() != moveReply.gridLocation)
-                {
-                    playerToMove.GetComponent<Rigidbody2D>().MovePosition(new Vector2(moveReply.gridLocation.x + .5f, moveReply.gridLocation.y + .5f));
-                }
-                playerToMove.data.direction = moveReply.moveDir;
-            }
-
-            if (message.type == MessageType.DestroySoftBlock)
-            {
-                DestroySoftBlock rekt = (DestroySoftBlock)message.GetData();
-                GameObject softBlockToDestroy = gameObjectMap[rekt.xLoc][rekt.yLoc];
-                if (softBlockToDestroy != null)
-                    softBlockToDestroy.GetComponent<NetworkSoftBlock>().Fizzle();
-            }
-
-            if (message.type == MessageType.PowerUpDrop)
-            {
-                PowerUpDrop puDrop = (PowerUpDrop)message.GetData();
-
-                charMap[puDrop.xLoc][puDrop.yLoc] = (puDrop.puIndex == -1) ? CellID.Empty : puDrop.puIndex.ToString()[0];
-            }
-
-            if (message.type == MessageType.TriggerReply)
-            {
-                TriggerReply triggerReply = (TriggerReply)message.GetData();
-                NetworkPlayer triggeredPlayer = _players[triggerReply.playerData.name];
-                triggeredPlayer.data = triggerReply.playerData;
-                if (triggerReply.playerData.isAlive == false)
-                {
-                    _players[triggerReply.playerData.name].gameObject.SetActive(false);
-                    deathSound.Play();
-                    GameObject napstablook = (GameObject)Instantiate(Resources.Load("Napstablook"), triggerReply.playerData.worldLocation, Quaternion.identity);
-                    Destroy(napstablook, 1.5f);
-                }
-                else
-                {
-                    pickupSound.Play();
-                }
-                if (charMap[triggerReply.xLoc][triggerReply.yLoc] != CellID.Explosion)
-                    charMap[triggerReply.xLoc][triggerReply.yLoc] = CellID.Empty;
-                Destroy(gameObjectMap[triggerReply.xLoc][triggerReply.yLoc]);
-            }
-
-            if (message.type == MessageType.GameOver)
-            {
-                GameOver gameOver = (GameOver)message.GetData();
-                this.winnerMessage = gameOver.winnerMessage;
-                _isGameStarted = false;
-                SceneManager.LoadScene("NetworkEndScreen");
+                case MessageType.UsernameRequest:
+                    HandleUsernameRequest();
+                    break;
+                case MessageType.LobbyUpdate:
+                    HandleLobbyUpdate(message);
+                    break;
+                case MessageType.StartGame:
+                    HandleStartGame();
+                    break;
+                case MessageType.Setup:
+                    HandleSetup(message);
+                    break;
+                case MessageType.StateUpdate:
+                    HandleStateUpdate(message);
+                    break;
+                case MessageType.BombReply:
+                    HandleBombReply(message);
+                    break;
+                //case MessageType.MoveReply:
+                //    HandleMoveReply(message);
+                //    break;
+                case MessageType.DestroySoftBlock:
+                    HandleDestroySoftBlock(message);
+                    break;
+                case MessageType.PowerUpDrop:
+                    HandlePowerUpDrop(message);
+                    break;
+                case MessageType.TriggerReply:
+                    HandleTriggerReply(message);
+                    break;
+                case MessageType.GameOver:
+                    HandleGameOver(message);
+                    break;
             }
         }
     }
@@ -351,5 +250,147 @@ public class ClientManager : NetworkHost
     public void SendTriggerRequest(char cellID)
     {
         base.Send(_server, MessageType.TriggerRequest, new TriggerRequest(cellID));
+    }
+
+    private void HandleUsernameRequest()
+    {
+        //efren's code touch all you want
+        if (UIManager.userName == "")
+            base.Send(_server, MessageType.UsernameReply, new UsernameReply("Frisk"));
+        else
+            base.Send(_server, MessageType.UsernameReply, new UsernameReply(UIManager.userName));
+    }
+
+    private void HandleLobbyUpdate(Message message)
+    {
+        LobbyUpdate lobbyUpdate = (LobbyUpdate)message.GetData();
+        _playerCount = lobbyUpdate.playerCount;
+        clientUsernames = lobbyUpdate.usernames;
+        for (int i = 0; i < clientUsernames.Length; i++)
+        {
+            if (clientUsernames[i] == null || clientUsernames[i] == "[Joinable]" || clientUsernames[i] == "")
+                clientUsernames[i] = "[Joinable]";
+            else
+            {
+                GameObject.Find("Player" + (i + 1).ToString()).GetComponent<UnityEngine.UI.Text>().text = clientUsernames[i];
+                GameObject.Find("Player" + (i + 1).ToString() + " Avatar").GetComponent<Animator>().SetBool("Joined", true);
+                joinSound.Play();
+            }
+        }
+    }
+
+    private void HandleStartGame()
+    {
+        if (this.GetComponent<ServerManager>() != null)
+            SceneManager.LoadScene("ServerGame");
+        else
+            SceneManager.LoadScene("ClientGame");
+    }
+
+    private void HandleSetup(Message message)
+    {
+        Setup setup = (Setup)message.GetData();
+        charMap = Mapper.StringToMap(Mapper.mapString);
+        gameObjectMap = Mapper.CreateGameObjectMap(charMap);
+
+        foreach (string playerName in setup.players)
+        {
+            _players.Add(playerName, GameObject.Find(playerName).GetComponent<NetworkPlayer>());
+        }
+        for (int i = 1; i <= 4; i++)
+        {
+            NetworkPlayer player = GameObject.Find("Player" + i).GetComponent<NetworkPlayer>();
+            if (_players.ContainsKey(player.data.name))
+            {
+                player.data.isAlive = true;
+            }
+            else
+            {
+                player.gameObject.SetActive(false);
+            }
+        }
+        myPlayer = _players[setup.players[0]];
+        GameAudio _gameAudio = GameObject.Find("GameAudioManager").GetComponent<GameAudio>();
+        pickupSound = _gameAudio.pickupSound;
+        deathSound = _gameAudio.deathSound;
+        _gameAudio.SelectMusic(setup.songSelection);
+        this._isGameStarted = true;
+    }
+
+    private void HandleStateUpdate(Message message)
+    {
+        StateUpdate stateUpdate = (StateUpdate)message.GetData();
+        SyncMap(stateUpdate.mapString);
+        foreach (PlayerData serverPlayer in stateUpdate.players)
+        {
+            NetworkPlayer player = _players[serverPlayer.name];
+            if (player.data.gridLocation != serverPlayer.gridLocation)
+            {
+                player.GetComponent<Rigidbody2D>().MovePosition(new Vector2(serverPlayer.gridLocation.x + .5f, serverPlayer.gridLocation.y + .5f));
+            }
+            player.data.direction = serverPlayer.direction;
+        }
+    }
+
+    private void HandleBombReply(Message message)
+    {
+        BombReply bombReply = (BombReply)message.GetData();
+        NetworkPlayer droppingPlayer = _players[bombReply.playerData.name];
+        droppingPlayer.DropBomb();
+    }
+
+    private void HandleMoveReply(Message message)
+    {
+        MoveReply moveReply = (MoveReply)message.GetData();
+        NetworkPlayer playerToMove = _players[moveReply.playerName];
+        if (playerToMove.GetGridLocation() != moveReply.gridLocation)
+        {
+            playerToMove.GetComponent<Rigidbody2D>().MovePosition(new Vector2(moveReply.gridLocation.x + .5f, moveReply.gridLocation.y + .5f));
+        }
+        playerToMove.data.direction = moveReply.moveDir;
+    }
+
+    private void HandleDestroySoftBlock(Message message)
+    {
+        DestroySoftBlock rekt = (DestroySoftBlock)message.GetData();
+        GameObject softBlockToDestroy = gameObjectMap[rekt.xLoc][rekt.yLoc];
+        if (softBlockToDestroy != null)
+            softBlockToDestroy.GetComponent<NetworkSoftBlock>().Fizzle();
+    }
+
+    private void HandlePowerUpDrop(Message message)
+    {
+        PowerUpDrop puDrop = (PowerUpDrop)message.GetData();
+
+        charMap[puDrop.xLoc][puDrop.yLoc] = (puDrop.puIndex == -1) ? CellID.Empty : puDrop.puIndex.ToString()[0];
+    }
+
+    private void HandleTriggerReply(Message message)
+    {
+        TriggerReply triggerReply = (TriggerReply)message.GetData();
+        NetworkPlayer triggeredPlayer = _players[triggerReply.playerData.name];
+        triggeredPlayer.data = triggerReply.playerData;
+        if (triggerReply.playerData.isAlive == false)
+        {
+            _players[triggerReply.playerData.name].gameObject.SetActive(false);
+            deathSound.Play();
+            GameObject napstablook = (GameObject)Instantiate(Resources.Load("Napstablook"), triggerReply.playerData.worldLocation, Quaternion.identity);
+            Destroy(napstablook, 1.5f);
+        }
+        else
+        {
+            pickupSound.Play();
+        }
+        if (charMap[triggerReply.xLoc][triggerReply.yLoc] != CellID.Explosion)
+            charMap[triggerReply.xLoc][triggerReply.yLoc] = CellID.Empty;
+        Destroy(gameObjectMap[triggerReply.xLoc][triggerReply.yLoc]);
+    }
+
+    private void HandleGameOver(Message message)
+    {
+        GameOver gameOver = (GameOver)message.GetData();
+        this.winnerMessage = gameOver.winnerMessage;
+        _isGameStarted = false;
+        SceneManager.LoadScene("NetworkEndScreen");
     }
 }
