@@ -59,7 +59,7 @@ public class ServerGameManager : MonoBehaviour
         else if (triggerType == CellID.Determination)
         {
             triggeredPlayer.data.isInvulnerable = true;
-            triggeredPlayer.data.invulnTimeRemaining = 5f;
+            triggeredPlayer.data.invulnTimeRemaining = 5.7f;
         }
 
         Vector2 playerLoc = triggeredPlayer.GetGridLocation();
