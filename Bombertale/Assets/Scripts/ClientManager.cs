@@ -110,10 +110,19 @@ public class ClientManager : NetworkHost
     {
         if (_playersInLobby != null)
             _playersInLobby.text = "Players: " + this._playerCount + "/4";
+        int invulnCount = 0;
         foreach (NetworkPlayer player in _players.Values)
         {
             MovePlayer(player);
+            if (player.data.isInvulnerable)
+                invulnCount++;
+            
         }
+        if (invulnCount == 0)
+            useInvulnMusic(false);
+        else
+            useInvulnMusic(true);
+        
     }
 
     private void SyncMap(string mapString)
