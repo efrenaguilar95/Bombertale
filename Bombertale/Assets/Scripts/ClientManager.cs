@@ -25,7 +25,9 @@ public class ClientManager : NetworkHost
     public List<List<char>> charMap;
     public List<List<GameObject>> gameObjectMap;
 
-    private GameAudio _gameAudio;
+    private AudioSource bombSound;
+    private AudioSource deathSound;
+    private AudioSource pickupSound;
 
     void OnLevelWasLoaded(int level)
     {
@@ -308,7 +310,9 @@ public class ClientManager : NetworkHost
             }
         }
         myPlayer = _players[setup.players[0]];
-        _gameAudio = GameObject.Find("GameAudioManager").GetComponent<GameAudio>();
+        GameAudio _gameAudio = GameObject.Find("GameAudioManager").GetComponent<GameAudio>();
+        pickupSound = _gameAudio.pickupSound;
+        deathSound = _gameAudio.deathSound;
         _gameAudio.SelectMusic(setup.songSelection);
         this._isGameStarted = true;
     }
@@ -369,13 +373,13 @@ public class ClientManager : NetworkHost
         if (triggerReply.playerData.isAlive == false)
         {
             _players[triggerReply.playerData.name].gameObject.SetActive(false);
-            _gameAudio.deathSound.Play();
+            deathSound.Play();
             GameObject napstablook = (GameObject)Instantiate(Resources.Load("Napstablook"), triggerReply.playerData.worldLocation, Quaternion.identity);
             Destroy(napstablook, 1.5f);
         }
         else
         {
-            _gameAudio.pickupSound.Play();
+            pickupSound.Play();
         }
         if (charMap[triggerReply.xLoc][triggerReply.yLoc] != CellID.Explosion)
             charMap[triggerReply.xLoc][triggerReply.yLoc] = CellID.Empty;
@@ -388,20 +392,5 @@ public class ClientManager : NetworkHost
         this.winnerMessage = gameOver.winnerMessage;
         _isGameStarted = false;
         SceneManager.LoadScene("NetworkEndScreen");
-    }
-
-    public void useInvulnMusic(bool yes)
-    {
-        if (yes)
-        {
-            _gameAudio.musicSource.Pause();
-            if (!_gameAudio.invulnMusic.isPlaying)
-                _gameAudio.invulnMusic.Play();
-        }
-        else
-        {
-            _gameAudio.invulnMusic.Stop();
-            _gameAudio.musicSource.UnPause();
-        }
     }
 }

@@ -77,13 +77,11 @@ public class NetworkPlayer : MonoBehaviour
         {
             this.data.invulnTimeRemaining -= Time.deltaTime;
             StartCoroutine("Flash");
-            _clientManager.useInvulnMusic(true);
         }
         else
         {
             this.data.isInvulnerable = false;
             StopCoroutine("Flash");
-            _clientManager.useInvulnMusic(false);
         }
         if (this.data.direction == Direction.NONE)
         {
@@ -127,7 +125,7 @@ public class NetworkPlayer : MonoBehaviour
 
     private IEnumerator Flash()
     {
-        while (this.data.isInvulnerable)
+        while(this.data.isInvulnerable)
         {
             toggleFlash();
             yield return new WaitForSeconds(.15f);

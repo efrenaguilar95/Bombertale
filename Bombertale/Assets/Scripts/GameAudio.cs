@@ -5,11 +5,11 @@ using System.Collections;
 public class GameAudio : MonoBehaviour
 {
     public AudioClip[] music;
+    AudioSource[] sounds;
     public AudioSource musicSource;
     public AudioSource bombSound;
     public AudioSource deathSound;
-    public AudioSource pickupSound;
-    public AudioSource invulnMusic;
+    public AudioSource pickupSound; 
     public AudioClip dogSong;
     void Start()
     {
