@@ -3,6 +3,7 @@
 
 body {
 	background-color: #000000;
+	font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
 }
 #bombertale_logo {
 	margin: 0 auto;
@@ -19,7 +20,27 @@ body {
 }
 #new_password_label {
 	color: #FFFFFF;
-	font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
+	font-size: large;
+}
+
+
+
+#hosted_servers {
+	margin-top: 40px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 0;
+	width: 50%;
+	text-align: center;
+}
+#hosted_servers_label {
+	margin-top: 40px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 0;
+	width: 50%;
+	text-align: center;
+	color: #00FF00;
 	font-size: large;
 }
 #new_password_input {
@@ -32,6 +53,5 @@ body {
 	margin-bottom: 10px;
 }
 #reset_button {
-	font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
 	font-size: large;
 }

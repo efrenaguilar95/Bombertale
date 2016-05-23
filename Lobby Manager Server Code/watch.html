@@ -2,22 +2,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Reset Password</title>
+<title>Watch</title>
 <link href="_css/main.css" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script type="text/javascript">
 	function getServers()
 	{
-		var getServersLink = 'http://apedestrian.com/bombertale/GetServerScores.php';
-		$("#hosted_servers").load(getServersLink);
+		var gameName = "null";
+		var getServersLink = 'http://apedestrian.com/bombertale/GetScore.php?gameName=' + gameName;
+		$("#listed_servers").load(getServersLink);
+		setTimeout(getServers, 5000);
 	}
 </script>
 </head>
-<body>
+<body onload="getServers();">
 <div id="bombertale_logo"><img src="_assets/BombertaleMenu.png" width="835" height="127" alt=""/></div>
 
 <div id="hosted_servers">
-	<label id="hosted_servers_label">Select a game to watch</label>
+	<div id="listed_servers"><span style="color:red"><p>Game has ended</p></span></div>
 	<br />
 </div>
 </body>
