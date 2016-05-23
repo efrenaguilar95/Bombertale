@@ -31,7 +31,7 @@ public class NetworkHost : MonoBehaviour {
     public int _myReliableChannelID;
     private HostTopology _topology;
     public int _hostID;
-    private int bufferSize = 1024;
+    private int bufferSize = 1500;
 
     //public virtual void Awake()
     //{
