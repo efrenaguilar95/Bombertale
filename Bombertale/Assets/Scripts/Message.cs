@@ -98,11 +98,13 @@ public struct StateUpdate
 {
     public string mapString;
     public List<PlayerData> players;
+    public float timeStamp;
 
-    public StateUpdate(List<List<char>> map, Dictionary<int, NetworkPlayer> playerDict)
+    public StateUpdate(List<List<char>> map, Dictionary<int, NetworkPlayer> playerDict, float currentTime)
     {
         this.mapString = Mapper.MapToString(map);
         this.players = new List<PlayerData>();
+        this.timeStamp = currentTime;
         foreach (NetworkPlayer player in playerDict.Values)
         {
             players.Add(new PlayerData(player.data));

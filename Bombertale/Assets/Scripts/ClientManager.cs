@@ -12,6 +12,7 @@ public class ClientManager : NetworkHost
     private int _playerCount;
     private AudioSource joinSound;
     public string[] clientUsernames;
+    private float _clockOffset = 0f;
 
     /// Lobby Variables
     private Text _playersInLobby, _serverName;
@@ -51,7 +52,6 @@ public class ClientManager : NetworkHost
         joinSound = GameObject.Find("LobbyAudioManager").GetComponent<AudioSource>();
     }
 
-
     void Update()
     {
         PollMovement();
@@ -65,7 +65,7 @@ public class ClientManager : NetworkHost
         if (recEvent.type == NetworkEventType.DataEvent)
         {
             Message message = recEvent.message;
-            Debug.Log(message.subJson);
+            //Debug.Log(message.subJson);
 
             switch (message.type)
             {
@@ -104,6 +104,8 @@ public class ClientManager : NetworkHost
                     break;
             }
         }
+        if (_isGameStarted)
+            base.gameTime += Time.deltaTime;
     }
 
     void LateUpdate()
@@ -129,12 +131,10 @@ public class ClientManager : NetworkHost
     {
         if (Mapper.MapToString(charMap) == mapString)
         {
-            Debug.Log("No changes to map");
             return;
         }
         else
         {
-            Debug.Log("Changes to map");
             List<List<char>> newMap = Mapper.StringToMap(mapString);
             for (int col = 0; col < newMap.Count; col++)
             {
@@ -320,21 +320,47 @@ public class ClientManager : NetworkHost
         _gameAudio = GameObject.Find("GameAudioManager").GetComponent<GameAudio>();
         _gameAudio.SelectMusic(setup.songSelection);
         this._isGameStarted = true;
+        base.gameTime = 0;
     }
 
     private void HandleStateUpdate(Message message)
     {
         StateUpdate stateUpdate = (StateUpdate)message.GetData();
         SyncMap(stateUpdate.mapString);
+        //Do logic based on offset
         foreach (PlayerData serverPlayer in stateUpdate.players)
         {
-            NetworkPlayer player = _players[serverPlayer.name];
-            if (player.data.gridLocation != serverPlayer.gridLocation)
+            Vector2 rollbackLocation = new Vector2(serverPlayer.worldLocation.x, serverPlayer.worldLocation.y);
+            switch (serverPlayer.direction)
             {
-                player.GetComponent<Rigidbody2D>().MovePosition(new Vector2(serverPlayer.gridLocation.x + .5f, serverPlayer.gridLocation.y + .5f));
+                case Direction.UP:
+                    rollbackLocation += new Vector2(0, serverPlayer.speed * _clockOffset);
+                    break;
+                case Direction.DOWN:
+                    rollbackLocation -= new Vector2(0, serverPlayer.speed * _clockOffset);
+                    break;
+                case Direction.RIGHT:
+                    rollbackLocation += new Vector2(serverPlayer.speed * _clockOffset, 0);
+                    break;
+                case Direction.LEFT:
+                    rollbackLocation -= new Vector2(serverPlayer.speed * _clockOffset, 0);
+                    break;
+            }
+            rollbackLocation = new Vector2((int)rollbackLocation.x, (int)rollbackLocation.y);
+
+            NetworkPlayer player = _players[serverPlayer.name];
+            if (player.data.gridLocation != rollbackLocation)
+            {
+                //player.GetComponent<Rigidbody2D>().MovePosition(new Vector2(serverPlayer.gridLocation.x + .5f, serverPlayer.gridLocation.y + .5f));
+                player.GetComponent<Rigidbody2D>().MovePosition(new Vector2(rollbackLocation.x + .5f, rollbackLocation.y + .5f));
             }
             player.data.direction = serverPlayer.direction;
         }
+        //Calculate offset
+        _clockOffset = base.gameTime - stateUpdate.timeStamp;
+        if (_clockOffset < 0)
+            _clockOffset = 0f;
+        Debug.Log("Ping (ms): " + _clockOffset * 1000);
     }
 
     private void HandleBombReply(Message message)
@@ -401,16 +427,19 @@ public class ClientManager : NetworkHost
 
     public void useInvulnMusic(bool yes)
     {
-        if (yes)
+        if (_gameAudio != null)
         {
-            _gameAudio.musicSource.Pause();
-            if (!_gameAudio.invulnMusic.isPlaying)
-                _gameAudio.invulnMusic.Play();
-        }
-        else
-        {
-            _gameAudio.invulnMusic.Stop();
-            _gameAudio.musicSource.UnPause();
+            if (yes)
+            {
+                _gameAudio.musicSource.Pause();
+                if (!_gameAudio.invulnMusic.isPlaying)
+                    _gameAudio.invulnMusic.Play();
+            }
+            else
+            {
+                _gameAudio.invulnMusic.Stop();
+                _gameAudio.musicSource.UnPause();
+            }
         }
     }
 }

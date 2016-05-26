@@ -10,9 +10,9 @@ public class ServerManager : NetworkHost
     public List<int> clientList = new List<int>();
     public string[] clientUsernames;
     public ServerGameManager serverGameManager;
-
     private DatabaseManager _databaseManager;
 
+    bool _isGameStarted = false;
     float randMusic;
     int indexMusic;
 
@@ -97,7 +97,7 @@ public class ServerManager : NetworkHost
                     serverGameManager.SetPlayerDirection(recEvent.sender, playerMove.moveDir);
                     NetworkPlayer movingPlayer = serverGameManager.clientToPlayer[recEvent.sender];
                     //SendAll(MessageType.MoveReply, new MoveReply(movingPlayer.data.name, movingPlayer.data.direction, movingPlayer.GetGridLocation()));
-                    SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.charMap, serverGameManager.clientToPlayer));
+                    SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.charMap, serverGameManager.clientToPlayer, base.gameTime));
                 }
                 if (message.type == MessageType.BombRequest)
                 {
@@ -112,24 +112,22 @@ public class ServerManager : NetworkHost
                 if (message.type == MessageType.TriggerRequest)
                 {
                     TriggerRequest triggerRequest = (TriggerRequest)message.GetData();
-                    Debug.Log("TriggerRequest from Player" + recEvent.sender + " - " + triggerRequest.cellId);
+                    //Debug.Log("TriggerRequest from Player" + recEvent.sender + " - " + triggerRequest.cellId);
                     NetworkPlayer triggeredPlayer = serverGameManager.clientToPlayer[recEvent.sender];
                     int x = (int)triggeredPlayer.transform.position.x;
                     int y = (int)triggeredPlayer.transform.position.y;
-                    //int triggerValue;
-                    //bool success = int.TryParse(serverGameManager.map.grid[x][y], out triggerValue);
-                    //if ((int)System.Char.GetNumericValue(triggerRequest.cellId) == triggerValue)
-                    //if (triggerRequest.cellId == serverGameManager.map.grid[x][y])
                     if (triggerRequest.cellId == serverGameManager.charMap[x][y])
                     {
-                        //serverGameManager.TriggerUpdate(recEvent.sender, triggerRequest.triggerType);
                         serverGameManager.TriggerUpdate(recEvent.sender, triggerRequest.cellId);
                         SendAll(MessageType.TriggerReply, new TriggerReply(triggeredPlayer.data, x, y));
                     }
-                    //Debug.Log(new Vector2((int)triggeredPlayer.transform.position.x, (int)triggeredPlayer.transform.position.y));
-                    //Debug.Log(serverGameManager.map.grid[(int)triggeredPlayer.transform.position.x][(int)triggeredPlayer.transform.position.y]);
                 }
                 break;
+        }
+
+        if (_isGameStarted)
+        {
+            base.gameTime += Time.deltaTime;
         }
     }
 
@@ -138,7 +136,7 @@ public class ServerManager : NetworkHost
         if (serverGameManager != null && stateUpdateCooldown <= 0f)
         {
             //SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.map.grid, serverGameManager.clientToPlayer));
-            SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.charMap, serverGameManager.clientToPlayer));
+            SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.charMap, serverGameManager.clientToPlayer, base.gameTime));
             stateUpdateCooldown = updateFrequency;
         }
         else
@@ -188,5 +186,7 @@ public class ServerManager : NetworkHost
             
             base.Send(clientList[i], MessageType.Setup, new Setup(playerListToSend, indexMusic));
         }
+        base.gameTime = 0;
+        _isGameStarted = true;
     }
 }

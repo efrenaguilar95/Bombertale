@@ -27,6 +27,8 @@ public class NetworkHost : MonoBehaviour {
     public static string ServerPassword = "";
     public static bool IsPrivate = false;
 
+    public float gameTime;
+
     private ConnectionConfig _config;
     public int _myReliableChannelID;
     private HostTopology _topology;
