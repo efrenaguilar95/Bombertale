@@ -320,7 +320,11 @@ public class ClientManager : NetworkHost
         _gameAudio = GameObject.Find("GameAudioManager").GetComponent<GameAudio>();
         _gameAudio.SelectMusic(setup.songSelection);
         this._isGameStarted = true;
-        base.gameTime = 0;
+        byte error;
+        base.gameTime = NetworkTransport.GetRemoteDelayTimeMS(base._hostID, _server, setup.NetworkTimestamp, out error) / 1000;
+
+        //Debug.Log(NetworkTransport.GetNetworkTimestamp());
+        //Debug.Log(NetworkTransport.GetRemoteDelayTimeMS(base._hostID, _server, setup.NetworkTimestamp, out error));
     }
 
     private void HandleStateUpdate(Message message)
@@ -358,6 +362,7 @@ public class ClientManager : NetworkHost
         }
         //Calculate offset
         _clockOffset = base.gameTime - stateUpdate.timeStamp;
+        Debug.Log(_clockOffset);
         if (_clockOffset < 0)
             _clockOffset = 0f;
         Debug.Log("Ping (ms): " + _clockOffset * 1000);

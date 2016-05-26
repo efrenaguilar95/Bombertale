@@ -184,9 +184,10 @@ public class ServerManager : NetworkHost
                 }
             }
             
-            base.Send(clientList[i], MessageType.Setup, new Setup(playerListToSend, indexMusic));
+            base.Send(clientList[i], MessageType.Setup, new Setup(playerListToSend, indexMusic, NetworkTransport.GetNetworkTimestamp()));
         }
         base.gameTime = 0;
+        //Debug.Log(NetworkTransport.GetNetworkTimestamp());
         _isGameStarted = true;
     }
 }
