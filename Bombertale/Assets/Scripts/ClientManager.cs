@@ -323,8 +323,8 @@ public class ClientManager : NetworkHost
         byte error;
         base.gameTime = NetworkTransport.GetRemoteDelayTimeMS(base._hostID, _server, setup.NetworkTimestamp, out error) / 1000;
 
-        //Debug.Log(NetworkTransport.GetNetworkTimestamp());
-        //Debug.Log(NetworkTransport.GetRemoteDelayTimeMS(base._hostID, _server, setup.NetworkTimestamp, out error));
+        Debug.Log(NetworkTransport.GetNetworkTimestamp());
+        Debug.Log(NetworkTransport.GetRemoteDelayTimeMS(base._hostID, _server, setup.NetworkTimestamp, out error));
     }
 
     private void HandleStateUpdate(Message message)
