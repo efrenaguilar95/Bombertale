@@ -27,6 +27,8 @@ public class ClientManager : NetworkHost
     public List<List<GameObject>> gameObjectMap;
 
     private GameAudio _gameAudio;
+    private float myStartTime;
+    private float serverStartTime;
 
     void OnLevelWasLoaded(int level)
     {
@@ -104,8 +106,6 @@ public class ClientManager : NetworkHost
                     break;
             }
         }
-        if (_isGameStarted)
-            base.gameTime += Time.deltaTime;
     }
 
     void LateUpdate()
@@ -320,11 +320,9 @@ public class ClientManager : NetworkHost
         _gameAudio = GameObject.Find("GameAudioManager").GetComponent<GameAudio>();
         _gameAudio.SelectMusic(setup.songSelection);
         this._isGameStarted = true;
-        byte error;
-        base.gameTime = NetworkTransport.GetRemoteDelayTimeMS(base._hostID, _server, setup.NetworkTimestamp, out error) / 1000;
 
-        Debug.Log(NetworkTransport.GetNetworkTimestamp());
-        Debug.Log(NetworkTransport.GetRemoteDelayTimeMS(base._hostID, _server, setup.NetworkTimestamp, out error));
+        myStartTime = Time.time;
+        serverStartTime = setup.timestamp;
     }
 
     private void HandleStateUpdate(Message message)
@@ -361,7 +359,8 @@ public class ClientManager : NetworkHost
             player.data.direction = serverPlayer.direction;
         }
         //Calculate offset
-        _clockOffset = base.gameTime - stateUpdate.timeStamp;
+        float serverDelta = stateUpdate.timeStamp - serverStartTime;
+        _clockOffset = Time.time - (myStartTime + serverDelta);
         Debug.Log(_clockOffset);
         if (_clockOffset < 0)
             _clockOffset = 0f;

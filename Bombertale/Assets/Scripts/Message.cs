@@ -61,13 +61,13 @@ public struct Setup
 {
     public List<string> players;
     public int songSelection;
-    public int NetworkTimestamp;
+    public float timestamp;
 
-    public Setup(List<string> players, int songSelection, int timestamp)
+    public Setup(List<string> players, int songSelection, float serverTime)
     {
         this.players = players;
         this.songSelection = songSelection;
-        this.NetworkTimestamp = timestamp;
+        this.timestamp = serverTime;
     }
 }
 
