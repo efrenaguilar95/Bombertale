@@ -6,7 +6,13 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
 
 	private string unityPassword = "ICS168";
+    private DatabaseManager _databaseManager;
     public static string userName;
+
+    void Awake()
+    {
+        _databaseManager = this.GetComponent<DatabaseManager>();
+    }
 
     public void PressLocalGame()
     {
@@ -24,6 +30,7 @@ public class UIManager : MonoBehaviour {
 
 	public void BackToMainMenu()
 	{
+        _databaseManager.Logout(UIManager.userName);
 		SceneManager.LoadScene("MainMenu");
 	}
 
@@ -44,6 +51,7 @@ public class UIManager : MonoBehaviour {
 
     public void Flee()
     {
+        _databaseManager.Logout(UIManager.userName);
         Application.Quit();
     }
 	public void Login()
@@ -51,7 +59,7 @@ public class UIManager : MonoBehaviour {
 		string username = GameObject.Find("Canvas/Username").GetComponent<UnityEngine.UI.InputField>().text;
 		string password = GameObject.Find("Canvas/Password").GetComponent<UnityEngine.UI.InputField>().text;
 
-		string returnCode = Login (username, password);
+        string returnCode = _databaseManager.Login(username, password);
 
 		returnCode = returnCode.Substring (0, 4);
 
@@ -90,7 +98,7 @@ public class UIManager : MonoBehaviour {
 		string password = GameObject.Find("Canvas/Password").GetComponent<UnityEngine.UI.InputField>().text;
 		string email = GameObject.Find("Canvas/Email").GetComponent<UnityEngine.UI.InputField>().text;
 
-		string returnCode = CreateAccount (username, password, email);
+        string returnCode = _databaseManager.CreateAccount(username, password, email);
 
 		returnCode = returnCode.Substring (0, 4);
 
@@ -125,7 +133,7 @@ public class UIManager : MonoBehaviour {
 	public void SubmitForgotLogin()
 	{
 		string email = GameObject.Find("Canvas/Email").GetComponent<UnityEngine.UI.InputField>().text;
-		string returnCode = SendLoginResetEmail (email);
+        string returnCode = _databaseManager.SendLoginResetEmail(email);
 		returnCode = returnCode.Substring (0, 4);
 
 		if (returnCode == "BC07")
@@ -151,45 +159,5 @@ public class UIManager : MonoBehaviour {
 	}
 
 
-
-	public string CreateAccount(string username, string password, string email)
-	{
-		string url = "http://apedestrian.com/bombertale/CreateAccount.php?unityPassword=" + unityPassword +  "&clientUsername=" + username + "&clientPassword=" + password + "&clientEmail=" + email;
-		return GetText (url);
-	}
-
-	public string Login(string username, string password)
-	{
-		string url = "http://apedestrian.com/bombertale/Login.php?unityPassword=" + unityPassword +  "&clientUsername=" + username + "&clientPassword=" + password;
-		return GetText (url);
-	}
-
-	public string SendLoginResetEmail(string email)
-	{
-		string url = "http://apedestrian.com/bombertale/SendLoginResetEmail.php?unityPassword=" + unityPassword +  "&clientEmail=" + email;
-		return GetText (url);
-	}
-
-	private string GetText(string url)
-	{
-		WWW www = new WWW(url.Replace(" ", "%20"));
-		StartCoroutine(WaitForRequest(www));
-		while(!www.isDone)
-		{
-			//...
-		}
-		return www.text;
-	}
-
-	private IEnumerator WaitForRequest(WWW www)
-	{
-		yield return www;
-
-		// check for errors
-		if(!string.IsNullOrEmpty(www.error))
-			Debug.Log("WWW Error: "+ www.error);
-		else
-			Debug.Log("WWW success: "+ www.text);
-	}
 
 }

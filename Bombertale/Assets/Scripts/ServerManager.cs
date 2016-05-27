@@ -47,6 +47,7 @@ public class ServerManager : NetworkHost
     void OnDestroy()
     {
         _databaseManager.DeleteServer(NetworkHost.ServerName);
+        _databaseManager.Logout(UIManager.userName);
     }
 
     void Update()
