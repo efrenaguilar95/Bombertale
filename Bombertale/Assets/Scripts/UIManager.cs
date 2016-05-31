@@ -31,6 +31,7 @@ public class UIManager : MonoBehaviour {
 	public void BackToMainMenu()
 	{
         _databaseManager.Logout(UIManager.userName);
+        Debug.Log(_databaseManager.Logout(UIManager.userName));
 		SceneManager.LoadScene("MainMenu");
 	}
 

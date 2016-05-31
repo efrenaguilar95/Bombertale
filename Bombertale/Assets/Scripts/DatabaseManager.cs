@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 public class DatabaseManager : MonoBehaviour
 {
+
+    void OnApplicationQuit()
+    {
+        this.Logout(UIManager.userName);
+    }
 	/*
 		RETURN CODES
 		All these functions can return:
