@@ -13,6 +13,7 @@ public class ClientManager : NetworkHost
     private AudioSource joinSound;
     public string[] clientUsernames;
     private float _clockOffset = 0f;
+    private bool _isServerClient = false;
 
     /// Lobby Variables
     private Text _playersInLobby, _serverName;
@@ -44,6 +45,7 @@ public class ClientManager : NetworkHost
         int randomPort = Random.Range(10000, 65000);
         base.Setup(randomPort, 1);
         _server = base.Connect(NetworkHost.ServerIP, NetworkHost.Port);
+        _isServerClient = this.GetComponent<ServerManager>() != null;
 
         _playersInLobby = GameObject.Find("PlayersInLobbyText").GetComponent<Text>();
         _serverName = GameObject.Find("ServerName").GetComponent<Text>();
@@ -119,13 +121,13 @@ public class ClientManager : NetworkHost
             MovePlayer(player);
             if (player.data.isInvulnerable)
                 invulnCount++;
-            
+
         }
         if (invulnCount == 0)
             useInvulnMusic(false);
         else
             useInvulnMusic(true);
-        
+
     }
 
     private void SyncMap(string mapString)
@@ -289,7 +291,8 @@ public class ClientManager : NetworkHost
 
     private void HandleStartGame()
     {
-        if (this.GetComponent<ServerManager>() != null)
+        if (_isServerClient)
+            //if (this.GetComponent<ServerManager>() != null)
             SceneManager.LoadScene("ServerGame");
         else
             SceneManager.LoadScene("ClientGame");
@@ -319,8 +322,11 @@ public class ClientManager : NetworkHost
         }
         myPlayer = _players[setup.players[0]];
         _gameAudio = GameObject.Find("GameAudioManager").GetComponent<GameAudio>();
-        DCPanel = GameObject.Find("DCPanel");
-        DCPanel.SetActive(false);
+        if (!_isServerClient)
+        {
+            DCPanel = GameObject.Find("DCPanel");
+            DCPanel.SetActive(false);
+        }
         _gameAudio.SelectMusic(setup.songSelection);
         this._isGameStarted = true;
     }
