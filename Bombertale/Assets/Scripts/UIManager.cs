@@ -37,6 +37,16 @@ public class UIManager : MonoBehaviour {
 
                 }
         }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (SceneManager.GetActiveScene().name == "Login")
+                Login();
+            else if (SceneManager.GetActiveScene().name == "CreateAccount")
+                CreateAccount();
+            else if (SceneManager.GetActiveScene().name == "ForgotLogin")
+                SubmitForgotLogin();
+        }
  
 		if (response!="waiting") 
 		{
