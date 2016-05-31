@@ -359,8 +359,10 @@ public class ClientManager : NetworkHost
             player.data.direction = serverPlayer.direction;
         }
         //Calculate offset
-        float serverDelta = stateUpdate.timeStamp - serverStartTime;
-        _clockOffset = Time.time - (myStartTime + serverDelta);
+        //float serverDelta = stateUpdate.timeStamp - serverStartTime;
+        //_clockOffset = Time.time - (myStartTime + serverDelta);
+        byte error;
+        _clockOffset = NetworkTransport.GetRemoteDelayTimeMS(this._hostID, _server, stateUpdate.timeStamp, out error) / 1000;
         Debug.Log(_clockOffset);
         if (_clockOffset < 0)
             _clockOffset = 0f;

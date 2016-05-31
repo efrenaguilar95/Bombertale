@@ -61,9 +61,9 @@ public struct Setup
 {
     public List<string> players;
     public int songSelection;
-    public float timestamp;
+    public int timestamp;
 
-    public Setup(List<string> players, int songSelection, float serverTime)
+    public Setup(List<string> players, int songSelection, int serverTime)
     {
         this.players = players;
         this.songSelection = songSelection;
@@ -101,9 +101,9 @@ public struct StateUpdate
 {
     public string mapString;
     public List<PlayerData> players;
-    public float timeStamp;
+    public int timeStamp;
 
-    public StateUpdate(List<List<char>> map, Dictionary<int, NetworkPlayer> playerDict, float currentTime)
+    public StateUpdate(List<List<char>> map, Dictionary<int, NetworkPlayer> playerDict, int currentTime)
     {
         this.mapString = Mapper.MapToString(map);
         this.players = new List<PlayerData>();

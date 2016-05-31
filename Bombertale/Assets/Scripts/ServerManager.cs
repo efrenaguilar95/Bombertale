@@ -98,7 +98,7 @@ public class ServerManager : NetworkHost
                     serverGameManager.SetPlayerDirection(recEvent.sender, playerMove.moveDir);
                     NetworkPlayer movingPlayer = serverGameManager.clientToPlayer[recEvent.sender];
                     //SendAll(MessageType.MoveReply, new MoveReply(movingPlayer.data.name, movingPlayer.data.direction, movingPlayer.GetGridLocation()));
-                    SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.charMap, serverGameManager.clientToPlayer, Time.time));
+                    SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.charMap, serverGameManager.clientToPlayer, NetworkTransport.GetNetworkTimestamp()));
                 }
                 if (message.type == MessageType.BombRequest)
                 {
@@ -132,7 +132,7 @@ public class ServerManager : NetworkHost
         if (serverGameManager != null && stateUpdateCooldown <= 0f)
         {
             //SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.map.grid, serverGameManager.clientToPlayer));
-            SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.charMap, serverGameManager.clientToPlayer, Time.time));
+            SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.charMap, serverGameManager.clientToPlayer, NetworkTransport.GetNetworkTimestamp()));
             stateUpdateCooldown = updateFrequency;
         }
         else
@@ -180,7 +180,7 @@ public class ServerManager : NetworkHost
                 }
             }
             
-            base.Send(clientList[i], MessageType.Setup, new Setup(playerListToSend, indexMusic, Time.time));
+            base.Send(clientList[i], MessageType.Setup, new Setup(playerListToSend, indexMusic, NetworkTransport.GetNetworkTimestamp()));
         }
         _isGameStarted = true;
     }
