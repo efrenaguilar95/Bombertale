@@ -8,7 +8,6 @@ public class ServerGameManager : MonoBehaviour
     public Dictionary<int, NetworkPlayer> clientToPlayer = new Dictionary<int, NetworkPlayer>();
 
     public ServerManager _serverManager;
-    private ClientManager _clientManager;
     private List<NetworkPlayer> _playerList = new List<NetworkPlayer>();
     public List<List<char>> charMap;
 
@@ -17,7 +16,6 @@ public class ServerGameManager : MonoBehaviour
         for (int i = 1; i <= 4; i++)
             _playerList.Add(GameObject.Find("Player" + i).GetComponent<NetworkPlayer>());
         GameObject serverObject = GameObject.Find("NetworkManager");
-        _clientManager = serverObject.GetComponent<ClientManager>();
         _serverManager = serverObject.GetComponent<ServerManager>();
         _serverManager.serverGameManager = this;
         charMap = Mapper.StringToMap(Mapper.mapString);

@@ -11,7 +11,7 @@ public enum MessageType
     StartGame,
     Setup,
     Move,
-    MoveReply,
+    //MoveReply,
     StateUpdate,
     BombRequest,
     BombReply,
@@ -81,20 +81,20 @@ public struct Move
     }
 }
 
-[System.Serializable]
-public struct MoveReply
-{
-    public string playerName;
-    public Direction moveDir;
-    public Vector2 gridLocation;
+//[System.Serializable]
+//public struct MoveReply
+//{
+//    public string playerName;
+//    public Direction moveDir;
+//    public Vector2 gridLocation;
 
-    public MoveReply(string playerName, Direction direction, Vector2 gridLoc)
-    {
-        this.playerName = playerName;
-        this.moveDir = direction;
-        this.gridLocation = gridLoc;
-    }
-}
+//    public MoveReply(string playerName, Direction direction, Vector2 gridLoc)
+//    {
+//        this.playerName = playerName;
+//        this.moveDir = direction;
+//        this.gridLocation = gridLoc;
+//    }
+//}
 
 [System.Serializable]
 public struct StateUpdate
@@ -217,8 +217,8 @@ public class Message
                 return JsonUtility.FromJson<Setup>(subJson);
             case MessageType.Move:
                 return JsonUtility.FromJson<Move>(subJson);
-            case MessageType.MoveReply:
-                return JsonUtility.FromJson<MoveReply>(subJson);
+            //case MessageType.MoveReply:
+            //    return JsonUtility.FromJson<MoveReply>(subJson);
             case MessageType.StateUpdate:
                 return JsonUtility.FromJson<StateUpdate>(subJson);
             case MessageType.BombRequest:

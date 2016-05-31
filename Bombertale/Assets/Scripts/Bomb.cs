@@ -12,7 +12,6 @@ public class Bomb : MonoBehaviour {
     public GameObject exHori;
     public GameObject exVert;
 
-    Mapper map;
     AudioSource bombSound;
 
     //This will break local game
@@ -21,7 +20,6 @@ public class Bomb : MonoBehaviour {
 
     void Awake()
     {
-        map = GameObject.Find("Map").GetComponent<Mapper>();
         bombSound = GameObject.Find("GameAudioManager").GetComponent<GameAudio>().bombSound;
         _clientManager = GameObject.Find("NetworkManager").GetComponent<ClientManager>();
         _serverGameManager = GameObject.Find("GameManager").GetComponent<ServerGameManager>();
@@ -36,7 +34,6 @@ public class Bomb : MonoBehaviour {
         Destroy(this.gameObject);
         bombSound.Play();
         Instantiate(exCenter, this.transform.position, Quaternion.identity);
-        //map.grid[(int)this.transform.position.x][(int)this.transform.position.y] = CellID.Explosion;
         _clientManager.charMap[(int)this.transform.position.x][(int)this.transform.position.y] = CellID.Explosion;
         if (_serverGameManager != null)
             _serverGameManager.charMap[(int)this.transform.position.x][(int)this.transform.position.y] = CellID.Explosion;

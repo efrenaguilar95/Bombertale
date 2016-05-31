@@ -9,15 +9,6 @@ public class SoftBlock : MonoBehaviour {
 
     private bool isQuitting = false;
 
-    Mapper map;
-    int xLoc, yLoc;
-    void Awake()
-    {
-        map = GameObject.Find("Map").GetComponent<Mapper>();
-        xLoc = (int)this.transform.position.x;
-        yLoc = (int)this.transform.position.y;  
-    }
-
     public void GetRekt()
     {
         Fizzle();

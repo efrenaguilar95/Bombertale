@@ -54,7 +54,6 @@ public class NetworkPlayer : MonoBehaviour
 
     public PlayerData data;
     private GameObject bombPrefab;
-    private ClientManager _clientManager;
     private Animator playerAnim;
     private bool isOrigColor = true;
     private Color flashColor;
@@ -64,7 +63,6 @@ public class NetworkPlayer : MonoBehaviour
     {
         this.data = new PlayerData(this.name, "", this.GetWorldLocation(), Direction.NONE, false, 3f, 1, 1, false, 0f);
         this.bombPrefab = Resources.Load("Bomb") as GameObject;
-        _clientManager = GameObject.Find("NetworkManager").GetComponent<ClientManager>();
         playerAnim = this.GetComponent<Animator>();
         spriteRenderer = this.GetComponent<SpriteRenderer>();
         flashColor = new Color(1.0f, 0, 0);

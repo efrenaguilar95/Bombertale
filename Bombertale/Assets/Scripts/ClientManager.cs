@@ -27,8 +27,6 @@ public class ClientManager : NetworkHost
     public List<List<GameObject>> gameObjectMap;
 
     private GameAudio _gameAudio;
-    private float myStartTime;
-    private float serverStartTime;
 
     void OnLevelWasLoaded(int level)
     {
@@ -320,9 +318,6 @@ public class ClientManager : NetworkHost
         _gameAudio = GameObject.Find("GameAudioManager").GetComponent<GameAudio>();
         _gameAudio.SelectMusic(setup.songSelection);
         this._isGameStarted = true;
-
-        myStartTime = Time.time;
-        serverStartTime = setup.timestamp;
     }
 
     private void HandleStateUpdate(Message message)
@@ -333,21 +328,21 @@ public class ClientManager : NetworkHost
         foreach (PlayerData serverPlayer in stateUpdate.players)
         {
             Vector2 rollbackLocation = new Vector2(serverPlayer.worldLocation.x, serverPlayer.worldLocation.y);
-            switch (serverPlayer.direction)
-            {
-                case Direction.UP:
-                    rollbackLocation += new Vector2(0, serverPlayer.speed * _clockOffset);
-                    break;
-                case Direction.DOWN:
-                    rollbackLocation -= new Vector2(0, serverPlayer.speed * _clockOffset);
-                    break;
-                case Direction.RIGHT:
-                    rollbackLocation += new Vector2(serverPlayer.speed * _clockOffset, 0);
-                    break;
-                case Direction.LEFT:
-                    rollbackLocation -= new Vector2(serverPlayer.speed * _clockOffset, 0);
-                    break;
-            }
+            //switch (serverPlayer.direction)
+            //{
+            //    case Direction.UP:
+            //        rollbackLocation += new Vector2(0, serverPlayer.speed * _clockOffset);
+            //        break;
+            //    case Direction.DOWN:
+            //        rollbackLocation -= new Vector2(0, serverPlayer.speed * _clockOffset);
+            //        break;
+            //    case Direction.RIGHT:
+            //        rollbackLocation += new Vector2(serverPlayer.speed * _clockOffset, 0);
+            //        break;
+            //    case Direction.LEFT:
+            //        rollbackLocation -= new Vector2(serverPlayer.speed * _clockOffset, 0);
+            //        break;
+            //}
             rollbackLocation = new Vector2((int)rollbackLocation.x, (int)rollbackLocation.y);
 
             NetworkPlayer player = _players[serverPlayer.name];
@@ -359,14 +354,12 @@ public class ClientManager : NetworkHost
             player.data.direction = serverPlayer.direction;
         }
         //Calculate offset
-        //float serverDelta = stateUpdate.timeStamp - serverStartTime;
-        //_clockOffset = Time.time - (myStartTime + serverDelta);
-        byte error;
-        _clockOffset = NetworkTransport.GetRemoteDelayTimeMS(this._hostID, _server, stateUpdate.timeStamp, out error) / 1000;
-        Debug.Log(_clockOffset);
-        if (_clockOffset < 0)
-            _clockOffset = 0f;
-        Debug.Log("Ping (ms): " + _clockOffset * 1000);
+        //byte error;
+        //_clockOffset = (float)NetworkTransport.GetRemoteDelayTimeMS(this._hostID, _server, stateUpdate.timeStamp, out error) / 1000;
+        //Debug.Log(_clockOffset);
+        //if (_clockOffset < 0)
+        //    _clockOffset = 0f;
+        //Debug.Log("Ping (ms): " + _clockOffset * 1000);
     }
 
     private void HandleBombReply(Message message)
@@ -376,16 +369,16 @@ public class ClientManager : NetworkHost
         droppingPlayer.DropBomb();
     }
 
-    private void HandleMoveReply(Message message)
-    {
-        MoveReply moveReply = (MoveReply)message.GetData();
-        NetworkPlayer playerToMove = _players[moveReply.playerName];
-        if (playerToMove.GetGridLocation() != moveReply.gridLocation)
-        {
-            playerToMove.GetComponent<Rigidbody2D>().MovePosition(new Vector2(moveReply.gridLocation.x + .5f, moveReply.gridLocation.y + .5f));
-        }
-        playerToMove.data.direction = moveReply.moveDir;
-    }
+    //private void HandleMoveReply(Message message)
+    //{
+    //    MoveReply moveReply = (MoveReply)message.GetData();
+    //    NetworkPlayer playerToMove = _players[moveReply.playerName];
+    //    if (playerToMove.GetGridLocation() != moveReply.gridLocation)
+    //    {
+    //        playerToMove.GetComponent<Rigidbody2D>().MovePosition(new Vector2(moveReply.gridLocation.x + .5f, moveReply.gridLocation.y + .5f));
+    //    }
+    //    playerToMove.data.direction = moveReply.moveDir;
+    //}
 
     private void HandleDestroySoftBlock(Message message)
     {

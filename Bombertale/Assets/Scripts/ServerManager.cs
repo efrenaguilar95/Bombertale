@@ -11,8 +11,6 @@ public class ServerManager : NetworkHost
     public string[] clientUsernames;
     public ServerGameManager serverGameManager;
     private DatabaseManager _databaseManager;
-
-    bool _isGameStarted = false;
     float randMusic;
     int indexMusic;
 
@@ -96,13 +94,13 @@ public class ServerManager : NetworkHost
                 {
                     Move playerMove = (Move)message.GetData();
                     serverGameManager.SetPlayerDirection(recEvent.sender, playerMove.moveDir);
-                    NetworkPlayer movingPlayer = serverGameManager.clientToPlayer[recEvent.sender];
+                    //NetworkPlayer movingPlayer = serverGameManager.clientToPlayer[recEvent.sender];
                     //SendAll(MessageType.MoveReply, new MoveReply(movingPlayer.data.name, movingPlayer.data.direction, movingPlayer.GetGridLocation()));
                     SendAll(MessageType.StateUpdate, new StateUpdate(serverGameManager.charMap, serverGameManager.clientToPlayer, NetworkTransport.GetNetworkTimestamp()));
                 }
                 if (message.type == MessageType.BombRequest)
                 {
-                    BombRequest bombRequest = (BombRequest)message.GetData();
+                    //BombRequest bombRequest = (BombRequest)message.GetData();
                     if (serverGameManager.DropBomb(recEvent.sender))
                     {
                         NetworkPlayer droppingPlayer = serverGameManager.clientToPlayer[recEvent.sender];
@@ -182,6 +180,5 @@ public class ServerManager : NetworkHost
             
             base.Send(clientList[i], MessageType.Setup, new Setup(playerListToSend, indexMusic, NetworkTransport.GetNetworkTimestamp()));
         }
-        _isGameStarted = true;
     }
 }

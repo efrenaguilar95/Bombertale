@@ -2,13 +2,11 @@
 using System.Collections;
 
 public class NetworkSoftBlock : MonoBehaviour {
-    private Mapper map;
     private int xLoc, yLoc;
     private ServerGameManager _serverGameManager;
 
     void Awake()
     {
-        map = GameObject.Find("Map").GetComponent<Mapper>();
         xLoc = (int)this.transform.position.x;
         yLoc = (int)this.transform.position.y;
         _serverGameManager = GameObject.Find("GameManager").GetComponent<ServerGameManager>();
@@ -48,7 +46,5 @@ public class NetworkSoftBlock : MonoBehaviour {
             }
             _serverGameManager._serverManager.SendAll(MessageType.StateUpdate, new StateUpdate(_serverGameManager.charMap, _serverGameManager.clientToPlayer, UnityEngine.Networking.NetworkTransport.GetNetworkTimestamp()));
         }
-        //Destroy(this.gameObject);
-        //map.grid[xLoc][yLoc] = ".";
     }
 }
