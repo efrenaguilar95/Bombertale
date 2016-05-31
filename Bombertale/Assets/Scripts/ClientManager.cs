@@ -25,6 +25,7 @@ public class ClientManager : NetworkHost
     private Dictionary<string, NetworkPlayer> _players = new Dictionary<string, NetworkPlayer>();
     public List<List<char>> charMap;
     public List<List<GameObject>> gameObjectMap;
+    public GameObject DCPanel;
 
     private GameAudio _gameAudio;
 
@@ -60,7 +61,9 @@ public class ClientManager : NetworkHost
         if (recEvent.type == NetworkEventType.DisconnectEvent)
         {
             Debug.Log("Server kicked me");
-            SceneManager.LoadScene("ServerList");
+            //SceneManager.LoadScene("ServerList");
+            DCPanel.SetActive(true);
+            Time.timeScale = 0;
         }
         if (recEvent.type == NetworkEventType.DataEvent)
         {
@@ -316,6 +319,8 @@ public class ClientManager : NetworkHost
         }
         myPlayer = _players[setup.players[0]];
         _gameAudio = GameObject.Find("GameAudioManager").GetComponent<GameAudio>();
+        DCPanel = GameObject.Find("DCPanel");
+        DCPanel.SetActive(false);
         _gameAudio.SelectMusic(setup.songSelection);
         this._isGameStarted = true;
     }
@@ -328,21 +333,21 @@ public class ClientManager : NetworkHost
         foreach (PlayerData serverPlayer in stateUpdate.players)
         {
             Vector2 rollbackLocation = new Vector2(serverPlayer.worldLocation.x, serverPlayer.worldLocation.y);
-            //switch (serverPlayer.direction)
-            //{
-            //    case Direction.UP:
-            //        rollbackLocation += new Vector2(0, serverPlayer.speed * _clockOffset);
-            //        break;
-            //    case Direction.DOWN:
-            //        rollbackLocation -= new Vector2(0, serverPlayer.speed * _clockOffset);
-            //        break;
-            //    case Direction.RIGHT:
-            //        rollbackLocation += new Vector2(serverPlayer.speed * _clockOffset, 0);
-            //        break;
-            //    case Direction.LEFT:
-            //        rollbackLocation -= new Vector2(serverPlayer.speed * _clockOffset, 0);
-            //        break;
-            //}
+            switch (serverPlayer.direction)
+            {
+                case Direction.UP:
+                    rollbackLocation += new Vector2(0, serverPlayer.speed * _clockOffset);
+                    break;
+                case Direction.DOWN:
+                    rollbackLocation -= new Vector2(0, serverPlayer.speed * _clockOffset);
+                    break;
+                case Direction.RIGHT:
+                    rollbackLocation += new Vector2(serverPlayer.speed * _clockOffset, 0);
+                    break;
+                case Direction.LEFT:
+                    rollbackLocation -= new Vector2(serverPlayer.speed * _clockOffset, 0);
+                    break;
+            }
             rollbackLocation = new Vector2((int)rollbackLocation.x, (int)rollbackLocation.y);
 
             NetworkPlayer player = _players[serverPlayer.name];
@@ -354,12 +359,12 @@ public class ClientManager : NetworkHost
             player.data.direction = serverPlayer.direction;
         }
         //Calculate offset
-        //byte error;
-        //_clockOffset = (float)NetworkTransport.GetRemoteDelayTimeMS(this._hostID, _server, stateUpdate.timeStamp, out error) / 1000;
-        //Debug.Log(_clockOffset);
-        //if (_clockOffset < 0)
-        //    _clockOffset = 0f;
-        //Debug.Log("Ping (ms): " + _clockOffset * 1000);
+        byte error;
+        _clockOffset = (float)NetworkTransport.GetRemoteDelayTimeMS(this._hostID, _server, stateUpdate.timeStamp, out error) / 1000;
+        Debug.Log(_clockOffset);
+        if (_clockOffset < 0)
+            _clockOffset = 0f;
+        Debug.Log("Ping (ms): " + _clockOffset * 1000);
     }
 
     private void HandleBombReply(Message message)
