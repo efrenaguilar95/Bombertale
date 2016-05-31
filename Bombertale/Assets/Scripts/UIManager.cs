@@ -2,21 +2,42 @@
 using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour {
 
 	private string unityPassword = "ICS168";
     private DatabaseManager _databaseManager;
     public static string userName;
+    EventSystem system;
 
     void Awake()
     {
         _databaseManager = this.GetComponent<DatabaseManager>();
+        system = EventSystem.current;
     }
 
 	void Update()
 	{
 		string response = _databaseManager.getWWWText ();
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            Selectable next = Input.GetKey(KeyCode.LeftShift) ?
+                system.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnUp() :
+                system.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnDown();
+              if (next != null)
+                {
+                    InputField input = next.GetComponent<InputField>();
+                if (input != null)
+                    {
+                    input.OnPointerClick(new PointerEventData(system));
+                    system.SetSelectedGameObject(next.gameObject, new BaseEventData(system));
+                    }
+
+
+                }
+        }
+ 
 		if (response!="waiting") 
 		{
 			string returnCode = response.Substring (0, 4);
