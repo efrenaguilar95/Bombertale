@@ -45,29 +45,67 @@ public class ServerListManager : MonoBehaviour
         Refresh();
     }
 
+	void Update()
+	{
+		string response = _databaseManager.getWWWText ();
+		if (response!="waiting") 
+		{
+			string returnCode = response.Substring(0, 4);
+			if (returnCode == "BL00") { //Got servers successfully
+				splitString (response);
+
+				for (int i = 0; i < serverCount; ++i) {
+					string[] temp;
+					temp = serverList [i].Split ('&');
+					Server newServer = new Server (temp);
+					servers.Add (newServer.serverName, newServer);
+				}
+				GameObject tempObject = null;
+
+				foreach (Server server in servers.Values) {
+					tempObject = Instantiate (serverRowPrefab, this.transform.position, Quaternion.identity) as GameObject;
+					tempObject.transform.SetParent (transform.parent.Find ("Scroll View/Viewport/Content"));
+					tempObject.transform.localScale = Vector3.one;
+					tempObject.transform.Find ("ServerName").GetComponent<UnityEngine.UI.Text> ().text = server.serverName;
+					tempObject.transform.Find ("Players").GetComponent<UnityEngine.UI.Text> ().text = server.playerCount + "/4";
+					if (server.security) {
+						tempObject.transform.Find ("Security").GetComponent<UnityEngine.UI.Image> ().sprite = Resources.Load<Sprite> ("lock");
+					}
+
+					toDelete.Add (tempObject);
+
+				}
+			} 
+			else if (returnCode == "BL01") //No servers hosted
+			{
+				_errorText.text = "No servers hosted";
+			}
+			else if(returnCode == "BL13") //Server is ready to be joined
+			{
+				if (NetworkHost.IsPrivate)
+				{
+					//message box
+					if(true) //password is WRONG
+					{
+						_errorText.text = "Wrong Password";
+						return;
+					}
+				}
+				SceneManager.LoadScene("ClientLobby");
+			}
+			else if (returnCode == "BL12")
+				_errorText.text = "Server is full";
+			else if (returnCode == "BL08")
+				_errorText.text = "Server doesn't exist";
+			else
+				_errorText.text = "Could not connect";
+		}
+	}
+
     public void PressJoin()
     {
-        string response = _databaseManager.JoinServer(NetworkHost.ServerName).Substring(0, 4);
+		_databaseManager.JoinServer (NetworkHost.ServerName);
         _errorText.text = "";
-        if (response == "BL13")
-        {
-            if (NetworkHost.IsPrivate)
-            {
-                //message box
-                if(true) //password is WRONG
-                {
-                    _errorText.text = "Wrong Password";
-                    return;
-                }
-            }
-            SceneManager.LoadScene("ClientLobby");
-        }
-        else if (response == "BL12")
-            _errorText.text = "Server is full";
-        else if (response == "BL08")
-            _errorText.text = "Server doesn't exist";
-        else
-            _errorText.text = "Could not connect";
 
     }
 
@@ -77,41 +115,8 @@ public class ServerListManager : MonoBehaviour
         ClearServers();
         _errorText.text = "";
 
-        string response = _databaseManager.GetServers();
 
-        if (response.Substring(0, 4) == "BL00")
-        {
-            splitString(response);
-
-            for (int i = 0; i < serverCount; ++i)
-            {
-                string[] temp;
-                temp = serverList[i].Split('&');
-                Server newServer = new Server(temp);
-                servers.Add(newServer.serverName, newServer);
-            }
-            GameObject tempObject = null;
-
-            foreach (Server server in servers.Values)
-            {
-                tempObject = Instantiate(serverRowPrefab, this.transform.position, Quaternion.identity) as GameObject;
-                tempObject.transform.SetParent(transform.parent.Find("Scroll View/Viewport/Content"));
-                tempObject.transform.localScale = Vector3.one;
-                tempObject.transform.Find("ServerName").GetComponent<UnityEngine.UI.Text>().text = server.serverName;
-                tempObject.transform.Find("Players").GetComponent<UnityEngine.UI.Text>().text = server.playerCount + "/4";
-                if (server.security)
-                {
-                    tempObject.transform.Find("Security").GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>("lock");
-                }
-
-                toDelete.Add(tempObject);
-
-            }
-        }
-        else if (response.Substring(0, 4) == "BL01")
-            _errorText.text = "No servers hosted";
-        else
-            _errorText.text = "Could not connect";
+        _databaseManager.GetServers();
     }
 
     private void splitString(string message)

@@ -5,6 +5,10 @@ using System.Collections.Generic;
 public class DatabaseManager : MonoBehaviour
 {
 
+	public WWW www;
+	public bool isDone = false;
+	private string unityPassword = "ICS168";
+
     void OnApplicationQuit()
     {
         this.Logout(UIManager.userName);
@@ -20,9 +24,7 @@ public class DatabaseManager : MonoBehaviour
 	*/
 
 
-	private string unityPassword = "ICS168";
-
-	public string GetServers()
+	public void GetServers()
 	{
 		/*
 			CAN RETURN:
@@ -30,10 +32,10 @@ public class DatabaseManager : MonoBehaviour
 				BL01:	No servers hosted
 		*/
 		string url = "http://apedestrian.com/bombertale/GetServers.php?unityPassword=" + unityPassword;
-		return GetText (url);
+		SendRequest (url);
 	}
 
-	public string DeleteServer(string serverName)
+	public void DeleteServer(string serverName)
 	{
 		/*
 			CAN RETURN:
@@ -41,10 +43,10 @@ public class DatabaseManager : MonoBehaviour
 				BL06:	Failed to delete server
 		*/
 		string url = "http://apedestrian.com/bombertale/DeleteServer.php?unityPassword=" + unityPassword + "&serverName=" + serverName;
-		return GetText (url);
+		SendRequest (url);
 	}
 
-	public string CreateServer(string serverName, string ip, int port, bool isPrivate, string password, int players)
+	public void CreateServer(string serverName, string ip, int port, bool isPrivate, string password, int players)
 	{
 		/*
 			CAN RETURN:
@@ -54,10 +56,10 @@ public class DatabaseManager : MonoBehaviour
 		string isPrivateString = isPrivate ? "1" : "0";
 
 		string url = "http://apedestrian.com/bombertale/CreateServer.php?unityPassword=" + unityPassword + "&serverName=" + serverName + "&serverIp=" + ip + "&port=" + port + "&private=" + isPrivateString + "&password=" + password + "&players=" + players;
-		return GetText (url);
+		SendRequest (url);
 	}
 
-	public string JoinServer(string serverName)
+	public void JoinServer(string serverName)
 	{
 		/*
 			CAN RETURN:
@@ -66,10 +68,10 @@ public class DatabaseManager : MonoBehaviour
 				BL13:	Server is ready to be joined
 		*/
 		string url = "http://apedestrian.com/bombertale/JoinServer.php?unityPassword=" + unityPassword +  "&serverName=" + serverName;
-		return GetText (url);
+		SendRequest (url);
 	}
 
-	public string UpdatePlayers(string serverName, int players)
+	public void UpdatePlayers(string serverName, int players)
 	{
 		/*
 			CAN RETURN:
@@ -77,10 +79,10 @@ public class DatabaseManager : MonoBehaviour
 				BL10:	Failed to update players
 		*/
 		string url = "http://apedestrian.com/bombertale/UpdatePlayers.php?unityPassword=" + unityPassword +  "&serverName=" + serverName + "&players=" + players;
-		return GetText (url);
+		SendRequest (url);
 	}
 
-	public string CreateAccount(string username, string password, string email)
+	public void CreateAccount(string username, string password, string email)
 	{
 		/*
 			CAN RETURN:
@@ -90,10 +92,10 @@ public class DatabaseManager : MonoBehaviour
 				BC06:	Failed to create account
 		*/
 		string url = "http://apedestrian.com/bombertale/CreateAccount.php?unityPassword=" + unityPassword +  "&clientUsername=" + username + "&clientPassword=" + password + "&clientEmail=" + email;
-		return GetText (url);
+		SendRequest (url);
 	}
 
-	public string Login(string username, string password)
+	public void Login(string username, string password)
 	{
 		/*
 			CAN RETURN:
@@ -104,10 +106,10 @@ public class DatabaseManager : MonoBehaviour
 				BC11:	Failed to login
 		*/
 		string url = "http://apedestrian.com/bombertale/Login.php?unityPassword=" + unityPassword +  "&clientUsername=" + username + "&clientPassword=" + password;
-		return GetText (url);
+		SendRequest (url);
 	}
 
-	public string SendLoginResetEmail(string email)
+	public void SendLoginResetEmail(string email)
 	{
 		/*
 			CAN RETURN:
@@ -116,10 +118,10 @@ public class DatabaseManager : MonoBehaviour
 				BC09:	Failed to send email
 		*/
 		string url = "http://apedestrian.com/bombertale/SendLoginResetEmail.php?unityPassword=" + unityPassword +  "&clientEmail=" + email;
-		return GetText (url);
+		SendRequest (url);
 	}
 
-	public string Logout(string clientUsername)
+	public void Logout(string clientUsername)
 	{
 		/*
 			CAN RETURN:
@@ -127,10 +129,10 @@ public class DatabaseManager : MonoBehaviour
 				BC13:	Failed to logout
 		*/
 		string url = "http://apedestrian.com/bombertale/Logout.php?unityPassword=" + unityPassword +  "&clientUsername=" + clientUsername;
-		return GetText (url);
+		SendRequest (url);
 	}
 
-	public string ServerCheckin(string serverName)
+	public void ServerCheckin(string serverName)
 	{
 		/*
 			CAN RETURN:
@@ -138,10 +140,10 @@ public class DatabaseManager : MonoBehaviour
 				BL15:	Failed to checkin
 		*/
 		string url = "http://apedestrian.com/bombertale/ServerCheckin.php?unityPassword=" + unityPassword +  "&serverName=" + serverName;
-		return GetText (url);
+		SendRequest (url);
 	}
 
-	public string clientCheckin(string clientUsername)
+	public void clientCheckin(string clientUsername)
 	{
 		/*
 			CAN RETURN:
@@ -149,10 +151,10 @@ public class DatabaseManager : MonoBehaviour
 				BC15:	Failed to checkin
 		*/
 		string url = "http://apedestrian.com/bombertale/ServerCheckin.php?unityPassword=" + unityPassword +  "&clientUsername=" + clientUsername;
-		return GetText (url);
+		SendRequest (url);
 	}
 
-	public string cannotConnect(string serverName)
+	public void cannotConnect(string serverName)
 	{
 		/*
 			CAN RETURN:
@@ -162,28 +164,48 @@ public class DatabaseManager : MonoBehaviour
 				BL18:	Server has checked in recently, did not report
 		*/
 		string url = "http://apedestrian.com/bombertale/CannotConnect.php?unityPassword=" + unityPassword +  "&serverName=" + serverName;
-		return GetText (url);
+		SendRequest (url);
 	}
 
-	private string GetText(string url)
+	public string getWWWText()
 	{
-		WWW www = new WWW(url.Replace(" ", "%20"));
-		StartCoroutine(WaitForRequest(www));
-		while(!www.isDone)
+		if (www == null)
+			return "waiting";
+		//Debug.Log (www);
+		if (www.isDone && !isDone)
 		{
-			//...
+			isDone = www.isDone;
+			return www.text;
 		}
-		return www.text;
+		return "waiting";
 	}
 
+	private void SendRequest(string url)
+	{
+		www = null;
+		www = new WWW(url.Replace(" ", "%20"));
+		isDone = false;
+		StartCoroutine(WaitForRequest(www));
+		//while(!www.isDone)
+		//{
+			//...
+		//}
+		//return www.text;
+	}
+
+	///*
 	private IEnumerator WaitForRequest(WWW www)
 	{
-		yield return www;
+		//while(!www.isDone)
+		//{
+			yield return www;
 
-		// check for errors
-		if(!string.IsNullOrEmpty(www.error))
-			Debug.Log("WWW Error: "+ www.error);
-		else
-			Debug.Log("WWW success: "+ www.text);
+			// check for errors
+			if(!string.IsNullOrEmpty(www.error))
+				Debug.Log("WWW Error: "+ www.error);
+			else
+				Debug.Log("WWW success: "+ www.text);
+		//}
 	}
+	//*/
 }
