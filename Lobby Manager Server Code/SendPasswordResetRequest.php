@@ -52,7 +52,7 @@
 		die('<span style="color: red">Failed to update password</span>');
 	}
 
-	$newPassword = sha1(strip_tags($_GET['newPassword']));
+	$newPassword = sha1(strip_tags($_GET['newPassword']) . "theDOG");
 
 	$query = "UPDATE $usersTablename SET password = '$newPassword' WHERE id = '$id'";
 

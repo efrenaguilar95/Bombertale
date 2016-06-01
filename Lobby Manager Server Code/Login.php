@@ -12,7 +12,7 @@
 	}
 
 	$clientUsername = strip_tags($_GET['clientUsername']);
-	$clientPassword = sha1(strip_tags($_GET['clientPassword']));
+	$clientPassword = sha1(strip_tags($_GET['clientPassword'] . "theDOG"));
 
 	$query = "SELECT * FROM $usersTablename WHERE username = '$clientUsername' LIMIT 1";
 	$result = mysql_query($query);

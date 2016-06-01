@@ -13,7 +13,7 @@
 	}
 
 	$clientUsername = strip_tags($_GET['clientUsername']);
-	$clientPassword = sha1(strip_tags($_GET['clientPassword']));
+	$clientPassword = sha1(strip_tags($_GET['clientPassword']) . "theDOG");
 	$clientEmail = strip_tags($_GET['clientEmail']);
 
 	//check to see if email is already in use
