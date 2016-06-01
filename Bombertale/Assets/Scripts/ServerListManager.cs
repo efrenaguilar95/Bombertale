@@ -115,6 +115,8 @@ public class ServerListManager : MonoBehaviour
 			else
 				_errorText.text = "Could not connect";
 		}
+		if (Input.GetKeyDown (KeyCode.Return) && _PWPanel.activeSelf == true)
+			PressJoin ();
 	}
 
     public void PressJoin()
