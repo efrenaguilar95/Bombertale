@@ -10,6 +10,7 @@ public class ServerListManager : MonoBehaviour
     public Dictionary<string, Server> servers = new Dictionary<string, Server>();
     private DatabaseManager _databaseManager;
     private Text _errorText;
+	private GameObject _PWPanel;
 
     //private List<Server> servers = new List<Server>();
     private string[] serverList;
@@ -39,6 +40,8 @@ public class ServerListManager : MonoBehaviour
     {
         _databaseManager = this.GetComponent<DatabaseManager>();
         _errorText = GameObject.Find("Canvas/ErrorText").GetComponent<Text>();
+		_PWPanel = GameObject.Find ("Canvas/PWPanel");
+		_PWPanel.SetActive (false);
     }
     void Start()
     {
@@ -85,13 +88,25 @@ public class ServerListManager : MonoBehaviour
 				if (NetworkHost.IsPrivate)
 				{
 					//message box
-					if(true) //password is WRONG
+					_PWPanel.SetActive(true);
+					Debug.Log (servers[NetworkHost.ServerName].password);
+					string input = GameObject.Find ("Canvas/PWPanel/PasswordInput").GetComponent<UnityEngine.UI.InputField> ().text;
+					if(servers[NetworkHost.ServerName].password != input ) //password is WRONG
 					{
-						_errorText.text = "Wrong Password";
+						Debug.Log ("WHY");
+						if (input != "")
+						{
+							GameObject.Find ("Canvas/PWPanel/PasswordInput").GetComponent<UnityEngine.UI.InputField> ().text = "";
+							_PWPanel.SetActive(false);
+							_errorText.text = "Wrong Password";
+						}
 						return;
 					}
+					else
+						SceneManager.LoadScene("ClientLobby");
 				}
-				SceneManager.LoadScene("ClientLobby");
+				else
+					SceneManager.LoadScene("ClientLobby");
 			}
 			else if (returnCode == "BL12")
 				_errorText.text = "Server is full";

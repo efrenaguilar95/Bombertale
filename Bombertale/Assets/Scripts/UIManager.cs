@@ -170,7 +170,4 @@ public class UIManager : MonoBehaviour {
 		string email = GameObject.Find("Canvas/Email").GetComponent<UnityEngine.UI.InputField>().text;
         _databaseManager.SendLoginResetEmail(email);
 	}
-
-
-
 }
