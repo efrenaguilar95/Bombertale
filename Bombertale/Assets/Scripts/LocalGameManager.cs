@@ -70,7 +70,7 @@ public class LocalGameManager : MonoBehaviour {
         {
             win = Winner();
             DeleteAll();
-            SceneManager.LoadScene("EndScreen");
+            SceneManager.LoadScene("LocalEndScreen");
         }
         
     }

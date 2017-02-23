@@ -19,81 +19,95 @@ public class UIManager : MonoBehaviour {
 
 	void Update()
 	{
-		string response = _databaseManager.getWWWText ();
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (SceneManager.GetActiveScene().name != "LocalEndScreen")
         {
-            Selectable next = Input.GetKey(KeyCode.LeftShift) ?
-                system.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnUp() :
-                system.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnDown();
-              if (next != null)
+            string response = _databaseManager.getWWWText();
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                Selectable next = Input.GetKey(KeyCode.LeftShift) ?
+                    system.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnUp() :
+                    system.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnDown();
+                if (next != null)
                 {
                     InputField input = next.GetComponent<InputField>();
-                if (input != null)
+                    if (input != null)
                     {
-                    input.OnPointerClick(new PointerEventData(system));
-                    system.SetSelectedGameObject(next.gameObject, new BaseEventData(system));
+                        input.OnPointerClick(new PointerEventData(system));
+                        system.SetSelectedGameObject(next.gameObject, new BaseEventData(system));
                     }
 
 
                 }
-        }
+            }
 
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            if (SceneManager.GetActiveScene().name == "Login")
-                Login();
-            else if (SceneManager.GetActiveScene().name == "CreateAccount")
-                CreateAccount();
-            else if (SceneManager.GetActiveScene().name == "ForgotLogin")
-                SubmitForgotLogin();
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                if (SceneManager.GetActiveScene().name == "Login")
+                    Login();
+                else if (SceneManager.GetActiveScene().name == "CreateAccount")
+                    CreateAccount();
+                else if (SceneManager.GetActiveScene().name == "ForgotLogin")
+                    SubmitForgotLogin();
+            }
+
+            if (response != "waiting")
+            {
+                string returnCode = response.Substring(0, 4);
+                if (returnCode == "BC00")
+                { //Login successful
+                    string username = GameObject.Find("Canvas/Username").GetComponent<UnityEngine.UI.InputField>().text;
+                    userName = username;
+                    GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "";
+                    SceneManager.LoadScene("JoinOrHost");
+                }
+                else if (returnCode == "BC04" || returnCode == "BC05")
+                {
+                    //wrong login information
+                    GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Wrong Login Information";
+                }
+                else if (returnCode == "BC10")
+                {
+                    //user logged in
+                    GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "That User Is Already Logged In";
+                }
+                else if (returnCode == "BC01")
+                {
+                    //account created!
+                    GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "";
+                    SceneManager.LoadScene("Login");
+                }
+                else if (returnCode == "BC02")
+                {
+                    //username taken
+                    GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Username Taken";
+                }
+                else if (returnCode == "BC03")
+                {
+                    //email in use
+                    GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Email Already In Use";
+                }
+                else if (returnCode == "BC07")
+                {
+                    //email sent!
+                    GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Email Sent!";
+                }
+                else if (returnCode == "BC08")
+                {
+                    //email not in database
+                    GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "No Accounts With That Email";
+                }
+                else if (returnCode == "BC09")
+                {
+                    //email not in database
+                    GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Failed To Send Email :(";
+                }
+                else
+                {
+                    //could not reach server
+                    GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Couldn't Reach Server";
+                }
+            }
         }
- 
-		if (response!="waiting") 
-		{
-			string returnCode = response.Substring (0, 4);
-			if (returnCode == "BC00") { //Login successful
-				string username = GameObject.Find ("Canvas/Username").GetComponent<UnityEngine.UI.InputField> ().text;
-				userName = username;
-				GameObject.Find ("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text> ().text = "";
-				SceneManager.LoadScene ("JoinOrHost");
-			} else if (returnCode == "BC04" || returnCode == "BC05") {
-				//wrong login information
-				GameObject.Find ("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text> ().text = "Wrong Login Information";
-			} else if (returnCode == "BC10") {
-				//user logged in
-				GameObject.Find ("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text> ().text = "That User Is Already Logged In";
-			} else if (returnCode == "BC01") {
-				//account created!
-				GameObject.Find ("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text> ().text = "";
-				SceneManager.LoadScene ("Login");
-			} else if (returnCode == "BC02") {
-				//username taken
-				GameObject.Find ("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text> ().text = "Username Taken";
-			} else if (returnCode == "BC03") {
-				//email in use
-				GameObject.Find ("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text> ().text = "Email Already In Use";
-			} 
-			else if (returnCode == "BC07") 
-			{
-				//email sent!
-				GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Email Sent!";
-			}
-			else if(returnCode == "BC08")
-			{
-				//email not in database
-				GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "No Accounts With That Email";
-			}
-			else if(returnCode == "BC09")
-			{
-				//email not in database
-				GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Failed To Send Email :(";
-			}
-			else
-			{
-				//could not reach server
-				GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Couldn't Reach Server";
-			}
-		}
 	}
 
     public void PressLocalGame()
@@ -116,6 +130,11 @@ public class UIManager : MonoBehaviour {
         //Debug.Log(_databaseManager.Logout(UIManager.userName));
 		SceneManager.LoadScene("MainMenu");
 	}
+
+    public void LocalMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 
 	public void GoToLogin()
 	{
