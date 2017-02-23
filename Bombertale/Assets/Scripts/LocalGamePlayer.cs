@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class LocalGamePlayer : MonoBehaviour
 {
@@ -84,6 +85,8 @@ public class LocalGamePlayer : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitObject)
     {
+        int xcoord = (int)hitObject.transform.position.x;
+        int ycoord = (int)hitObject.transform.position.y;
         if (hitObject.CompareTag("Explosion"))
         {
             if (new Vector2(hitObject.transform.position.x, hitObject.transform.position.y) == GridLocation())
@@ -94,7 +97,7 @@ public class LocalGamePlayer : MonoBehaviour
                 //    Destroy(spawnPoint.gameObject);
                 //}
                 //else {
-                    Die();
+                Die();
                 //}
             }
         }
@@ -106,25 +109,41 @@ public class LocalGamePlayer : MonoBehaviour
                 moveSpeed += speedPU;
             }
             Destroy(hitObject.gameObject);
+            List<List<char>> mapgrid = LocalMapper.StringToMap(LocalMapper.mapString);
+            mapgrid[xcoord][ycoord] = CellID.Empty;
+            string newMapstring = LocalMapper.MapToString(mapgrid);
+            LocalMapper.mapString = newMapstring;
         }
         else if (hitObject.CompareTag("PUExplosion"))
         {
             pickupSound.Play();
             bombSize += sizePU;
             Destroy(hitObject.gameObject);
+            List<List<char>> mapgrid = LocalMapper.StringToMap(LocalMapper.mapString);
+            mapgrid[xcoord][ycoord] = CellID.Empty;
+            string newMapstring = LocalMapper.MapToString(mapgrid);
+            LocalMapper.mapString = newMapstring;
         }
         else if (hitObject.CompareTag("PUBomb"))
         {
             pickupSound.Play();
             bombCount++;
             Destroy(hitObject.gameObject);
+            List<List<char>> mapgrid = LocalMapper.StringToMap(LocalMapper.mapString);
+            mapgrid[xcoord][ycoord] = CellID.Empty;
+            string newMapstring = LocalMapper.MapToString(mapgrid);
+            LocalMapper.mapString = newMapstring;
         }
         else if (hitObject.CompareTag("PUDetermine"))
         {
             pickupSound.Play();
-            determinedTime = 5.0f;
+            determinedTime = 5.7f;
             isDetermined = true;
             Destroy(hitObject.gameObject);
+            List<List<char>> mapgrid = LocalMapper.StringToMap(LocalMapper.mapString);
+            mapgrid[xcoord][ycoord] = CellID.Empty;
+            string newMapstring = LocalMapper.MapToString(mapgrid);
+            LocalMapper.mapString = newMapstring;
         }
         //else if (hitObject.CompareTag("PURespawn"))
         //{
@@ -140,7 +159,7 @@ public class LocalGamePlayer : MonoBehaviour
         {
             bombCount--;
             GameObject newBomb = (GameObject)Instantiate(bomb, GridLocation(), Quaternion.identity);
-            Bomb bombScript = newBomb.GetComponent<Bomb>();
+            LocalGameBomb bombScript = newBomb.GetComponent<LocalGameBomb>();
             bombScript.size = bombSize;
             Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), newBomb.GetComponent<Collider2D>());
             Invoke("RefillBombCount", bombScript.lifespan);

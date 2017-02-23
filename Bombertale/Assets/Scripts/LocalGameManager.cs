@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Collections.Generic;
 
 public class LocalGameManager : MonoBehaviour {
 
@@ -32,17 +33,34 @@ public class LocalGameManager : MonoBehaviour {
     PlayerStruct p4Struct;
 
     public static int win = 0;
-    
+
+    public List<List<char>> charMap;
+    public List<List<GameObject>> gameObjectMap;
+
+    public string mapStringPub;
+    private GameAudio _gameAudio;
+    private int invlunCount = 0;
+
 
     void Awake() {
         p1Struct = new PlayerStruct(player1, KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.Space);
         p2Struct = new PlayerStruct(player2, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.DownArrow, KeyCode.RightArrow, KeyCode.Mouse0);
         p3Struct = new PlayerStruct(player3, KeyCode.Keypad5, KeyCode.Keypad1, KeyCode.Keypad2, KeyCode.Keypad3, KeyCode.Keypad0);
         p4Struct = new PlayerStruct(player4, KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, KeyCode.P);
+        _gameAudio = GameObject.Find("GameAudioManager").GetComponent<GameAudio>();
+    }
+
+    void Start()
+    {
+        charMap = LocalMapper.StringToMap(LocalMapper.mapString);
+        mapStringPub = LocalMapper.mapString;
+        gameObjectMap = LocalMapper.CreateGameObjectMap(charMap);
     }
 
     void Update()
     {
+        UpdateMap(LocalMapper.mapString);
+        mapStringPub = LocalMapper.MapToString(charMap);
         PlayerHandler(p1Struct);
         PlayerHandler(p2Struct);
         PlayerHandler(p3Struct);
@@ -54,6 +72,24 @@ public class LocalGameManager : MonoBehaviour {
             DeleteAll();
             SceneManager.LoadScene("EndScreen");
         }
+        
+    }
+
+    void LateUpdate()
+    {
+        invlunCount = 0;
+        if (p1Struct.playerScript.isDetermined)
+            invlunCount++;
+        if (p2Struct.playerScript.isDetermined)
+            invlunCount++;
+        if (p3Struct.playerScript.isDetermined)
+            invlunCount++;
+        if (p4Struct.playerScript.isDetermined)
+            invlunCount++;
+        if (invlunCount == 0)
+            useInvulnMusic(false);
+        else
+            useInvulnMusic(true);
     }
 
     void DeleteAll()
@@ -113,6 +149,14 @@ public class LocalGameManager : MonoBehaviour {
             pStruct.isAlive = false;
             return;
         }
+        if (pStruct.playerScript.isDetermined)
+        {
+            invlunCount++;
+        }
+        else
+        {
+            invlunCount--;
+        }
         //Movement
         if (Input.GetKeyDown(pStruct.upKey))
         {
@@ -161,6 +205,63 @@ public class LocalGameManager : MonoBehaviour {
             pStruct.playerScript.DropBomb();
         }
 
+    }
+
+    private void UpdateMap(string mapString)
+    {
+        if (LocalMapper.MapToString(charMap) == mapString)
+        {
+            return;
+        }
+        else
+        {
+            List<List<char>> newMap = LocalMapper.StringToMap(mapString);
+            for (int col = 0; col < newMap.Count; col++)
+            {
+                for (int row = 0; row < newMap[col].Count; row++)
+                {
+                    char newCell = newMap[col][row];
+                    char myCell = charMap[col][row];
+                    if (myCell != newCell)
+                    {
+                        if (newCell == CellID.Empty)
+                        {
+                            //Destroy w/e I have
+                            Destroy(gameObjectMap[col][row]);
+                        }
+                        else if (myCell == CellID.SoftBlock && newCell != CellID.SoftBlock)
+                        {
+                            Destroy(gameObjectMap[col][row]);
+                            gameObjectMap[col][row] = LocalMapper.CreateCell(newCell, col, row);
+                        }
+                        else
+                        {
+                            //Instantiate
+                            gameObjectMap[col][row] = LocalMapper.CreateCell(newCell, col, row);
+                        }
+                    }
+                }
+            }
+
+            charMap = newMap;
+        }
+    }
+    private void useInvulnMusic(bool yes)
+    {
+        if (_gameAudio != null)
+        {
+            if (yes)
+            {
+                _gameAudio.musicSource.Pause();
+                if (!_gameAudio.invulnMusic.isPlaying)
+                    _gameAudio.invulnMusic.Play();
+            }
+            else
+            {
+                _gameAudio.invulnMusic.Stop();
+                _gameAudio.musicSource.UnPause();
+            }
+        }
     }
 }
 

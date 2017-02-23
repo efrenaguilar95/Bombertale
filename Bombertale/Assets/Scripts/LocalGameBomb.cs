@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Bomb : MonoBehaviour {
+public class LocalGameBomb : MonoBehaviour
+{
     public float lifespan = 2.5f;
     public int size = 1;
     public GameObject exCenter;
@@ -12,31 +13,27 @@ public class Bomb : MonoBehaviour {
     public GameObject exHori;
     public GameObject exVert;
 
-    AudioSource bombSound;
+    LocalMapper map;
+    LocalGameManager localGameManager;
 
-    //This will break local game
-    private ClientManager _clientManager;
-    private ServerGameManager _serverGameManager;
+    AudioSource bombSound;
 
     void Awake()
     {
         bombSound = GameObject.Find("GameAudioManager").GetComponent<GameAudio>().bombSound;
-        _clientManager = GameObject.Find("NetworkManager").GetComponent<ClientManager>();
-        _serverGameManager = GameObject.Find("GameManager").GetComponent<ServerGameManager>();
+        localGameManager = GameObject.Find("LocalGameManager").GetComponent<LocalGameManager>();
     }
 
-    void Start () {
+    void Start()
+    {
         Invoke("Explode", lifespan);
-	}
+    }
 
     void Explode()
     {
         Destroy(this.gameObject);
         bombSound.Play();
         Instantiate(exCenter, this.transform.position, Quaternion.identity);
-        _clientManager.charMap[(int)this.transform.position.x][(int)this.transform.position.y] = CellID.Explosion;
-        if (_serverGameManager != null)
-            _serverGameManager.charMap[(int)this.transform.position.x][(int)this.transform.position.y] = CellID.Explosion;
 
         ExplosionDirection(Vector3.up);
         ExplosionDirection(Vector3.down);
@@ -46,7 +43,7 @@ public class Bomb : MonoBehaviour {
 
     void ExplosionDirection(Vector3 direction)
     {
-        GameObject connectPrefab=null, endPrefab=null;
+        GameObject connectPrefab = null, endPrefab = null;
         if (direction == Vector3.up)
         {
             connectPrefab = exVert;
@@ -75,29 +72,21 @@ public class Bomb : MonoBehaviour {
         {
             int xLoc = bombX + (i * (int)direction.x);
             int yLoc = bombY + (i * (int)direction.y);
-
-            //if (_serverGameManager.charMap[xLoc][yLoc] == CellID.SpeedUp || _serverGameManager.charMap[xLoc][yLoc] == CellID.BombUp ||
-            //    _serverGameManager.charMap[xLoc][yLoc] == CellID.ExplosionUp || _serverGameManager.charMap[xLoc][yLoc] == CellID.Determination)
-            //{
-
-            //}
-
-            //if (map.grid[xLoc][yLoc] == CellID.SoftBlock || map.grid[xLoc][yLoc] == CellID.HardBlock || map.grid[xLoc][yLoc] == CellID.ConeBlock)    //Might break if we add IDs for players
-            if (_clientManager.charMap[xLoc][yLoc] == CellID.SoftBlock || _clientManager.charMap[xLoc][yLoc] == CellID.HardBlock || _clientManager.charMap[xLoc][yLoc] == CellID.ConeBlock)
+            
+            if (localGameManager.charMap[xLoc][yLoc] == CellID.SoftBlock || localGameManager.charMap[xLoc][yLoc] == CellID.HardBlock || localGameManager.charMap[xLoc][yLoc] == CellID.ConeBlock)
             {
-                //if (map.grid[xLoc][yLoc] == CellID.SoftBlock)
-                if (_clientManager.charMap[xLoc][yLoc] == CellID.SoftBlock)
+                if (localGameManager.charMap[xLoc][yLoc] == CellID.SoftBlock)
                 {
-                    //SoftBlock localSoftBlock = map.gameObjectGrid[xLoc][yLoc].GetComponent<SoftBlock>();
-                    NetworkSoftBlock localSoftBlock = _clientManager.gameObjectMap[xLoc][yLoc].GetComponent<NetworkSoftBlock>();
+                    //Debug.Log(string.Format("Block broken at {0}, {1}", xLoc, yLoc));
+                    SoftBlock localSoftBlock = localGameManager.gameObjectMap[xLoc][yLoc].GetComponent<SoftBlock>();
                     if (localSoftBlock != null)
                     {
-                        localSoftBlock.GetRekt();
+                        localSoftBlock.GetRekt(xLoc, yLoc);
                     }
                     else
                     {
                         //map.gameObjectGrid[xLoc][yLoc].GetComponent<NetworkSoftBlock>().GetRekt();
-                        _clientManager.gameObjectMap[xLoc][yLoc].GetComponent<NetworkSoftBlock>().GetRekt();
+                        //localGameManager.gameObjectMap[xLoc][yLoc].GetComponent<NetworkSoftBlock>().GetRekt();
                     }
                 }
                 return;
@@ -107,10 +96,7 @@ public class Bomb : MonoBehaviour {
                 Instantiate(connectPrefab, new Vector2(xLoc, yLoc), Quaternion.identity);
             else
                 Instantiate(endPrefab, new Vector2(xLoc, yLoc), Quaternion.identity);
-            //map.grid[xLoc][yLoc] = CellID.Explosion;
-            _clientManager.charMap[xLoc][yLoc] = CellID.Explosion;
-            if (_serverGameManager != null)
-                _serverGameManager.charMap[xLoc][yLoc] = CellID.Explosion;
+            localGameManager.charMap[xLoc][yLoc] = CellID.Explosion;
         }
     }
 

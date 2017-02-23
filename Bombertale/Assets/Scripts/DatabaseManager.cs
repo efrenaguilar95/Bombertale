@@ -97,7 +97,7 @@ public class DatabaseManager : MonoBehaviour
 
 	public void Login(string username, string password)
 	{
-		/*
+        /*
 			CAN RETURN:
 				BC00:	Login successful
 				BC04:	Failed to find account by that name
@@ -105,6 +105,8 @@ public class DatabaseManager : MonoBehaviour
 				BC10:	User already logged in
 				BC11:	Failed to login
 		*/
+        if (username == "")
+            return;
 		string url = "http://apedestrian.com/bombertale/Login.php?unityPassword=" + unityPassword +  "&clientUsername=" + username + "&clientPassword=" + password;
 		SendRequest (url);
 	}

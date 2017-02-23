@@ -10,9 +10,9 @@ GameObject:
   - component: {fileID: 402544}
   - component: {fileID: 21241358}
   - component: {fileID: 6169572}
-  - component: {fileID: 114926083732930994}
+  - component: {fileID: 114656703490056008}
   m_Layer: 0
-  m_Name: ExplosionVert
+  m_Name: LocalExplosionVert
   m_TagString: Explosion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,7 +91,7 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 107580}
   m_IsPrefabParent: 1
---- !u!114 &114926083732930994
+--- !u!114 &114656703490056008
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 107580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2398b7850278e384dbdf4b7689bd5699, type: 3}
+  m_Script: {fileID: 11500000, guid: 11e19518fa24b044da92460dcb00cd29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lifespan: 0.5

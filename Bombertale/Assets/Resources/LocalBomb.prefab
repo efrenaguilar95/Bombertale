@@ -1,0 +1,197 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &194232
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 467686}
+  - component: {fileID: 21219920}
+  - component: {fileID: 6190430}
+  - component: {fileID: 5036448}
+  - component: {fileID: 6166986}
+  - component: {fileID: 114789023979798280}
+  m_Layer: 0
+  m_Name: LocalBomb
+  m_TagString: Bomb
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &467686
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194232}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &5036448
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194232}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
+--- !u!61 &6166986
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194232}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0.5, y: 0.5}
+  serializedVersion: 2
+  m_Size: {x: 0.9, y: 0.9}
+--- !u!61 &6190430
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194232}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0.5, y: 0.5}
+  serializedVersion: 2
+  m_Size: {x: 0.9, y: 0.9}
+--- !u!212 &21219920
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194232}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -259543943
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: ebcba9a1c242edf4aa25af8db39a1521, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_SortingLayerID
+      value: -259543943
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: lifespan
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 153978, guid: c81758de5410db244b15ddfdb06d73b1, type: 2}
+    - target: {fileID: 0}
+      propertyPath: exUp
+      value: 
+      objectReference: {fileID: 147090, guid: 2c301111559020b4ca8552e60e32dd93, type: 2}
+    - target: {fileID: 0}
+      propertyPath: exDown
+      value: 
+      objectReference: {fileID: 195942, guid: 54bdd677f0119dd4f907be01c088aeac, type: 2}
+    - target: {fileID: 0}
+      propertyPath: exRight
+      value: 
+      objectReference: {fileID: 187070, guid: fa418454538c2504aa0aa8d61859d494, type: 2}
+    - target: {fileID: 0}
+      propertyPath: exLeft
+      value: 
+      objectReference: {fileID: 151802, guid: 75b11fcddf730de4c8eaac6f115421f1, type: 2}
+    - target: {fileID: 0}
+      propertyPath: exCenter
+      value: 
+      objectReference: {fileID: 153978, guid: c81758de5410db244b15ddfdb06d73b1, type: 2}
+    - target: {fileID: 0}
+      propertyPath: exHori
+      value: 
+      objectReference: {fileID: 124420, guid: 4b2b6011b3a76dc46bde00538a695c4b, type: 2}
+    - target: {fileID: 0}
+      propertyPath: exVert
+      value: 
+      objectReference: {fileID: 107580, guid: f6feb9737b5de27498df4940288aaafc, type: 2}
+    - target: {fileID: 0}
+      propertyPath: size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: PUSpeed
+      value: 
+      objectReference: {fileID: 165948, guid: 8ce2292505ac78945b24e179ce05161f, type: 2}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 194232}
+  m_IsPrefabParent: 1
+--- !u!114 &114789023979798280
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c98c0cd53304f3479df5f13f71bc7cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifespan: 2.5
+  size: 1
+  exCenter: {fileID: 153978, guid: c0a5450c6e69925469e090513c06d8ea, type: 2}
+  exLeft: {fileID: 151802, guid: 012148eb0fca2ad49a6fd39524b2d5d5, type: 2}
+  exRight: {fileID: 187070, guid: b342add403467eb45b7a1e6e1ae1c0d3, type: 2}
+  exUp: {fileID: 147090, guid: 3fa5f01e1aa746b4e8cd015c9fd9440d, type: 2}
+  exDown: {fileID: 195942, guid: 3573908334c6133418e391f8e2e487bb, type: 2}
+  exHori: {fileID: 124420, guid: 4a2964e3fb36e654b808003991a82313, type: 2}
+  exVert: {fileID: 107580, guid: 4ba976ee1c83d8f4ab31299196035eb1, type: 2}

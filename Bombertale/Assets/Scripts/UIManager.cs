@@ -157,6 +157,26 @@ public class UIManager : MonoBehaviour {
 		string password = GameObject.Find("Canvas/Password").GetComponent<UnityEngine.UI.InputField>().text;
 		string email = GameObject.Find("Canvas/Email").GetComponent<UnityEngine.UI.InputField>().text;
 
+        if (username == "")
+        {
+            GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Please enter a username";
+            return;
+        }
+        if (username.Contains(" "))
+        {
+            GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Spaces not allowed in username";
+            return;
+        }
+        if (password == "")
+        {
+            GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Please enter a password";
+            return;
+        }
+        if (email == "")
+        {
+            GameObject.Find("Canvas/ErrorText").GetComponent<UnityEngine.UI.Text>().text = "Please enter an email";
+            return;
+        }
         _databaseManager.CreateAccount(username, password, email);
 	}
 
