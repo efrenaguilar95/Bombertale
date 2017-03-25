@@ -1,4 +1,4 @@
-[<img src="Bombertale/Assets/Art/UI/MenuBlack.png">]()
+<img src="Bombertale/Assets/Art/UI/MenuBlack.png">
 
 Bombertale is an Undertale fan-game that combines the classic game of Bomberman and combines it with the world of Undertale.
 
@@ -52,22 +52,22 @@ To win the game defeat everybody else to be the last person standing!
 Collect powerups to help you!
 
 ### Ballet Slippers
-[<img src="Bombertale/Assets/Art/BalletSlippers.png">]()
+<img src="Bombertale/Assets/Art/BalletSlippers.png">
 
 _These used shoes make you feel incredibly dangerous. Picking this up increases your movement speed._
 
 ### Heart of Determination
-[<img src="Bombertale/Assets/Art/Heart.png">]()
+<img src="Bombertale/Assets/Art/Heart.png">
 
 _As you survive all this chaos around you, you can't help but feel a little satisified that you're still alive. Picking this up grants you temporary invincibility._
 
 ### ???
-[<img src="Bombertale/Assets/Art/Hfman3.png">]()
+<img src="Bombertale/Assets/Art/Hfman3.png">
 
 _Did you remember his name? He's dying to know if you did. Picking him up will increase the explosion length of your bombs._
 
 ### Extra Bomb
-[<img src="Bombertale/Assets/Art/power_up4.png">]()
+<img src="Bombertale/Assets/Art/power_up4.png">
 
 _WHERE DID YOU EVEN GET THESE? WHY ARE THEY JUST LYING AROUND? Picking this up will give you another bomb to use._
 
