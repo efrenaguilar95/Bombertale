@@ -92,6 +92,6 @@ All contributions will be up for review before being committed; however, most co
 
 This project is free for all to use and learn from. All we ask is that anything that may be taken from this project be credited to us.
 
-Any code made by us cannot be used for monetary purposes unless approved by our team.
+Any code or assets made by us cannot be used for monetary purposes unless approved by our team.
 
 All arts and assests taken from Undertale are owned by Toby Fox and as such all rights for those go to him.
