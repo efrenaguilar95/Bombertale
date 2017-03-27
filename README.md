@@ -1,4 +1,4 @@
-<img src="Bombertale/Assets/Art/UI/MenuBlack.png">
+[<img src="Bombertale/Assets/Art/UI/MenuBlack.png">](https://pgtruong.itch.io/bombertale)
 
 Bombertale is an Undertale fan-game that combines the classic game of Bomberman and combines it with the world of Undertale.
 
